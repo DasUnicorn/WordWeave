@@ -7,11 +7,11 @@ assignees: DasUnicorn
 
 ---
 
-*Description Of Service Or Screen:*
+**Description Of Service Or Screen:**
 N/A
 
-*User Objective:*
+**User Objective:**
 As a user, I want to , so that
 
-*Acceptance Criteria:*
+**Acceptance Criteria:**
 N/A
