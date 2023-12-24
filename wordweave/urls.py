@@ -20,7 +20,6 @@ from weave_manager import views as index_views
 
 urlpatterns = [
     path('', index_views.index, name='index'),
-    path("accounts/", include("django.contrib.auth.urls")),
-    path("accounts/", include("authentication.urls")),
+    path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]
