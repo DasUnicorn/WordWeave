@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.openid',
     'weave_manager',
     'authentication',
+    'taggit',
 ]
 
 # Constants to set the side number and
