@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import Thread
 
 # Create your views here.
-def index(request):
-	return HttpResponse("Hello World!")
+class GlobalTimeline(generic.ListView):
+    queryset = Thread.objects.all()
+    template_name = "timeline/timeline.html"
