@@ -3,6 +3,9 @@ from django.views import generic
 from .models import Thread
 
 # Create your views here.
+
+
 class GlobalTimeline(generic.ListView):
     queryset = Thread.objects.all()
-    template_name = "timeline/timeline.html"
+    template_name = "index.html"
+    paginate_by = 6
