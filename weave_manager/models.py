@@ -25,6 +25,7 @@ class Comment(models.Model):
     Thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
+    votes = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
