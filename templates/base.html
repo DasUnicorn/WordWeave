@@ -34,11 +34,9 @@
                     </li>
                     {% if user.is_authenticated %}
                     {% load account %}
-                    {% if request.path != profile %}
                     <li>
-                        <a class="nav-link" href="{% url 'application:profile' user %}">Profile</a>
+                        <a class="nav-link" href="{% url 'user_profile' username=user.username %}">Profile</a>
                     </li>
-                    {% endif %}
                     <li>
                         <a class="nav-link {% if request.path == account_logout %}active{% endif %}" href="{% url 'account_logout' %}">Logout</a>
                     </li>
