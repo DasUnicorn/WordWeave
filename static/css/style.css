@@ -1,3 +1,47 @@
+/* Setting Global Variables */
+
+:root {
+  --color-text-dark: #001A23;
+  --color-text-light: #FFFFFF;
+  --color-highlight: #BAFF2A;
+  --color-background: #FFFFFF;
+  --color-background-highlight: #F52789;
+}
+
+
 .logo {
 	font-family: 'Permanent Marker', cursive;
+	color: var(--color-text-dark);
+	text-decoration: none; /* Fallback for iOS */
+	text-decoration: transparent;
+}
+
+h1, h2, h3, h4 {
+	font-family: 'Alatsi', sans-serif;
+}
+
+.bg-hl {
+	background-color: var(--color-highlight);
+}
+
+.bg-hl-pink {
+	background-color: var(--color-background-highlight);
+}
+
+.color-dark {
+	color: var(--color-text-dark);
+}
+
+.font-marker {
+	font-family: 'Permanent Marker', cursive;
+}
+
+/* Overwright Bootstrap classes*/
+
+.navbar-collapse {
+	flex-grow: 0;
+}
+
+.nav-link {
+	font-family: 'Alatsi', sans-serif;
 }
