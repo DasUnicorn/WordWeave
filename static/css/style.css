@@ -51,6 +51,11 @@ h4 {
 	box-shadow: 8px 8px 0px 1px var(--color-highlight);
 }
 
+.menu-icon {
+	width: 10px;
+	height: 10px;
+}
+
 /* Overwright Bootstrap classes*/
 
 .navbar-collapse {

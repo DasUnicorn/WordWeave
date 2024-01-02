@@ -7,3 +7,4 @@ Reddit style news site
 * sign up in django: https://learndjango.com/tutorials/django-signup-tutorial
 * tags https://github.com/jazzband/django-taggit
 * profile pictures by https://de.freepik.com/vektoren-kostenlos/handgezeichnetes-flaches-profilsymbol_17539361.htm#query=profile%20picture&position=42&from_view=search&track=ais&uuid=594c74d8-53ba-48f7-9d10-3770ce010d32
+* navbar https://www.flaticon.com/free-icon/menu-bar_8860952?term=navigation&page=1&position=42&origin=search&related_id=8860952
