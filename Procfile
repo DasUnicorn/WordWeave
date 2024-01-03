@@ -1,1 +1,1 @@
-web: gunicorn weave_manager.wsgi
+web: gunicorn WordWeave.wsgi
