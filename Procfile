@@ -1,1 +1,1 @@
-web: poetry run gunicorn wordweave.wsgi
+web: gunicorn wordweave.wsgi
