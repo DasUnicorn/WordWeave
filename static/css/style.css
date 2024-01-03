@@ -17,11 +17,35 @@
 	text-decoration: transparent;
 }
 
+.header-gif {
+	width: 80%;
+}
+
+.banner-content {
+	background-color: var(--color-text-dark);
+	color: var(--color-text-light);
+}
+
+.circle {
+	background-color: var(--color-background-highlight);
+	color: var(--color-text-light);
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-radius: 50px;
+}
+
 h1,
 h2,
 h3,
 h4 {
 	font-family: 'Alatsi', sans-serif;
+	text-wrap: pretty;
+}
+
+a {
+	color: var(--color-background-highlight);
 }
 
 .bg-hl {
@@ -34,6 +58,15 @@ h4 {
 
 .color-dark {
 	color: var(--color-text-dark);
+}
+
+.bg-light {
+	background-color: var(--color-text-light);
+}
+
+.banner-box {
+	border: 2px solid var(--color-text-light);
+  box-shadow: 8px 8px 0px 1px var(--color-text-light);
 }
 
 .font-marker {
@@ -57,6 +90,15 @@ h4 {
 }
 
 /* Overwright Bootstrap classes*/
+
+.fs-7{
+	font-size: 0.7em;
+}
+
+.card {
+	border: 2px solid var(--color-text-dark);
+  border-radius: 0;
+}
 
 .navbar-collapse {
 	flex-grow: 0;
