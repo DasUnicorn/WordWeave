@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-4i66ks)n7!1dai3kc777si%ty2(c%i($8zrw*wz@d#(%2_5s^3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
 TEMPLATES = [
     {
@@ -115,6 +115,8 @@ DATABASES = {
     }
 }
 
+# Custom User Model
+AUTH_USER_MODEL = "authentication.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

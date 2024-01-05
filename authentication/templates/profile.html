@@ -2,6 +2,12 @@
 {% block content %}
 <h1>User Profile</h1>
 {% if profiles %}
+<p>Profile: {{ profiles.user.username }}</p>
+<p>Request: {{ request.user }}</p>
+
+{% if profile.user.username == request.user.username %}
+<h2>You are the current user</h2>
+{% endif %}
 {% for profile in profiles %}
 <div>
 	<h2>{{ profile.user.username }}</h2>
