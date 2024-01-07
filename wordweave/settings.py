@@ -75,10 +75,17 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.openid',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'weave_manager',
     'authentication',
     'taggit',
 ]
+
+# Crespy Bootstrap Settings:
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Constants to set the side number and
 # Redirect the user upon a successful login and logout
