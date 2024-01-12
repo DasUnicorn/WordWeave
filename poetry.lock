@@ -318,6 +318,17 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "django-image-uploader-widget"
+version = "0.4.1"
+description = "Simple Image Uploader Widget for Django-Admin"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-image-uploader-widget-0.4.1.tar.gz", hash = "sha256:d0b0751ea04c90ccae95cc1945bfc0cea2967d1bfae9d174b599fe909adc1434"},
+    {file = "django_image_uploader_widget-0.4.1-py3-none-any.whl", hash = "sha256:4f3e00c9e1046732b19d2779e46dfe14b619eb8d1353f1728b5d64117de67b8a"},
+]
+
+[[package]]
 name = "django-taggit"
 version = "5.0.1"
 description = "django-taggit is a reusable Django application for simple tagging."
@@ -622,4 +633,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12.1"
-content-hash = "2e1caad5077b2ac4ae92d038265f719fac873834e9c705c52e3202117f0edece"
+content-hash = "19bfd6888f53d02fc8db76d4540431e3270674aba3b292cde5b0b735c26054b7"

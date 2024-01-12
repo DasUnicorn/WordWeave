@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     'weave_manager',
     'authentication',
     'taggit',
+    'image_uploader_widget',
 ]
 
 # Crespy Bootstrap Settings:
