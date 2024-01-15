@@ -85,7 +85,7 @@ INSTALLED_APPS = [
 
 # Crespy Bootstrap Settings:
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = ("bootstrap5",)
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Constants to set the side number and

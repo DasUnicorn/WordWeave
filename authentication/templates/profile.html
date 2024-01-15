@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
+{% load i18n %}
+{% load crispy_forms_tags %}
 <h1>User Profile</h1>
-
 {% if request.user.username == user.username %}
-<h2>You are the current user</h2>
+<h2>Settings:</h2>
+<a class="button secondaryAction" href="{% url 'account_change_password' %}">{% trans "Want to change your password?" %}</a>
+<a class="button secondaryAction" href="{% url 'update_profile' %}">{% trans "Want to update your bio?" %}</a>
 {% endif %}
-
 <div>
 	<h2>{{ user.username }}</h2>
 	<p>Bio: {{ user.bio }}</p>
@@ -16,5 +18,4 @@
 	<p>No profile picture available</p>
 	{% endif %}
 </div>
-
 {% endblock %}
