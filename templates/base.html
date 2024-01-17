@@ -33,7 +33,7 @@
                     <li class="nav-item">
                         <a class="nav-link color-dark {% if request.path == home_url %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
                     </li>
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
                     {% load account %}
                     <li>
                         <a class="nav-link color-dark {% if request.path == user_profile_url %}active{% endif %}" href="{% url 'user_profile' username=request.user.username %}">Profile</a>
