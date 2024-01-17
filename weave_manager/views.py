@@ -3,6 +3,7 @@ from django.views import generic
 from .models import Thread
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
 from django.views.generic.edit import FormView
 from .forms import ThreadForm
 from django.urls import reverse_lazy
@@ -26,3 +27,8 @@ class CreateThreadView(LoginRequiredMixin, FormView):
         form.instance.author = self.request.user
         form.save()
         return super().form_valid(form)
+
+class ThreadDetailView(DetailView):
+    model = Thread
+    template_name = 'thread_detail.html'
+    context_object_name = 'thread'

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="card my-2">
+        <p class="circle">{{ thread.votes }}</p>
+        {% for tag in thread.tags.all %}
+            <p>{{ tag }}</p>
+        {% endfor %}
+        <div class="card-body d-flex flex-column">
+            <h2 class="card-title">{{ thread.title }}</h2>
+            <div class="d-flex flex-row justify-content-between">
+                <p class="fs-7">by <a href="#">{{ thread.author }}</a></p>
+                <p class="card-text text-muted fs-7">{{ thread.created_on }}</p>
+            </div>
+            <p class="card-text">{{ thread.content }}</p>
+        </div>
+    </div>
+{% endblock %}
