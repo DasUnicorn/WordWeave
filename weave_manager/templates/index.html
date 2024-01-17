@@ -11,6 +11,9 @@
     <p class="mt-5">Welcome to Weaver, where ideas become conversations. Sign up or log in now and let your words weave the story of tomorrow.</p>
 </div>
 <div class="container-fluid">
+    {% if request.user.is_authenticated %}
+    <a href={% url 'create_thread' %} class="neon-button"> Write Thread</a>
+    {% endif %}
     <div class="row">
         <!-- Thread Entries -->
         <div class="mt-3 left">
