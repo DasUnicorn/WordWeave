@@ -27,7 +27,7 @@
                     <div class="card-body d-flex flex-column">
                         <h2 class="card-title">{{ thread.title }}</h2>
                         <div class="d-flex flex-row justify-content-between">
-                            <p class="fs-7">by <a href="#">{{ thread.author }}</a></p>
+                            <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}">{{ thread.author }}</a></p>
                             <p class="card-text text-muted fs-7">{{ thread.created_on}}
                         </div>
                         <p class="card-text">{{ thread.content|truncatechars:500 }}</p>
