@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+    <!-- Display the Thread -->
     <div class="card my-2">
         <p class="circle">{{ thread.votes }}</p>
         {% for tag in thread.tags.all %}
@@ -14,4 +16,21 @@
             <p class="card-text">{{ thread.content }}</p>
         </div>
     </div>
+
+     <!-- Display comments -->
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <p><a href="{% url 'user_profile' username=comment.author %}">{{ comment.author }}</a> said: "{{ comment.body }}"</p>
+        </div>
+    {% endfor %}
+
+    <!-- Comment form -->
+    {% if request.user.is_authenticated %}
+    <h2>Leave a Comment</h2>
+    <form method="post" action="{% url 'add_comment' thread.slug %}">
+        {% csrf_token %}
+        {% crispy comment_form %}
+    </form>
+    {% endif %}
 {% endblock %}

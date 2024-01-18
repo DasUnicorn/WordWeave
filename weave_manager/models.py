@@ -31,7 +31,7 @@ class Thread(models.Model):
         super().save(*args, **kwargs)
 
 class Comment(models.Model):
-    Thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
