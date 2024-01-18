@@ -20,7 +20,9 @@
             <div class="row">
                 {% for thread in thread_list %}
                 <div class="card my-2 ">
-                    <p class="circle">{{ thread.votes }}</p>
+                    <p>Votes: {{ thread.votes }}</p>
+                    <a href="{% url 'upvote_thread' thread_id=thread.id %}">Upvote</a>
+                    <a href="{% url 'downvote_thread' thread_id=thread.id %}">Downvote</a>
                     {% for tag in thread.tags.all %}
                     <p>{{ tag }}</p>
                     {% endfor %}

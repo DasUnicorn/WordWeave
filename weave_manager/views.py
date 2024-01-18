@@ -8,6 +8,7 @@ from .forms import ThreadForm
 from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
+from django.shortcuts import get_object_or_404, redirect
 
 # Create your views here.
 
@@ -15,7 +16,6 @@ from django.views import View
 class GlobalTimeline(generic.ListView):
     queryset = Thread.objects.all()
     template_name = "index.html"
-    paginate_by = 6
 
 #  LoginRequiredMixin is used to ensure that only logged-in users can create threads.
 class CreateThreadView(LoginRequiredMixin, FormView):
@@ -52,3 +52,13 @@ class AddCommentView(View):
             comment.save()
 
         return redirect('thread_detail', slug=slug)
+
+def upvote_thread(request, thread_id):
+    thread = get_object_or_404(Thread, pk=thread_id)
+    thread.up_vote(request.user)
+    return redirect('home')
+
+def downvote_thread(request, thread_id):
+    thread = get_object_or_404(Thread, pk=thread_id)
+    thread.down_vote(request.user)
+    return redirect('home')
