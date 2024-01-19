@@ -37,14 +37,28 @@ class Thread(models.Model):
         if not self.thread_votes.filter(user=user).exists():
             self.votes = F('votes') + 1
             self.save()
-            ThreadVote.objects.create(thread=self, user=user, value=1)
+            self.thread_votes.create(user=user, value=1)
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == -1:
+            self.votes = F('votes') + 2
+            self.save()
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.value = 1
+            vote.save()
+        # Here need to come an exception that gets handle to inform the user that they have already voted.
 
     def down_vote(self, user):
         # Check if the user has already voted for the thread
         if not self.thread_votes.filter(user=user).exists():
             self.votes = F('votes') - 1
             self.save()
-            ThreadVote.objects.create(thread=self, user=user, value=-1)
+            self.thread_votes.create(user=user, value=-1)
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == 1:
+            self.votes = F('votes') - 2
+            self.save()
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.value = -1
+            vote.save()
+        # Here need to come an exception that gets handle to inform the user that they have already voted.
 
 class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")

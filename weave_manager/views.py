@@ -54,7 +54,7 @@ class AddCommentView(View):
         return redirect('thread_detail', slug=slug)
 
 def upvote_thread(request, thread_id):
-    thread = get_object_or_404(Thread, pk=thread_id)
+    thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.up_vote(request.user)
     return redirect('home')
 
