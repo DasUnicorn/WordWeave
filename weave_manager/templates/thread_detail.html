@@ -3,9 +3,11 @@
 {% block content %}
 <!-- Display the Thread -->
 <div class="card my-2">
+    {% if request.user.is_authenticated %}
     <p>Votes: {{ thread.votes }}</p>
     <button onclick="up_Vote('{{ thread.id }}')">Up Vote</button>
     <button onclick="down_Vote('{{ thread.id }}')">Down Vote</button>
+    {% endif %}
     {% for tag in thread.tags.all %}
     <p>{{ tag }}</p>
     {% endfor %}
