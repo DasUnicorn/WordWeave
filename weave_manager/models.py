@@ -65,6 +65,7 @@ class Comment(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
+    votes = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -74,18 +75,33 @@ class Comment(models.Model):
         return f"Comment {self.body} by {self.author}"
 
     def up_vote(self, user):
-        # Check if the user has already voted for the comment
+        # Check if the user has already voted for the thread
         if not self.comment_votes.filter(user=user).exists():
             self.votes = F('votes') + 1
             self.save()
-            CommentVote.objects.create(comment=self, user=user, value=1)
+            self.comment_votes.create(user=user, value=1)
+        elif self.comment_votes.get(user=user, comment_id=self.id).value == -1:
+            self.votes = F('votes') + 2
+            self.save()
+            vote = self.comment_votes.get(user=user, comment_id=self.id)
+            vote.value = 1
+            vote.save()
+        # Here need to come an exception that gets handle to inform the user that they have already voted.
 
     def down_vote(self, user):
-        # Check if the user has already voted for the comment
+        # Check if the user has already voted for the thread
         if not self.comment_votes.filter(user=user).exists():
             self.votes = F('votes') - 1
             self.save()
-            CommentVote.objects.create(comment=self, user=user, value=-1)
+            self.comment_votes.create(user=user, value=-1)
+        elif self.comment_votes.get(user=user, comment_id=self.id).value == 1:
+            self.votes = F('votes') - 2
+            self.save()
+            vote = self.comment_votes.get(user=user, comment_id=self.id)
+            vote.value = -1
+            vote.save()
+        # Here need to come an exception that gets handle to inform the user that they have already voted.
+
 
 class ThreadVote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 from django.views import generic
-from .models import Thread
+from .models import Thread, Comment
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
@@ -59,6 +59,18 @@ def upvote_thread(request, thread_id):
     return redirect('home')
 
 def downvote_thread(request, thread_id):
-    thread = get_object_or_404(Thread, pk=thread_id)
+    thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.down_vote(request.user)
     return redirect('home')
+
+def upvote_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
+    comment.up_vote(request.user)
+    thread = get_object_or_404(Thread, pk=comment.thread.id)
+    return redirect('thread_detail', slug=thread.slug)
+
+def downvote_comment(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
+    comment.down_vote(request.user)
+    thread = get_object_or_404(Thread, pk=comment.thread.id)
+    return redirect('thread_detail', slug=thread.slug)
