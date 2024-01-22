@@ -29,6 +29,16 @@
 		<p class="bio fst-italic">{{ user.bio }}</p>
 	</div>
 	<h2>All Threads from {{user.username}}:</h2>
-	
+
+	{% if user.posts.all %}
+    <ul>
+        {% for thread in user.posts.all %}
+        <li>{{ thread.title }} - {{ thread.created_on }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No threads available for this user.</p>
+    {% endif %}
+
 </div>
 {% endblock %}
