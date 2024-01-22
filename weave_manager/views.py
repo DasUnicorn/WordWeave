@@ -2,7 +2,7 @@ from django.views import generic
 from .models import Thread, Comment
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.views.generic.edit import FormView
 from .forms import ThreadForm
 from django.urls import reverse_lazy
@@ -16,6 +16,9 @@ from django.shortcuts import get_object_or_404, redirect
 class GlobalTimeline(generic.ListView):
     queryset = Thread.objects.all()
     template_name = "index.html"
+
+class InfoView(TemplateView):
+    template_name = "info.html"
 
 #  LoginRequiredMixin is used to ensure that only logged-in users can create threads.
 class CreateThreadView(LoginRequiredMixin, FormView):
