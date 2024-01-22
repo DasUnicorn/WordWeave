@@ -2,9 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% load i18n %}
-<h1>Create Thread</h1>
-<form method="post" action="{% url 'create_thread' %}">
-	{% csrf_token %}
-	{% crispy form %}
-</form>
+<div class="container-lg p-3">
+	<h1>Write a new Thread</h1>
+	<form method="post" action="{% url 'create_thread' %}">
+		{% csrf_token %}
+		{% crispy form %}
+	</form>
+</div>
 {% endblock %}
