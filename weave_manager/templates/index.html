@@ -45,8 +45,8 @@
                         </div>
                         <p class="card-text">{{ thread.content|truncatechars:500 }}</p>
                         </p>
+                        <a href="{% url 'thread_detail' slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
                     </div>
-                    <a href="{% url 'thread_detail' slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
                 </div>
                 {% endfor %}
             </div>
