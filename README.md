@@ -1,6 +1,8 @@
 # WordWeave
 Reddit style news site
 
+[live-site](https://word-weave-eb35426ae0cb.herokuapp.com/)
+
 ## Credits
 * user story structure: https://community.atlassian.com/t5/Jira-Content-Archive-questions/Default-Description-Text-on-Create/qaq-p/2359579
 * log in screen: https://learndjango.com/tutorials/django-login-and-logout-tutorial
