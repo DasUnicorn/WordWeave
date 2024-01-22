@@ -17,6 +17,19 @@
 	text-decoration: transparent;
 }
 
+.profile-pic {
+	width: 100px;
+	height: 100px;
+	border: 2px solid var(--color-text-dark);
+}
+
+.bio {
+	background-color: var(--color-highlight);
+	color: var(--color-text-dark);
+	padding: 10px;
+	border: solid;
+}
+
 .header-gif {
 	width: 80%;
 }
@@ -76,7 +89,7 @@ h4 {
 
 .banner-box {
 	border: 2px solid var(--color-text-light);
-  box-shadow: -8px -8px 0px 1px var(--color-text-light);
+	box-shadow: -8px -8px 0px 1px var(--color-text-light);
 }
 
 .font-marker {
@@ -131,6 +144,12 @@ h4 {
 	color: var(--color-text-light);
 }
 
+a {
+	/* Fallback for iOS: */
+	text-decoration: none;
+	text-decoration: transparent;
+}
+
 .tag {
 	padding: 5px;
 	border-radius: 10px;
@@ -144,13 +163,13 @@ h4 {
 
 /* Overwright Bootstrap classes*/
 
-.fs-7{
+.fs-7 {
 	font-size: 0.7em;
 }
 
 .card {
 	border: 2px solid var(--color-text-dark);
-  	border-radius: 0;
+	border-radius: 0;
 }
 
 .card-title {
