@@ -5,8 +5,8 @@
 <div class="card my-2">
     {% if request.user.is_authenticated %}
     <p>Votes: {{ thread.votes }}</p>
-    <button onclick="up_Vote('{{ thread.id }}')">Up Vote</button>
-    <button onclick="down_Vote('{{ thread.id }}')">Down Vote</button>
+    <a href="{% url 'upvote_thread' thread_id=thread.id %}">Upvote</a>
+    <a href="{% url 'downvote_thread' thread_id=thread.id %}">Downvote</a>
     {% endif %}
     {% for tag in thread.tags.all %}
     <p>{{ tag }}</p>
