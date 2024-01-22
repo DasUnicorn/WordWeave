@@ -20,8 +20,8 @@
             <div class="row">
                 {% for thread in thread_list %}
                 <div class="card my-2 ">
-                    {% if request.user.is_authenticated %}
                     <p>Votes: {{ thread.votes }}</p>
+                    {% if request.user.is_authenticated %}
                     <a href="{% url 'upvote_thread' thread_id=thread.id %}">Upvote</a>
                     <a href="{% url 'downvote_thread' thread_id=thread.id %}">Downvote</a>
                     {% endif %}
