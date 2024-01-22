@@ -36,6 +36,11 @@
 	border-radius: 50px;
 }
 
+.icon {
+	width: 30px;
+	height: 30px;
+}
+
 h1,
 h2,
 h3,
@@ -44,8 +49,13 @@ h4 {
 	text-wrap: pretty;
 }
 
-a {
+.link {
 	color: var(--color-background-highlight);
+}
+
+.link:hover {
+	background-color: var(--color-background-highlight);
+	color: var(--color-text-light);
 }
 
 .bg-hl {
@@ -66,7 +76,7 @@ a {
 
 .banner-box {
 	border: 2px solid var(--color-text-light);
-  box-shadow: 8px 8px 0px 1px var(--color-text-light);
+  box-shadow: -8px -8px 0px 1px var(--color-text-light);
 }
 
 .font-marker {
@@ -84,9 +94,52 @@ a {
 	box-shadow: 8px 8px 0px 1px var(--color-highlight);
 }
 
-.menu-icon {
-	width: 30px;
-	height: 30px;
+.neon-button:hover {
+	-webkit-box-shadow: 8px 8px 0px 1px var(--color-background-highlight);
+	box-shadow: 8px 8px 0px 1px var(--color-background-highlight);
+	color: var(--color-text-light);
+}
+
+.button-pink {
+	background-color: var(--color-background-highlight);
+	color: white;
+	padding: 10px 20px;
+	/* Fallback for iOS: */
+	text-decoration: none;
+	text-decoration: transparent;
+	-webkit-box-shadow: 8px 8px 0px 1px var(--color-text-light);
+	box-shadow: 8px 8px 0px 1px var(--color-text-light);
+}
+
+.button-pink:hover {
+	background-color: var(--color-highlight);
+	color: var(--color-text-dark);
+}
+
+.toogle-button {
+	background-color: var(--color-text-light);
+	color: var(--color-text-dark);
+	padding: 10px 20px;
+	/* Fallback for iOS: */
+	text-decoration: none;
+	text-decoration: transparent;
+	border: 2px solid var(--color-text-dark);
+}
+
+.toogle-button-active {
+	background-color: var(--color-background-highlight);
+	color: var(--color-text-light);
+}
+
+.tag {
+	padding: 5px;
+	border-radius: 10px;
+	background-color: var(--color-highlight);
+	color: var(--color-text-dark);
+}
+
+.rotate-180 {
+	transform: rotate(180deg);
 }
 
 /* Overwright Bootstrap classes*/
@@ -97,7 +150,19 @@ a {
 
 .card {
 	border: 2px solid var(--color-text-dark);
-  border-radius: 0;
+  	border-radius: 0;
+}
+
+.card-title {
+	color: var(--color-text-dark);
+	/* Fallback for iOS: */
+	text-decoration: none;
+	text-decoration: transparent;
+}
+
+.card-title:hover {
+	background-color: var(--color-highlight);
+	color: var(--color-text-dark);
 }
 
 .navbar-collapse {

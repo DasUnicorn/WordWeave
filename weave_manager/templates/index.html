@@ -1,44 +1,52 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 <!-- index.html content starts here -->
+{% if not request.user.is_authenticated %}
 <!-- Header -->
 <div class="container-fluid text-center mx-auto bg-hl py-5">
     <h1 class="text-uppercase font-marker">Welcome to</h1>
     <IMG SRC="static/img/weaver-green.gif" alt="weaver" class="header-gif">
 </div>
-<div class="banner-content p-5">
+<div class="banner-content p-5 d-flex flex-column">
     <h2 class="banner-box p-2">Threads of Thought, Waves of Conversation.</h2>
-    <p class="mt-5">Welcome to Weaver, where ideas become conversations. Sign up or log in now and let your words weave the story of tomorrow.</p>
-    <a href={% url 'info' %}> ... more Infos</a>
+    <p class="my-5">Welcome to Weaver, where ideas become conversations. Sign up or log in now and let your words weave the story of tomorrow.</p>
+    <a href={% url 'info' %} class="button-pink align-self-end"> How Weaver works</a>
 </div>
-<div class="container-fluid">
+{% endif %}
+<div class="container-lg pt-3">
     {% if request.user.is_authenticated %}
-    <a href={% url 'create_thread' %} class="neon-button"> Write Thread</a>
+    <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" class="icon"></img> new Thread</a>
+    <h1 class="pt-4 text-center text-uppercase">Timeline</h1>
+    <p class="pb-4">Welcome to your timeline. Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
+    <a href=# class="toogle-button toogle-button-active">Global Timeline</a>
+    <a href=# class="toogle-button">Tag-based Timeline</a>
     {% endif %}
     <div class="row">
         <!-- Thread Entries -->
         <div class="mt-3 left">
             <div class="row">
                 {% for thread in thread_list %}
-                <div class="card my-2 ">
-                    <p>Votes: {{ thread.votes }}</p>
-                    {% if request.user.is_authenticated %}
-                    <a href="{% url 'upvote_thread' thread_id=thread.id %}">Upvote</a>
-                    <a href="{% url 'downvote_thread' thread_id=thread.id %}">Downvote</a>
-                    {% endif %}
-                    {% for tag in thread.tags.all %}
-                    <p>{{ tag }}</p>
-                    {% endfor %}
+                <div class="card my-2 d-flex flex-row">
+                    <div class="d-flex flex-column align-items-center">
+                        <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></img></a>
+                        <p class="circle m-0">{{ thread.votes }}</p>
+                        <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></img></a>
+
+                        {% for tag in thread.tags.all %}
+                        <p class="tag">{{ tag }}</p>
+                        {% endfor %}
+                    </div>
                     <div class="card-body d-flex flex-column">
-                        <h2 class="card-title"><a href="{% url 'thread_detail' slug=thread.slug %}">{{ thread.title }}</a></h2>
+                        <h2><a href="{% url 'thread_detail' slug=thread.slug %}" class="card-title">{{ thread.title }}</a></h2>
                         <div class="d-flex flex-row justify-content-between">
-                            <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}">{{ thread.author }}</a></p>
+                            <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}" class="link">{{ thread.author }}</a></p>
                             <p class="card-text text-muted fs-7">{{ thread.created_on}}
                         </div>
                         <p class="card-text">{{ thread.content|truncatechars:500 }}</p>
-                        <a href="{% url 'thread_detail' slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
                         </p>
                     </div>
+                    <a href="{% url 'thread_detail' slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
                 </div>
                 {% endfor %}
             </div>

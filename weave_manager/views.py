@@ -1,5 +1,6 @@
 from django.views import generic
 from .models import Thread, Comment
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, TemplateView
@@ -56,22 +57,28 @@ class AddCommentView(View):
 
         return redirect('thread_detail', slug=slug)
 
+
+
+@login_required
 def upvote_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.up_vote(request.user)
     return redirect('home')
 
+@login_required
 def downvote_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.down_vote(request.user)
     return redirect('home')
 
+@login_required
 def upvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
     comment.up_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', slug=thread.slug)
 
+@login_required
 def downvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
     comment.down_vote(request.user)
