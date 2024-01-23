@@ -33,7 +33,7 @@
 	{% if user.posts.all %}
     <ul>
         {% for thread in user.posts.all %}
-        <li>{{ thread.title }} - {{ thread.created_on }}</li>
+        <li><a href="{% url 'thread_detail' slug=thread.slug %}" class="link">{{ thread.title }} </a> - <span class="text-muted fs-7">{{ thread.created_on }}</span></li>
         {% endfor %}
     </ul>
     {% else %}
