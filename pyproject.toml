@@ -16,6 +16,7 @@ whitenoise = "^6.6.0"
 django-crispy-forms = "^2.1"
 crispy-bootstrap5 = "^2023.10"
 django-image-uploader-widget = "^0.4.1"
+django-imagekit = "^5.0.0"
 
 
 [build-system]

@@ -13,3 +13,4 @@ Reddit style news site
 * django-image-uploader-widget https://pypi.org/project/django-image-uploader-widget/
 * django unittests https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2
 * svg icons: https://www.svgrepo.com/svg/513800/add-square
+* image resizing: https://github.com/matthewwithanm/django-imagekit

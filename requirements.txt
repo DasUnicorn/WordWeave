@@ -180,12 +180,18 @@ defusedxml==0.7.1 ; python_full_version >= "3.12.1" and python_full_version < "4
     --hash=sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61
 django-allauth==0.59.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:ec19efb80b34d2f18bd831eab9b10b6301f58d1cce9f39af35f497b7e5b0a141
+django-appconf==1.0.6 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
+    --hash=sha256:c3ae442fba1ff7ec830412c5184b17169a7a1e71cf0864a4c3f93cf4c98a1993 \
+    --hash=sha256:cfe87ea827c4ee04b9a70fab90b86d704cb02f2981f89da8423cb0fabf88efbf
 django-crispy-forms==2.1 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:4d7ec431933ad4d4b5c5a6de4a584d24613c347db9ac168723c9aaf63af4bb96 \
     --hash=sha256:d592044771412ae1bd539cc377203aa61d4eebe77fcbc07fbc8f12d3746d4f6b
 django-image-uploader-widget==0.4.1 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:4f3e00c9e1046732b19d2779e46dfe14b619eb8d1353f1728b5d64117de67b8a \
     --hash=sha256:d0b0751ea04c90ccae95cc1945bfc0cea2967d1bfae9d174b599fe909adc1434
+django-imagekit==5.0.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
+    --hash=sha256:a8e77ed6549751026a51f961bb2cd5fda739be691496da8eecbe68ffb966c261 \
+    --hash=sha256:aae9f74a8e9b6ceb5d15f7d8e266302901e76d9f532c78bd5135cb0fa206a6b0
 django-taggit==5.0.1 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:a0ca8a28b03c4b26c2630fd762cb76ec39b5e41abf727a7b66f897a625c5e647 \
     --hash=sha256:edcd7db1e0f35c304e082a2f631ddac2e16ef5296029524eb792af7430cab4cc
@@ -204,6 +210,9 @@ oauthlib==3.2.2 ; python_full_version >= "3.12.1" and python_full_version < "4.0
 packaging==23.2 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5 \
     --hash=sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7
+pilkit==3.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
+    --hash=sha256:f6719e8cc0482e5447f5cb94f18b949d8e604ea9673a9b019c74d41b779e4eab \
+    --hash=sha256:fe1707b0411a1d0cbf9ad3986779fa5a346cec4582a188740924aa39f504d117
 pillow==10.2.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:0304004f8067386b477d20a518b50f3fa658a28d44e4116970abfcd94fac34a8 \
     --hash=sha256:0689b5a8c5288bc0504d9fcee48f61a6a586b9b98514d7d29b840143d6734f39 \

@@ -304,6 +304,20 @@ mfa = ["qrcode (>=7.0.0)"]
 saml = ["python3-saml (>=1.15.0,<2.0.0)"]
 
 [[package]]
+name = "django-appconf"
+version = "1.0.6"
+description = "A helper class for handling configuration defaults of packaged apps gracefully."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "django-appconf-1.0.6.tar.gz", hash = "sha256:cfe87ea827c4ee04b9a70fab90b86d704cb02f2981f89da8423cb0fabf88efbf"},
+    {file = "django_appconf-1.0.6-py3-none-any.whl", hash = "sha256:c3ae442fba1ff7ec830412c5184b17169a7a1e71cf0864a4c3f93cf4c98a1993"},
+]
+
+[package.dependencies]
+django = "*"
+
+[[package]]
 name = "django-crispy-forms"
 version = "2.1"
 description = "Best way to have Django DRY forms"
@@ -327,6 +341,26 @@ files = [
     {file = "django-image-uploader-widget-0.4.1.tar.gz", hash = "sha256:d0b0751ea04c90ccae95cc1945bfc0cea2967d1bfae9d174b599fe909adc1434"},
     {file = "django_image_uploader_widget-0.4.1-py3-none-any.whl", hash = "sha256:4f3e00c9e1046732b19d2779e46dfe14b619eb8d1353f1728b5d64117de67b8a"},
 ]
+
+[[package]]
+name = "django-imagekit"
+version = "5.0.0"
+description = "Automated image processing for Django models."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-imagekit-5.0.0.tar.gz", hash = "sha256:aae9f74a8e9b6ceb5d15f7d8e266302901e76d9f532c78bd5135cb0fa206a6b0"},
+    {file = "django_imagekit-5.0.0-py3-none-any.whl", hash = "sha256:a8e77ed6549751026a51f961bb2cd5fda739be691496da8eecbe68ffb966c261"},
+]
+
+[package.dependencies]
+django-appconf = "*"
+pilkit = "*"
+
+[package.extras]
+async = ["django-celery (>=3.0)"]
+async-dramatiq = ["django-dramatiq (>=0.4.0)"]
+async-rq = ["django-rq (>=0.6.0)"]
 
 [[package]]
 name = "django-taggit"
@@ -399,6 +433,20 @@ files = [
     {file = "packaging-23.2-py3-none-any.whl", hash = "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"},
     {file = "packaging-23.2.tar.gz", hash = "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5"},
 ]
+
+[[package]]
+name = "pilkit"
+version = "3.0"
+description = "A collection of utilities and processors for the Python Imaging Library."
+optional = false
+python-versions = "*"
+files = [
+    {file = "pilkit-3.0-py3-none-any.whl", hash = "sha256:fe1707b0411a1d0cbf9ad3986779fa5a346cec4582a188740924aa39f504d117"},
+    {file = "pilkit-3.0.tar.gz", hash = "sha256:f6719e8cc0482e5447f5cb94f18b949d8e604ea9673a9b019c74d41b779e4eab"},
+]
+
+[package.dependencies]
+Pillow = ">=7.0"
 
 [[package]]
 name = "pillow"
@@ -633,4 +681,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12.1"
-content-hash = "19bfd6888f53d02fc8db76d4540431e3270674aba3b292cde5b0b735c26054b7"
+content-hash = "59757688226c84327f70b1965739d62fb7c8fead65df42d68c8bd83fefe869ab"
