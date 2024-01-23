@@ -1,19 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Weaving the Future, One Thread at a Time</h1>
-<p>Welcome to Weaver. Here is how everything works.</p>
-
-<h2>Share your thoughts and create a THREAD</h2>
-<p>Ignite the conversation! Craft THREADS on any topic that sparks your passion. From 'Revolutionizing Renewable Energy' to 'Ultimate Movie Fan Theories,' your ideas are the THREADS that weave the fabric of tomorrow's stories.</p>
-
-<h2>Get into the dialogue by writing a COMMENT</h2>
-<p>Express your thoughts, share your insights, and react to others' perspectives. Comment on THREADS like 'AI in Everyday Life' or contribute to the banter in 'Best Superhero Match-Ups.'</p>
-
-<h2>Follow TAGS</h2>
-THREADS get a personality with TAGS. Whether it's #TechTrends, #SustainableLiving, or #CreativeChats, curate your own timeline. Follow the tags that define your interest and personalize your timeline.
-
-<h2>Make your opinion count by VOTING on THREADS and COMMENTS</h2>
-<p> Cast your VOTE and let the community decide. Upvote for brilliance, like 'The Future of Space Travel,' or downvote for the unexpected twists in 'Unusual Ice Cream Flavors.' Your opinion shapes the narrative.</p>
-
-<a href="{% url 'account_signup' %}">Sign Up Now!</a>
+<div class="container-lg">
+	<h1 class="pt-4 ">Weaving the Future, One Thread at a Time</h1>
+	<p>Welcome to Weaver. Here is how everything works.</p>
+	<div class="rows">
+		<div>
+			<h2>Share your thoughts and create a THREAD</h2>
+			<p>Ignite the conversation! Craft THREADS on any topic that sparks your passion. From 'Revolutionizing Renewable Energy' to 'Ultimate Movie Fan Theories,' your ideas are the THREADS that weave the fabric of tomorrow's stories.</p>
+		</div>
+		<div>
+			<h2>Get into the dialogue by writing a COMMENT</h2>
+			<p>Express your thoughts, share your insights, and react to others' perspectives. Comment on THREADS like 'AI in Everyday Life' or contribute to the banter in 'Best Superhero Match-Ups.'</p>
+		</div>
+		<div>
+			<h2>Follow TAGS</h2>
+			<p>THREADS get a personality with TAGS. Whether it's #TechTrends, #SustainableLiving, or #CreativeChats, curate your own timeline. Follow the tags that define your interest and personalize your timeline.</p>
+		</div>
+		<div>
+			<h2>Make your opinion count by VOTING on THREADS and COMMENTS</h2>
+			<p> Cast your VOTE and let the community decide. Upvote for brilliance, like 'The Future of Space Travel,' or downvote for the unexpected twists in 'Unusual Ice Cream Flavors.' Your opinion shapes the narrative.</p>
+		</div>
+	</div>
+	<a href="{% url 'account_signup' %}" class="button-pink align-self-end">Sign Up Now!</a>
+</div>
 {% endblock %}

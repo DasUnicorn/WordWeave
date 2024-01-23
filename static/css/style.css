@@ -161,6 +161,13 @@ a {
 	transform: rotate(180deg);
 }
 
+@include media-breakpoint-up(md) {
+	.rows {
+		display: flex;
+		flex-direction: row;
+	}
+}
+
 /* Overwright Bootstrap classes*/
 
 .fs-7 {
@@ -191,3 +198,4 @@ a {
 .nav-link {
 	font-family: 'Alatsi', sans-serif;
 }
+
