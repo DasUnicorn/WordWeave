@@ -10,6 +10,8 @@ urlpatterns = [
     path('upvote_comment/<int:comment_id>/', upvote_comment, name='upvote_comment'),
     path('downvote_comment/<int:comment_id>/', downvote_comment, name='downvote_comment'),
     path('thread/<slug:slug>/add_comment/', AddCommentView.as_view(), name='add_comment'),
+    path('thread/<int:thread_id>/edit/', views.edit_thread, name='edit_thread'),
+    path('thread/<int:thread_id>/delete/', views.delete_thread, name='delete_thread'),
     path('thread/<slug:slug>/', ThreadDetailView.as_view(), name='thread_detail'),
     path('info/', InfoView.as_view(), name='info'),
 ]

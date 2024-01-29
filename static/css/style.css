@@ -161,6 +161,22 @@ a {
 	transform: rotate(180deg);
 }
 
+.md-show {
+	display: none;
+}
+
+@include media-breakpoint-up(md) {
+	.rows {
+		display: flex;
+		flex-direction: row;
+	}
+}
+@include media-breakpoint-up(md) {
+	.md-show {
+		display: flex;
+	}
+}
+
 @include media-breakpoint-up(md) {
 	.rows {
 		display: flex;
@@ -169,6 +185,30 @@ a {
 }
 
 /* Overwright Bootstrap classes*/
+.btn {
+	color: var(--color-text-dark);
+	background-color: var(--color-highlight);
+	border-radius: 0px;
+	border-color: var(--color-highlight);
+}
+
+.btn:hover {
+	color: var(--color-text-light);
+	background-color: var(--color-background-highlight);
+	border-color: var(--color-background-highlight);
+}
+
+.btn-danger {
+	color: var(--color-text-light);
+	background-color: var(--color-background-highlight);
+	border-color: var(--color-background-highlight);
+}
+
+.btn-danger {
+	color: var(--color-text-light);
+	background-color: var(--color-text-dark);
+	border-color: var(--color-text-dark);
+}
 
 .fs-7 {
 	font-size: 0.7em;
@@ -198,4 +238,3 @@ a {
 .nav-link {
 	font-family: 'Alatsi', sans-serif;
 }
-

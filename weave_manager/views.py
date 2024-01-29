@@ -9,7 +9,7 @@ from .forms import ThreadForm
 from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, reverse
 
 # Create your views here.
 
@@ -84,3 +84,29 @@ def downvote_comment(request, comment_id):
     comment.down_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', slug=thread.slug)
+
+@login_required
+def edit_thread(request, thread_id):
+    thread = get_object_or_404(Thread, id=thread_id, author=request.user)
+
+    if request.method == 'POST':
+        form = ThreadForm(request.POST, instance=thread)
+        if form.is_valid():
+            form.save()
+            return redirect('thread_detail', slug=thread.slug)
+    else:
+        form = ThreadForm(instance=thread)
+
+    return render(request, 'edit_thread.html', {'form': form, 'thread': thread})
+
+@login_required
+def delete_thread(request, thread_id):
+    thread = get_object_or_404(Thread, id=thread_id, author=request.user)
+
+    if request.method == 'POST':
+        # Handle the deletion of the thread
+        thread.delete()
+        return redirect('home')  # Redirect to home or any other page after deletion
+
+    # Render the delete confirmation page
+    return render(request, 'delete_thread_confirm.html', {'thread': thread})

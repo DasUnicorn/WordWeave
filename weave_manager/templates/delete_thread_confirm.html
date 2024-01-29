@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-lg p-3">
+  <h2>Delete Thread</h2>
+  <p>Are you sure you want to delete the thread "{{ thread.title }}"?</p>
+  <form method="post" action="{% url 'delete_thread' thread_id=thread.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Yes, Delete." class="btn btn-danger">
+    <a href={% url 'home' %} class="btn">No, Please don't.</a>
+  </form>
+</div>
+{% endblock %}

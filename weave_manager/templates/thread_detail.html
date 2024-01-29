@@ -24,6 +24,13 @@
             </div>
             <p class="card-text">{{ thread.content }}</p>
         </div>
+        <!-- Add edit and delete buttons for the thread -->
+        {% if user.is_authenticated and user == thread.author %}
+        <div>
+            <a href="{% url 'edit_thread' thread_id=thread.id %}" class="neon-button"><img src="{% static 'img/icons/edit.svg' %}" class="icon"><span class="ms-2 md-show">Edit Thread</span></a>
+            <a href="{% url 'delete_thread' thread_id=thread.id %}" class="neon-button"><img src="{% static 'img/icons/delete.svg' %}" class="icon"><span class="ms-2 md-show">Delete Thread</span></a>
+        </div>
+        {% endif %}
     </div>
 </div>
 <!-- Display comments -->
