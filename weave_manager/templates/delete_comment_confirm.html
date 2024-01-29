@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-lg p-3">
+  <h2>Delete Comment</h2>
+  <p>Are you sure you want to delete the Comment:</p>
+  <p>"{{ comment.body }}"?</p>
+  <form method="post" action="{% url 'delete_comment' comment_id=comment.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Yes, Delete." class="btn btn-danger">
+    <a href={% url 'thread_detail' slug=comment.thread.slug %} class="btn">No, Please don't.</a>
+  </form>
+</div>
+{% endblock %}

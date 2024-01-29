@@ -54,6 +54,12 @@
         <div class="comment">
             <p>"{{ comment.body }}"</p>
         </div>
+        {% if user.is_authenticated and user == comment.author %}
+        <div>
+            <a href="{% url 'edit_comment' comment_id=comment.id %}" class="neon-button"><img src="{% static 'img/icons/edit.svg' %}" class="icon"><span class="ms-2 md-show">Edit Comment</span></a>
+            <a href="{% url 'delete_comment' comment_id=comment.id %}" class="neon-button"><img src="{% static 'img/icons/delete.svg' %}" class="icon"><span class="ms-2 md-show">Delete Comment</span></a>
+        </div>
+        {% endif %}
     </div>
     <hr>
     {% endfor %}

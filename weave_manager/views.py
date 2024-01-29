@@ -106,7 +106,33 @@ def delete_thread(request, thread_id):
     if request.method == 'POST':
         # Handle the deletion of the thread
         thread.delete()
-        return redirect('home')  # Redirect to home or any other page after deletion
+        return redirect('home') 
 
     # Render the delete confirmation page
     return render(request, 'delete_thread_confirm.html', {'thread': thread})
+
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            form.save()
+            return redirect('thread_detail', slug=comment.thread.slug)
+    else:
+        form = CommentForm(instance=comment)
+
+    return render(request, 'edit_comment.html', {'form': form, 'comment': comment})
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id, author=request.user)
+
+    if request.method == 'POST':
+        # Handle the deletion of the thread
+        comment.delete()
+        return redirect('thread_detail', slug=comment.thread.slug)
+
+    # Render the delete confirmation page
+    return render(request, 'delete_comment_confirm.html', {'comment': comment})

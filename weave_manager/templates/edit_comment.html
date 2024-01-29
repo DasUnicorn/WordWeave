@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-lg p-3">
+  <h2>Edit Comment</h2>
+  <form method="post" action="{% url 'edit_comment' comment_id=comment.id %}">
+    {% csrf_token %}
+    {% crispy form %}
+  </form>
+</div>
+{% endblock %}
