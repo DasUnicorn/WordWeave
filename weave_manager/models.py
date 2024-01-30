@@ -109,6 +109,16 @@ class ThreadVote(models.Model):
     value = models.SmallIntegerField()
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
 
+    def delete(self, *args, **kwargs):
+        # Update the thread's vote count before deleting the vote instance
+        if self.value == 1:
+            self.thread.votes = F('votes') - 1
+        elif self.value == -1:
+            self.thread.votes = F('votes') + 1
+
+        self.thread.save()
+        super().delete(*args, **kwargs)
+
 class CommentVote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)

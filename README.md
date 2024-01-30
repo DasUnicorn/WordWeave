@@ -3,6 +3,77 @@ Reddit style news site
 
 [live-site](https://word-weave-eb35426ae0cb.herokuapp.com/)
 
+## Fixed Bug
+### The Situation:
+When a user deletes their profile, all threads, comments and votes the user has made on the platform should get deleted with it. 
+The current set up is as followed:
+
+'''
+class Thread(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, related_name="posts")
+    content = models.TextField()
+    votes = models.IntegerField(default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
+    tags = TaggableManager()
+
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"The title of this thread is {self.title}"
+
+    # Creating the slug
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def up_vote(self, user):
+        # Check if the user has already voted for the thread
+        if not self.thread_votes.filter(user=user).exists():
+            self.votes = F('votes') + 1
+            self.save()
+            self.thread_votes.create(user=user, value=1)
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == -1:
+            self.votes = F('votes') + 2
+            self.save()
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.value = 1
+            vote.save()
+        # Here need to come an exception that gets handle to inform the user that they have already voted.
+
+    def down_vote(self, user):
+        # Check if the user has already voted for the thread
+        if not self.thread_votes.filter(user=user).exists():
+            self.votes = F('votes') - 1
+            self.save()
+            self.thread_votes.create(user=user, value=-1)
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == 1:
+            self.votes = F('votes') - 2
+            self.save()
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.value = -1
+            vote.save()
+
+class ThreadVote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    value = models.SmallIntegerField()
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
+'''
+### The Problem:
+After Deleting a User, their votes (as instances of the Vote Model) get deleted, but the value "votes" of the Thread itselfs is never. Since the Votes for each thread is are the Thread.values that get displayed. The Votes in the website are never updated.
+
+### Possible solutions:
+One idea is to write a function for the ThreadVote Model that adjusts the value of the belonging thread, everytime one ThreadVote gets deleted.
+
+An other option would be a function that calculations the number of votes still existing, evertime a user gets deleted.
+
+
 ## Credits
 * user story structure: https://community.atlassian.com/t5/Jira-Content-Archive-questions/Default-Description-Text-on-Create/qaq-p/2359579
 * log in screen: https://learndjango.com/tutorials/django-login-and-logout-tutorial
