@@ -8,7 +8,8 @@ Reddit style news site
 When a user deletes their profile, all threads, comments and votes the user has made on the platform should get deleted with it. 
 The current set up is as followed:
 
-'''
+```
+
 class Thread(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -64,14 +65,51 @@ class ThreadVote(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     value = models.SmallIntegerField()
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
-'''
+
+```
+
 ### The Problem:
 After Deleting a User, their votes (as instances of the Vote Model) get deleted, but the value "votes" of the Thread itselfs is never. Since the Votes for each thread is are the Thread.values that get displayed. The Votes in the website are never updated.
 
 ### Possible solutions:
-One idea is to write a function for the ThreadVote Model that adjusts the value of the belonging thread, everytime one ThreadVote gets deleted.
+The idea is to write a function for the ThreadVote Model that adjusts the value of the belonging thread, everytime one ThreadVote gets deleted.
 
-An other option would be a function that calculations the number of votes still existing, evertime a user gets deleted.
+I tried this by overwriting the delete() function.
+
+```
+
+class ThreadVote(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True)
+    value = models.SmallIntegerField()
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
+
+    def delete(self, *args, **kwargs):
+        # Update the thread's vote count before deleting the vote instance
+        if self.value == 1:
+            self.thread.votes = F('votes') - 1
+        elif self.value == -1:
+            self.thread.votes = F('votes') + 1
+
+        self.thread.save()
+        super().delete(*args, **kwargs)
+
+```
+
+This wasn't working, because as it turns out, this isn't working for results of a cascading delete and therefore not a solution for my problem. The Django Docs suggest to use pre_delete, which works perfectly and solved the problem:
+
+```
+
+@receiver(pre_delete, sender=ThreadVote)
+def update_thread_votes(sender, instance, **kwargs):
+    if instance.value == 1:
+        instance.thread.votes = F('votes') - 1
+    elif instance.value == -1:
+        instance.thread.votes = F('votes') + 1
+    instance.thread.save()
+
+```
+
 
 
 ## Credits
