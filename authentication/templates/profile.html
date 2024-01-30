@@ -10,6 +10,10 @@
 	<div class="d-flex flex-row">
 		<a class="neon-button secondaryAction m-3" href="{% url 'account_change_password' %}">{% trans "Change Password" %}</a>
 		<a class="neon-button secondaryAction m-3" href="{% url 'update_profile' %}">{% trans "Update Profile" %}</a>
+		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
+            {% csrf_token %}
+            <button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans "Are you sure you want to delete your profile?" %}');">{% trans "Delete Profile" %}</button>
+        </form>
 	</div>
 	<hr>
 	{% endif %}

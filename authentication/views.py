@@ -7,6 +7,8 @@ from .forms import ProfileUpdateForm
 from django import forms
 from django.urls import reverse_lazy
 from image_uploader_widget.widgets import ImageUploaderWidget
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, reverse
 
 
 class UserProfileView(generic.DetailView):
@@ -49,3 +51,14 @@ class ProfileUpdateView(FormView):
     def get_success_url(self, *args, **kwargs):
         # Use 'username' as the parameter name
         return reverse_lazy("user_profile", args=[self.request.user.username])
+
+@login_required
+def delete_profile(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    
+    if request.method == 'POST' and request.user == user:
+        user.delete()
+        return redirect('home')
+
+    return redirect('profile', user.username)
+
