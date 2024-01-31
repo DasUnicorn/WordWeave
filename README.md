@@ -3,7 +3,81 @@ Reddit style news site
 
 [live-site](https://word-weave-eb35426ae0cb.herokuapp.com/)
 
-## Fixed Bug
+## Technologies Used
+
+* GitHub – storage and deployment
+* Sublime Text - Editor
+
+### Languages Used
+
+Python, CSS, Java Script
+
+### Frameworks, Libraries & Programs Used
+
+Github
+
+## User Experience
+
+### Target Audience
+
+
+### User stories
+
+## Design
+
+
+### Wireframes
+
+
+#### Mobile
+
+#### Desktop
+
+## Features 
+
+### Existing Features
+
+### Features Left to Implement
+
+### Accessibility
+
+#### Fonts and Font Sizes
+
+
+#### Colors
+
+
+#### Structural HTML
+
+
+## Testing
+
+
+#### Lighthouse Test
+
+
+#### Jigsaw CSS Validator
+
+
+#### W3C Validator
+
+
+#### Accessibility
+The result of the WAVE Web Accessibility Evaluation Tool shows .... Errors.
+
+
+#### JS Hint
+
+
+### Manual Testing
+
+### Automatic Testing
+Unittests
+
+### Unfixed Bugs
+
+
+### Fixed Bugs
 ### The Situation:
 When a user deletes their profile, all threads, comments and votes the user has made on the platform should get deleted with it. 
 The current set up is as followed:
@@ -96,7 +170,7 @@ class ThreadVote(models.Model):
 
 ```
 
-This wasn't working, because as it turns out, this isn't working for results of a cascading delete and therefore not a solution for my problem. The Django Docs suggest to use pre_delete, which works perfectly and solved the problem:
+This wasn't working, because as it turns out, for results of a cascading delete an overwritten delete function is not used.. The Django Docs suggest to use pre_delete, which works perfectly and solved the problem:
 
 ```
 
@@ -110,7 +184,27 @@ def update_thread_votes(sender, instance, **kwargs):
 
 ```
 
+## Deployment
 
+
+### Local Development
+
+#### How to Clone
+
+1. Click the code button and copy the link of your preferred clone option.
+2. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+3. Type 'git clone' into the terminal, paste the link you copied in step 1 and press enter.
+
+More detailed steps are provided by github: [github guide to clone a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+
+#### How to Fork
+
+To fork the repository:
+
+1. Log in (or sign up) to Github.
+2. Go to the repository for this project.
+3. Click the Fork button in the top right corner.
 
 ## Credits
 * user story structure: https://community.atlassian.com/t5/Jira-Content-Archive-questions/Default-Description-Text-on-Create/qaq-p/2359579
