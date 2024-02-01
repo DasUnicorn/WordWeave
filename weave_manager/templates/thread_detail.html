@@ -7,7 +7,7 @@
     <div class="d-flex flex-row align-items-center justify-content-center m-2">
         <p class="m-0">Tags:</p>
         {% for tag in thread.tags.all %}
-        <a href="{% url 'tag_site' slug=tag.slug %"}><p class="tag m-0 mx-1">{{ tag }}</p>
+        <a href="{% url 'tag_site' slug=tag.slug %}"><p class="tag m-0 mx-1">{{ tag }}</p>
         {% endfor %}</a>
     </div>
     <div class="my-2 d-flex flex-row">
