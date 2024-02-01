@@ -3,11 +3,12 @@
 {% block content %}
 <!-- index.html content starts here -->
 <div class="container-lg pt-3">
-    {% if request.user.is_authenticated %}
     <h1>The tag is: {{ tag.name }}</h1>
+    {% if request.user.is_authenticated %}
     {% if user_follows_tag %}
     <form method="post" action="{% url 'unfollow_tag' %}" class="d-inline">
         {% csrf_token %}
+        <input type="hidden" name="tag_name" value="{{ tag.name }}">
         <button type="submit" class="neon-button">Unfollow this Tag</button>
     </form>
     {% else %}

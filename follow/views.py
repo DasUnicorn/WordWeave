@@ -4,6 +4,7 @@ from django.contrib import messages
 from .models import Follower
 from taggit.models import Tag
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 
 def follow_tag(request):
     if request.method == 'POST':
@@ -23,7 +24,7 @@ def follow_tag(request):
 
     return redirect('tag_site', slug=tag_to_follow.slug)
 
-def unfollow_tag(request, slug):
+def unfollow_tag(request):
     if request.method == 'POST':
         tag_name = request.POST.get('tag_name')
         print(f'Tag name from form: {tag_name}')
