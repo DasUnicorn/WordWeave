@@ -1,5 +1,7 @@
 from django.views import generic
 from .models import Thread, Comment
+from follow.models import Follower
+from taggit.models import Tag
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -32,6 +34,30 @@ class CreateThreadView(LoginRequiredMixin, FormView):
         form.instance.author = self.request.user
         form.save()
         return super().form_valid(form)
+
+class TagSiteView(generic.ListView):
+    template_name = "tag_site.html"
+    context_object_name = 'thread_list'
+
+    def get_queryset(self):
+        tag_slug = self.kwargs['slug']
+        return Thread.objects.filter(tags__slug=tag_slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tag_slug = self.kwargs['slug']
+
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        context['tag'] = tag
+
+        user_follows_tag = False
+        if self.request.user.is_authenticated:
+            user_follows_tag = Follower.objects.filter(followed_by=self.request.user, following=tag).exists()
+
+        context['user_follows_tag'] = user_follows_tag
+
+        return context
+
 
 class ThreadDetailView(DetailView):
     model = Thread

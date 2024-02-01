@@ -1,5 +1,5 @@
 from . import views
-from .views import CreateThreadView, InfoView, AddCommentView, ThreadDetailView, upvote_thread, downvote_thread, upvote_comment, downvote_comment
+from .views import CreateThreadView, TagSiteView, InfoView, AddCommentView, ThreadDetailView, upvote_thread, downvote_thread, upvote_comment, downvote_comment
 from django.urls import path
 
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     path('comment/<int:comment_id>/edit/', views.edit_comment, name='edit_comment'),
     path('comment/<int:comment_id>/delete/', views.delete_comment, name='delete_comment'),
     path('thread/<slug:slug>/', ThreadDetailView.as_view(), name='thread_detail'),
+    path('tag/<slug:slug>/', TagSiteView.as_view(), name='tag_site'),
     path('info/', InfoView.as_view(), name='info'),
 ]

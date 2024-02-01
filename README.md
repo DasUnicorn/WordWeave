@@ -217,3 +217,4 @@ To fork the repository:
 * django unittests https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2
 * svg icons: https://www.svgrepo.com/svg/513800/add-square
 * image resizing: https://github.com/matthewwithanm/django-imagekit
+* follow and unfollow concept https://www.youtube.com/watch?v=vFWobmzLUII

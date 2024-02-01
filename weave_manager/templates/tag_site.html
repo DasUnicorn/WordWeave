@@ -2,25 +2,21 @@
 {% load static %}
 {% block content %}
 <!-- index.html content starts here -->
-{% if not request.user.is_authenticated %}
-<!-- Header -->
-<div class="container-fluid text-center mx-auto bg-hl py-5">
-    <h1 class="text-uppercase font-marker">Welcome to</h1>
-    <IMG SRC="static/img/weaver-green.gif" alt="weaver" class="header-gif">
-</div>
-<div class="banner-content p-5 d-flex flex-column">
-    <h2 class="banner-box p-2">Threads of Thought, Waves of Conversation.</h2>
-    <p class="my-5">Welcome to Weaver, where ideas become conversations. Sign up or log in now and let your words weave the story of tomorrow.</p>
-    <a href={% url 'info' %} class="button-pink align-self-end"> How Weaver works</a>
-</div>
-{% endif %}
 <div class="container-lg pt-3">
     {% if request.user.is_authenticated %}
-    <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" class="icon"></img> new Thread</a>
-    <h1 class="pt-4 text-center text-uppercase">Timeline</h1>
-    <p class="pb-4">Welcome to your timeline. Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
-    <a href=# class="toogle-button toogle-button-active">Global Timeline</a>
-    <a href=# class="toogle-button">Tag-based Timeline</a>
+    <h1>The tag is: {{ tag.name }}</h1>
+    {% if user_follows_tag %}
+    <form method="post" action="{% url 'unfollow_tag' %}" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="neon-button">Unfollow this Tag</button>
+    </form>
+    {% else %}
+    <form method="post" action="{% url 'follow_tag' %}" class="d-inline">
+        {% csrf_token %}
+        <input type="hidden" name="tag_name" value="{{ tag.name }}">
+        <button type="submit" class="neon-button">Follow this Tag</button>
+    </form>
+    {% endif %}
     {% endif %}
     <div class="row">
         <!-- Thread Entries -->
@@ -32,9 +28,10 @@
                         <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></img></a>
                         <p class="circle m-0">{{ thread.votes }}</p>
                         <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></img></a>
-
                         {% for tag in thread.tags.all %}
-                        <a href="{% url 'tag_site' slug=tag.slug %}"><p class="tag">{{ tag }}</p></a>
+                        <a href="{% url 'tag_site' slug=tag.slug %}">
+                            <p class="tag">{{ tag }}</p>
+                        </a>
                         {% endfor %}
                     </div>
                     <div class="card-body d-flex flex-column">

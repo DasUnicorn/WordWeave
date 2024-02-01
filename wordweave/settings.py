@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'weave_manager',
     'authentication',
+    'follow',
     'taggit',
     'image_uploader_widget',
     'imagekit',
