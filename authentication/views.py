@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import FormView
 from .models import User
+from weave_manager.models import Thread
+from django.db.models import Sum 
 from .forms import ProfileUpdateForm
 from django import forms
 from django.urls import reverse_lazy
@@ -17,6 +19,17 @@ class UserProfileView(generic.DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
     context_object_name = "user"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Calculate the sum of votes for all threads by the user
+        user_threads = Thread.objects.filter(author=self.object)
+        total_votes = user_threads.aggregate(Sum('votes'))['votes__sum']
+
+        context['total_votes'] = total_votes
+
+        return context
 
 
 class ProfileUpdateView(FormView):
