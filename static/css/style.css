@@ -8,6 +8,10 @@
 	--color-background-highlight: #F52789;
 }
 
+.bg-yellow {
+	background-color: #FFFF33;
+}
+
 
 .logo {
 	font-family: 'Permanent Marker', cursive;
