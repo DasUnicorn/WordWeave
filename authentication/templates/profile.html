@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
 <div class="container-lg my-2">
@@ -8,14 +9,16 @@
 	<hr>
 	<h2>Settings:</h2>
 	<div class="d-flex flex-row">
-		<a class="neon-button secondaryAction m-3" href="{% url 'account_change_password' %}">{% trans "Change Password" %}</a>
-		<a class="neon-button secondaryAction m-3" href="{% url 'update_profile' %}">{% trans "Update Profile" %}</a>
+		<a class="neon-button secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
 		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
-            {% csrf_token %}
-            <button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans "Are you sure you want to delete your profile?" %}');">{% trans "Delete Profile" %}</button>
-        </form>
+			{% csrf_token %}
+			<button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans "Are you sure you want to delete your profile?" %}');">Delete Profile</button>
+		</form>
 	</div>
 	<hr>
+	{% endif %}
+	{% if request.user.username == user.username %}
+	<h2>Your Profile:</h2>
 	{% endif %}
 	<div class="d-flex flex-column">
 		<div class="d-flex flex-row my-2">
@@ -28,22 +31,27 @@
 				<h2>{{ user.username }}</h2>
 				<p class="text-muted fs-7">Created On: {{ user.created_on }}</p>
 			</div>
+			{% if request.user.username == user.username %}
+			<a class="neon-button secondaryAction m-3 h-100" href="{% url 'update_profile' %}"><img src="{% static 'img/icons/edit.svg' %}" class="icon"></a>
+			{% endif %}
 		</div>
 		<p class="m-0">Bio:</p>
 		<p class="bio fst-italic">{{ user.bio }}</p>
 		<p>Total Votes on All Threads: {{ total_votes }}</p>
 	</div>
+	{% if request.user.username == user.username %}
+	<h2>All Threads from you:</h2>
+	{% else %}
 	<h2>All Threads from {{user.username}}:</h2>
-
+	{% endif %}
 	{% if user.posts.all %}
-    <ul>
-        {% for thread in user.posts.all %}
-        <li><a href="{% url 'thread_detail' slug=thread.slug %}" class="link">{{ thread.title }} </a> - <span class="text-muted fs-7">{{ thread.created_on }}</span></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No threads available for this user.</p>
-    {% endif %}
-
+	<ul>
+		{% for thread in user.posts.all %}
+		<li><a href="{% url 'thread_detail' slug=thread.slug %}" class="link">{{ thread.title }} </a> - <span class="text-muted fs-7">{{ thread.created_on }}</span></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>No threads available for this user.</p>
+	{% endif %}
 </div>
 {% endblock %}
