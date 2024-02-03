@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.generic.edit import FormView
 from .models import User
-from weave_manager.models import Thread
+from weave_manager.models import Thread, Comment
 from django.db.models import Sum 
 from .forms import ProfileUpdateForm
 from django import forms
@@ -25,7 +25,14 @@ class UserProfileView(generic.DetailView):
 
         # Calculate the sum of votes for all threads by the user
         user_threads = Thread.objects.filter(author=self.object)
-        total_votes = user_threads.aggregate(Sum('votes'))['votes__sum']
+        thread_votes = user_threads.aggregate(Sum('votes'))['votes__sum']
+
+        # Calculate the sum of votes for all comments by the user
+        user_comments = Comment.objects.filter(author=self.object)
+        comment_votes = user_comments.aggregate(Sum('votes'))['votes__sum']
+
+        # Add all votes for total sum
+        total_votes = thread_votes + comment_votes
 
         context['total_votes'] = total_votes
 

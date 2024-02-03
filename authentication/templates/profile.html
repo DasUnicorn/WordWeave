@@ -12,13 +12,22 @@
 		<a class="neon-button secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
 		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
 			{% csrf_token %}
-			<button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans "Are you sure you want to delete your profile?" %}');">Delete Profile</button>
+			<button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
 		</form>
 	</div>
 	<hr>
 	{% endif %}
 	{% if request.user.username == user.username %}
 	<h2>Your Profile:</h2>
+	{% endif %}
+	{% if total_votes %}
+	<div class="bg-yellow">
+		<p>Collected Upvotes: {{ total_votes }}</p>
+	</div>
+	{% else %}
+	<div class="bg-yellow">
+		<p>Collected Upvotes: 0</p>
+	</div>
 	{% endif %}
 	<div class="d-flex flex-column">
 		<div class="d-flex flex-row my-2">
@@ -37,7 +46,6 @@
 		</div>
 		<p class="m-0">Bio:</p>
 		<p class="bio fst-italic">{{ user.bio }}</p>
-		<p>Total Votes on All Threads: {{ total_votes }}</p>
 	</div>
 	{% if request.user.username == user.username %}
 	<h2>All Threads from you:</h2>
