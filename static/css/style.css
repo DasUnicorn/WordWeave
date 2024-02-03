@@ -75,6 +75,10 @@ h4 {
 	color: var(--color-text-light);
 }
 
+.link:hover h2{
+	background-color: var(--color-background-highlight);
+}
+
 .bg-hl {
 	background-color: var(--color-highlight);
 }
@@ -158,7 +162,12 @@ a {
 	padding: 5px;
 	border-radius: 10px;
 	background-color: var(--color-highlight);
+	border: 2px solid var(--color-highlight);
 	color: var(--color-text-dark);
+}
+
+.tag:hover {
+	background-color: var(--color-text-light);
 }
 
 .rotate-180 {
