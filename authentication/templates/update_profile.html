@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
-
-<h1>User Profile</h1>
-<form id="commentForm" method="post" style="margin-top: 1.3em;" enctype='multipart/form-data'>
-    {% csrf_token %}
-    {% crispy form %}
-</form>
-
+<div class="container-lg my-2">
+    <h1>User Profile</h1>
+    <form id="commentForm" method="post" style="margin-top: 1.3em;" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</div>
 {% endblock %}
