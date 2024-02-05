@@ -71,8 +71,8 @@ class ThreadDetailView(DetailView):
         return context
 
 class AddCommentView(View):
-    def post(self, request, slug):
-        thread = Thread.objects.get(slug=slug)
+    def post(self, request, thread_id):
+        thread = Thread.objects.get(id=thread_id)
         form = CommentForm(request.POST)
 
         if form.is_valid():
@@ -81,7 +81,7 @@ class AddCommentView(View):
             comment.author = request.user
             comment.save()
 
-        return redirect('thread_detail', slug=slug)
+        return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
 
 
@@ -102,14 +102,14 @@ def upvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
     comment.up_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
-    return redirect('thread_detail', slug=thread.slug)
+    return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
 @login_required
 def downvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
     comment.down_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
-    return redirect('thread_detail', slug=thread.slug)
+    return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
 @login_required
 def edit_thread(request, thread_id):
@@ -119,7 +119,7 @@ def edit_thread(request, thread_id):
         form = ThreadForm(request.POST, instance=thread)
         if form.is_valid():
             form.save()
-            return redirect('thread_detail', slug=thread.slug)
+            return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
     else:
         form = ThreadForm(instance=thread)
 
@@ -145,7 +145,7 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            return redirect('thread_detail', slug=comment.thread.slug)
+            return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
     else:
         form = CommentForm(instance=comment)
 
@@ -158,7 +158,7 @@ def delete_comment(request, comment_id):
     if request.method == 'POST':
         # Handle the deletion of the thread
         comment.delete()
-        return redirect('thread_detail', slug=comment.thread.slug)
+        return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
 
     # Render the delete confirmation page
     return render(request, 'delete_comment_confirm.html', {'comment': comment})
