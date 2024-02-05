@@ -178,24 +178,37 @@ a {
 	display: none;
 }
 
-@include media-breakpoint-up(md) {
-	.rows {
-		display: flex;
-		flex-direction: row;
-	}
-}
-@include media-breakpoint-up(md) {
-	.md-show {
-		display: flex;
-	}
+.md-rows {
+	flex-direction: column !important;
 }
 
 @include media-breakpoint-up(md) {
 	.rows {
 		display: flex;
-		flex-direction: row;
+		flex-direction: row !important;
 	}
 }
+@include media-breakpoint-up(md) {
+	.md-show {
+		display: flex !important;
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.md-rows {
+		flex-direction: row !important;
+	}
+}
+
+
+@media screen and (min-width:720px) {
+	.md-rows {
+		flex-direction: row !important;
+
+	.md-ms-2 {
+		margin-left: 1rem;
+	}
+	}
 
 /* Overwright Bootstrap classes*/
 .btn {

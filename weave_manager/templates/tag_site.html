@@ -36,7 +36,7 @@
                         {% endfor %}
                     </div>
                     <div class="card-body d-flex flex-column">
-                        <h2><a href="{% url 'thread_detail' slug=thread.slug %}" class="card-title">{{ thread.title }}</a></h2>
+                        <h2><a href="{% url 'thread_detail' slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
                         <div class="d-flex flex-row justify-content-between">
                             <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}" class="link">{{ thread.author }}</a></p>
                             <p class="card-text text-muted fs-7">{{ thread.created_on}}
