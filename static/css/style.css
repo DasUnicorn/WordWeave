@@ -204,11 +204,12 @@ a {
 @media screen and (min-width:720px) {
 	.md-rows {
 		flex-direction: row !important;
+	}
 
 	.md-ms-2 {
 		margin-left: 1rem;
 	}
-	}
+}
 
 /* Overwright Bootstrap classes*/
 .btn {
