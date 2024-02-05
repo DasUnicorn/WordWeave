@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.views import generic
 from .models import Follower
 from taggit.models import Tag
 from django.contrib.auth.models import User
@@ -41,3 +42,11 @@ def unfollow_tag(request):
             messages.error(request, 'Invalid tag name or user not authenticated.')
 
     return redirect('tag_site', slug=tag.slug)
+
+class UserTagView(generic.ListView):
+    template_name = "tag_user.html"
+    context_object_name = 'followed_tags'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Tag.objects.filter(following__followed_by=user)

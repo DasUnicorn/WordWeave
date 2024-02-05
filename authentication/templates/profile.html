@@ -14,6 +14,7 @@
 			{% csrf_token %}
 			<button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
 		</form>
+		<a class="neon-button secondaryAction m-3" href="{% url 'user_tags' %}">Change Tags</a>
 	</div>
 	<hr>
 	{% endif %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- index.html content starts here -->
+<div class="container-lg pt-3">
+    <h1>All Tags you are following: </h1>
+    {% if request.user.is_authenticated %}
+    <div class="d-flex">
+    {% for tag in followed_tags %}
+    <a href="{% url 'tag_site' slug=tag.slug %}" class="btn btn-primary m-3">{{ tag.name }}</a>
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>
+<!-- index.html content ends here -->
+{% endblock %}
