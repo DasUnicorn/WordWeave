@@ -13,7 +13,7 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 class Thread(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE, related_name="posts")
     content = models.TextField()
