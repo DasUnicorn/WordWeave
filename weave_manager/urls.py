@@ -17,4 +17,5 @@ urlpatterns = [
     path('thread/<int:thread_id>-<slug:slug>/', ThreadDetailView.as_view(), name='thread_detail'),
     path('tag/<slug:slug>/', TagSiteView.as_view(), name='tag_site'),
     path('info/', InfoView.as_view(), name='info'),
+    path('timeline/', views.UserTimelineView.as_view(), name='timeline'),
 ]

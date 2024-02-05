@@ -2,35 +2,19 @@
 {% load static %}
 {% block content %}
 <!-- index.html content starts here -->
-{% if not request.user.is_authenticated %}
-<!-- Header -->
-<div class="container-fluid text-center mx-auto bg-hl py-5">
-    <h1 class="text-uppercase font-marker">Welcome to</h1>
-    <IMG SRC="static/img/weaver-green.gif" alt="weaver" class="header-gif">
-</div>
-<div class="banner-content p-5 d-flex justify-content-center">
-    <div class="d-flex flex-column md-w-60">
-        <h2 class="banner-box p-2">Threads of Thought, Waves of Conversation.</h2>
-        <p class="my-5">Welcome to Weaver, where ideas become conversations. Sign up or log in now and let your words weave the story of tomorrow.</p>
-        <a href={% url 'info' %} class="button-pink align-self-end"> How Weaver works</a>
-    </div>
-</div>
-{% endif %}
 <div class="container-lg pt-3">
-    <h1 class="pt-4 text-center text-uppercase">Global Timeline</h1>
-    {% if request.user.is_authenticated %}
+    <h1 class="pt-4 text-center text-uppercase">Your Personal Timeline</h1>
     <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" class="icon"></img> new Thread</a>
-    <p class="py-4">Welcome to the global timeline.<br>Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
+    <p class="py-4">Welcome to your personal timeline.<br>Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
     <div class="d-flex md-rows">
-        <a href={% url 'home' %} class="toogle-button mt-2 toogle-button-active">Global Timeline</a>
-        <a href={% url 'timeline' %} class="toogle-button mt-2 md-ms-2">Tag-based Timeline</a>
+        <a href={% url 'home' %} class="toogle-button mt-2">Global Timeline</a>
+        <a href={% url 'timeline' %} class="toogle-button mt-2 toogle-button-active md-ms-2">Tag-based Timeline</a>
     </div>
-    {% endif %}
     <div class="row">
         <!-- Thread Entries -->
         <div class="mt-3 left">
             <div class="row">
-                {% for thread in thread_list %}
+                {% for thread in tag_timeline %}
                 <div class="card my-2 d-flex flex-row">
                     <div class="d-flex flex-column align-items-center">
                         <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></img></a>

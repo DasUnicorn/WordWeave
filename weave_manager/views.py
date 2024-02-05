@@ -20,6 +20,19 @@ class GlobalTimeline(generic.ListView):
     queryset = Thread.objects.all()
     template_name = "index.html"
 
+
+class UserTimelineView(LoginRequiredMixin, generic.ListView):
+    template_name = "timeline.html"
+    context_object_name = 'tag_timeline'
+    login_url = '/accounts/login/'
+
+    def get_queryset(self):
+        user = self.request.user
+        followed_tags = Tag.objects.filter(following__followed_by=user)
+        followed_threads = Thread.objects.filter(tags__in=followed_tags).distinct()
+
+        return followed_threads
+
 class InfoView(TemplateView):
     template_name = "info.html"
 

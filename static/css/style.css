@@ -36,6 +36,7 @@
 
 .header-gif {
 	width: 80%;
+	max-width: 500px;
 }
 
 .banner-content {
@@ -209,9 +210,18 @@ a {
 	.md-ms-2 {
 		margin-left: 1rem;
 	}
+	.md-w-60 {
+		width: 60%;
+		max-width: 700px;
+	}
 }
 
 /* Overwright Bootstrap classes*/
+.nav-link:hover, .logo:hover{
+	color: var(--color-text-dark);
+	text-decoration: underline;
+}
+
 .btn {
 	color: var(--color-text-dark);
 	background-color: var(--color-highlight);
@@ -264,4 +274,9 @@ a {
 
 .nav-link {
 	font-family: 'Alatsi', sans-serif;
+}
+
+.toogle-button:hover {
+	color: var(--color-text-dark);
+	background-color: var(--color-highlight);
 }
