@@ -12,6 +12,7 @@ from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, reverse
+from django.core.paginator import Paginator, EmptyPage
 
 # Create your views here.
 
@@ -98,7 +99,19 @@ class AddCommentView(View):
 
         return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
-
+class MyPaginator(Paginator):
+    def validate_number(self, number):
+        try:
+            return super().validate_number(number)
+        except EmptyPage:
+            if int(number) > 1:
+                # return the last page
+                return self.num_pages
+            elif int(number) < 1:
+                # return the first page
+                return 1
+            else:
+                raise
 
 @login_required
 def upvote_thread(request, thread_id):

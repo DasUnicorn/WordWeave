@@ -220,3 +220,5 @@ To fork the repository:
 * follow and unfollow concept https://www.youtube.com/watch?v=vFWobmzLUII
 * text in star https://stackoverflow.com/questions/45346098/content-number-inside-a-shape-symbol
 * paginator https://dontrepeatyourself.org/post/django-pagination-with-class-based-view/
+* markdown https://www.youtube.com/watch?v=SlRdKpLAEsM
+* markdown2 https://pypi.org/project/django-markdown2/
