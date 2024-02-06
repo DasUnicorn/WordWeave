@@ -26,10 +26,14 @@ class UserProfileView(generic.DetailView):
         # Calculate the sum of votes for all threads by the user
         user_threads = Thread.objects.filter(author=self.object)
         thread_votes = user_threads.aggregate(Sum('votes'))['votes__sum']
+        if not thread_votes:
+            thread_votes = 0
 
         # Calculate the sum of votes for all comments by the user
         user_comments = Comment.objects.filter(author=self.object)
         comment_votes = user_comments.aggregate(Sum('votes'))['votes__sum']
+        if not comment_votes:
+            comment_votes = 0
 
         # Add all votes for total sum
         total_votes = thread_votes + comment_votes
