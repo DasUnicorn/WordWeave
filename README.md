@@ -6,6 +6,8 @@ Behind the scenes, Weaver is powered by Python, using a Django web framework. Th
 
 You can check out the [live-site.](https://word-weave-eb35426ae0cb.herokuapp.com/)
 
+![Mock Up](static/img/readme/mockup.png)
+
 ## Technologies Used
 
 * GitHub – storage and deployment
