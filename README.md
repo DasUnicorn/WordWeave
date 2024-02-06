@@ -219,3 +219,4 @@ To fork the repository:
 * image resizing: https://github.com/matthewwithanm/django-imagekit
 * follow and unfollow concept https://www.youtube.com/watch?v=vFWobmzLUII
 * text in star https://stackoverflow.com/questions/45346098/content-number-inside-a-shape-symbol
+* paginator https://dontrepeatyourself.org/post/django-pagination-with-class-based-view/

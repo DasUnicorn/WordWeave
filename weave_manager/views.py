@@ -17,11 +17,13 @@ from django.shortcuts import get_object_or_404, redirect, reverse
 
 
 class GlobalTimeline(generic.ListView):
+    paginate_by = 5
     queryset = Thread.objects.all()
     template_name = "index.html"
 
 
 class UserTimelineView(LoginRequiredMixin, generic.ListView):
+    paginate_by = 5
     template_name = "timeline.html"
     context_object_name = 'tag_timeline'
     login_url = '/accounts/login/'
