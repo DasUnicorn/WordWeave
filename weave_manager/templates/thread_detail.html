@@ -22,7 +22,7 @@
                 <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}" class="link">{{ thread.author }}</a></p>
                 <p class="card-text text-muted fs-7">{{ thread.created_on}}</p>
             </div>
-            <p class="card-text">{{ thread.content }}</p>
+            <p class="card-text">{{ thread.content_html|safe }}</p>
         </div>
         <!-- Add edit and delete buttons for the thread -->
         {% if user.is_authenticated and user == thread.author %}

@@ -8,6 +8,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
+import markdown2
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -61,6 +62,10 @@ class Thread(models.Model):
             vote.value = -1
             vote.save()
         # Here need to come an exception that gets handle to inform the user that they have already voted.
+
+    @property
+    def content_html(self):
+        return markdown2.markdown(self.content)
 
 class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")

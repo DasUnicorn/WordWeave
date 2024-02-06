@@ -17,6 +17,7 @@ django-crispy-forms = "^2.1"
 crispy-bootstrap5 = "^2023.10"
 django-image-uploader-widget = "^0.4.1"
 django-imagekit = "^5.0.0"
+markdown2 = "^2.4.12"
 
 
 [build-system]
