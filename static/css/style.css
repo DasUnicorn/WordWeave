@@ -12,6 +12,18 @@
 	background-color: #FFFF33;
 }
 
+.bg-dark {
+	background-color: var(--color-text-dark);
+}
+
+.bg-light {
+	background-color: var(--color-text-light);
+}
+
+.text-dark {
+	color: var(--color-text-dark);
+}
+
 
 .logo {
 	font-family: 'Permanent Marker', cursive;
@@ -76,7 +88,7 @@ h4 {
 	color: var(--color-text-light);
 }
 
-.link:hover h2{
+.link:hover h2 {
 	background-color: var(--color-background-highlight);
 }
 
@@ -189,6 +201,7 @@ a {
 		flex-direction: row !important;
 	}
 }
+
 @include media-breakpoint-up(md) {
 	.md-show {
 		display: flex !important;
@@ -210,14 +223,20 @@ a {
 	.md-ms-2 {
 		margin-left: 1rem;
 	}
+
 	.md-w-60 {
 		width: 60%;
 		max-width: 700px;
 	}
+
+	.max-w-75 {
+		max-width: 75%;
+	}
 }
 
 /* Overwright Bootstrap classes*/
-.nav-link:hover, .logo:hover{
+.nav-link:hover,
+.logo:hover {
 	color: var(--color-text-dark);
 	text-decoration: underline;
 }

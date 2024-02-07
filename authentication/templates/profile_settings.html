@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+{% load i18n %}
+{% if request.user.username == user.username %}
+<div class="container-lg py-3">
+	<h1>Your settings:</h1>
+	<hr>
+	<h2>Account setting:</h2>
+	<div class="">
+		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
+		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_change_password' %}">Change E-Mail</a>
+		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
+			{% csrf_token %}
+			<button type="submit" class="btn btn-primary secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
+		</form>
+	</div>
+	<hr>
+	<h2>Profile</h2>
+	<a class="btn btn-primary secondaryAction m-3 h-100" href="{% url 'update_profile' %}">Update Profile</a>
+	<a class="btn btn-primary secondaryAction m-3" href="{% url 'user_tags' %}">Change Tags</a>
+
+</div>
+{% endif %}
+{% endblock %}

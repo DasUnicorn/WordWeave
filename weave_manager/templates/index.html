@@ -16,7 +16,7 @@
     </div>
 </div>
 {% endif %}
-<div class="container-lg pt-3">
+<div class="container-lg py-3">
     <h1 class="pt-4 text-center text-uppercase">Global Timeline</h1>
     {% if request.user.is_authenticated %}
     <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" class="icon"></img> new Thread</a>

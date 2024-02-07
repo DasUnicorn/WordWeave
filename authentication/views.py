@@ -42,7 +42,6 @@ class UserProfileView(generic.DetailView):
 
         return context
 
-
 class ProfileUpdateView(FormView):
     template_name = "update_profile.html"
     form_class = ProfileUpdateForm

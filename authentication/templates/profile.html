@@ -3,64 +3,73 @@
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-<div class="container-lg my-2">
-	<h1>Profile of {{user.username}}</h1>
-	{% if request.user.username == user.username %}
-	<hr>
-	<h2>Settings:</h2>
-	<div class="d-flex flex-row">
-		<a class="neon-button secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
-		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
-			{% csrf_token %}
-			<button type="submit" class="neon-button secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
-		</form>
-		<a class="neon-button secondaryAction m-3" href="{% url 'user_tags' %}">Change Tags</a>
-	</div>
-	<hr>
-	{% endif %}
-	{% if request.user.username == user.username %}
-	<h2>Your Profile:</h2>
-	{% endif %}
-	{% if total_votes %}
-	<div class="bg-yellow">
-		<p>Collected Upvotes: {{ total_votes }}</p>
-	</div>
-	{% else %}
-	<div class="bg-yellow">
-		<p>Collected Upvotes: 0</p>
-	</div>
-	{% endif %}
-	<div class="d-flex flex-column">
-		<div class="d-flex flex-row my-2">
-			{% if user.profile_pic %}
-			<img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic">
-			{% else %}
-			<p>No profile picture available</p>
-			{% endif %}
-			<div class="m-2">
-				<h2>{{ user.username }}</h2>
-				<p class="text-muted fs-7">Created On: {{ user.created_on }}</p>
+<div class="bg-dark p-3">
+	<div class="container-lg my-2">
+		{% if request.user.username == user.username %}
+		<a href="{% url 'user_settings' username=user.username %}" class="neon-button">Your Settings</a>
+		{% endif %}
+		<div class="d-flex flex-column align-items-center">
+			<div class="pt-5 d-flex md-rows align-items-center w-100 max-w-75">
+				<img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+				<div class="bg-light text-dark w-75 p-2 m-3 text-center">
+					<h1>{{ user.username }}</h1>
+					<p>{{ user.bio }}</p>
+				</div>
 			</div>
+			<div class="d-flex justify-content-center">
+				<p class="bg-hl p-2 m-0">Member since: {{ user.created_on }}</p>
+			</div>
+			<div class="d-flex flex-row justify-content-center align-items-center py-2">
+				<img src="{% static 'img/icons/star.svg' %}" class="icon">
+				{% if total_votes %}
+				<p class="m-0 p-0 text-white px-2">{{ total_votes }}</p>
+				{% else %}
+				<p class="m-0 p-0 text-white px-2">Collected Upvotes: 0</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+<div class="d-flex flex-column bg-hl-pink h-100">
+	<div class="container-lg p-3 h-100">
+		<div class="bg-dark p-2 mb-2">
 			{% if request.user.username == user.username %}
-			<a class="neon-button secondaryAction m-3 h-100" href="{% url 'update_profile' %}"><img src="{% static 'img/icons/edit.svg' %}" class="icon"></a>
+			<h2 class="text-white">All your Threads:</h2>
+			{% else %}
+			<h2 class="text-white">All Threads from {{user.username}}:</h2>
 			{% endif %}
 		</div>
-		<p class="m-0">Bio:</p>
-		<p class="bio fst-italic">{{ user.bio }}</p>
+		{% if user.posts.all %}
+		<ul>
+			{% for thread in user.posts.all %}
+			<div class="card m-2 p-2 d-flex flex-row">
+				<div class="d-flex flex-column align-items-center">
+					<a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></a>
+					<p class="circle m-0">{{ thread.votes }}</p>
+					<a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></a>
+					{% for tag in thread.tags.all %}
+					<a href="{% url 'tag_site' slug=tag.slug %}">
+						<p class="tag">{{ tag }}</p>
+					</a>
+					{% endfor %}
+				</div>
+				<div class="card-body d-flex flex-column">
+					<h2><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
+					<div class="d-flex flex-row justify-content-between">
+						<p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}" class="link">{{ thread.author }}</a></p>
+						<p class="card-text text-muted fs-7">{{ thread.created_on}}
+					</div>
+					<p class="card-text">{{ thread.content|truncatechars:500 }}</p>
+					</p>
+					<a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
+				</div>
+			</div>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p>No threads available for this user.</p>
+		{% endif %}
 	</div>
-	{% if request.user.username == user.username %}
-	<h2>All Threads from you:</h2>
-	{% else %}
-	<h2>All Threads from {{user.username}}:</h2>
-	{% endif %}
-	{% if user.posts.all %}
-	<ul>
-		{% for thread in user.posts.all %}
-		<li><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="link">{{ thread.title }} </a> - <span class="text-muted fs-7">{{ thread.created_on }}</span></li>
-		{% endfor %}
-	</ul>
-	{% else %}
-	<p>No threads available for this user.</p>
-	{% endif %}
+</div>
 </div>
 {% endblock %}
