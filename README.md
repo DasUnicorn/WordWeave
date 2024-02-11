@@ -65,16 +65,16 @@ These concepts were presented to other people for feedback and evaluation. Their
 ### Wireframes
 
 #### Timeline
-**Desktop:**
-<img src="static/img/readme/timeline-desktop.png" alt="Wireframe Desktop Timeline" height=300px>
-**Mobile:**
-![Wireframe Mobile Timeline](static/img/readme/timeline-mobile.png)
+**Desktop:** \
+<img src="static/img/readme/timeline-desktop.png" alt="Wireframe Desktop Timeline" height=400px> \
+**Mobile:** \
+<img src="static/img/readme/timeline-mobile.png" alt="Wireframe Mobile Timeline" height=400px> \
 
 #### Profile
-**Desktop:**
-![Wireframe Desktop profile](static/img/readme/profile-desktop.png)
-**Mobile:**
-![Wireframe mobile Profile](static/img/readme/profile-mobile.png)
+**Desktop:** \
+<img src="static/img/readme/profile-desktop.png" alt="Wireframe Desktop profile" height=400px> \
+**Mobile:** \
+<img src="static/img/readme/profile-mobile.png" alt="Wireframe Mobile profile" height=400px> \
 
 ## Features 
 
