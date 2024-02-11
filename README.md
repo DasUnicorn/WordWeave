@@ -64,10 +64,17 @@ These concepts were presented to other people for feedback and evaluation. Their
 
 ### Wireframes
 
+#### Timeline
+**Desktop:**
+![Wireframe Desktop Timeline](static/img/readme/timeline-desktop.png)
+**Mobile:**
+![Wireframe Mobile Timeline](static/img/readme/timeline-mobile.png)
 
-#### Mobile
-
-#### Desktop
+#### Profile
+**Desktop:**
+![Wireframe Desktop profile](static/img/readme/profile-desktop.png)
+**Mobile:**
+![Wireframe mobile Profile](static/img/readme/profile-mobile.png)
 
 ## Features 
 
@@ -89,6 +96,8 @@ These concepts were presented to other people for feedback and evaluation. Their
 
 * Create Threads and Comments: Logged-in users can create threads and comments on the platform. Threads appear in the global timeline and can be commented on by other logged-in users.
 * Upvote and Downvote: Users can upvote or downvote threads and comments to give and collect points on the platform.
+* Edit: Logged-in users can edit their threads and comments on the platform.
+* Delete: Logged-in users can delete their threads and comments. A confirmation is asked before the deletion is executed.
 
 #### Global and Tag-based Timeline:
 
