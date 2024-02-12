@@ -9,7 +9,7 @@
 	<h2>Account setting:</h2>
 	<div class="">
 		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
-		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_email_change' %}">Change E-Mail</a>
+		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_email' %}">Change E-Mail</a>
 		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
 			{% csrf_token %}
 			<button type="submit" class="btn btn-primary secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
