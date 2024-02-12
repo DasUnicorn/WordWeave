@@ -181,7 +181,8 @@ USE_TZ = True
 # R2 Bucket File Storage
 
 AWS_STORAGE_BUCKET_NAME = 'weaver-pics'
-AWS_S3_ENDPOINT_URL = 'https://d65120b07a992f2766a9efec4b596a74.eu.r2.cloudflarestorage.com'
+# AWS_S3_ENDPOINT_URL = 'https://d65120b07a992f2766a9efec4b596a74.eu.r2.cloudflarestorage.com'
+AWS_S3_ENDPOINT_URL = 'https://d65120b07a992f2766a9efec4b596a74.r2.cloudflarestorage.com/weaver-pics'
 AWS_S3_ACCESS_KEY_ID = '65946935e2538f79829b7408f060fb12'
 AWS_S3_SECRET_ACCESS_KEY = os.environ['AWS_S3_SECRET_ACCESS_KEY']
 AWS_S3_SIGNATURE_VERSION = 's3v4'
