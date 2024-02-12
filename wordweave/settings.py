@@ -83,7 +83,6 @@ INSTALLED_APPS = [
     'taggit',
     'image_uploader_widget',
     'imagekit',
-    'django-storages',
 ]
 
 # Crespy Bootstrap Settings:
