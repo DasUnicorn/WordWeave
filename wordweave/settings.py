@@ -176,6 +176,14 @@ USE_I18N = True
 
 USE_TZ = True
 
+# R2 Bucket File Storage
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'weaver-pics'
+AWS_S3_ENDPOINT_URL = 'https://d65120b07a992f2766a9efec4b596a74.r2.cloudflarestorage.com'
+AWS_S3_ACCESS_KEY_ID = 'ea19e3af559da7987953955cd62371cd'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

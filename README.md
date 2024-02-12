@@ -29,6 +29,7 @@ Python, HTML/CSS, Java Script
 * [django-taggit](https://github.com/jazzband/django-taggit)
 * [markdown2](https://pypi.org/project/django-markdown2/)
 * [django-image-uploader-widget](https://pypi.org/project/django-image-uploader-widget/)
+* django-storages and boto3, for r2 bucket storage
 
 ## User Experience
 
@@ -307,3 +308,4 @@ Starts a lightweight development web server on the local machine.
 * [follow and unfollow concept](https://www.youtube.com/watch?v=vFWobmzLUII)
 * django [pagination](https://dontrepeatyourself.org/post/django-pagination-with-class-based-view/)
 * The markdown in threads get handled with [markdown2](https://pypi.org/project/django-markdown2/)
+* Set Up R2 Bucket from [djangotherightway](https://djangotherightway.com/using-cloudflare-r2-with-django-for-storage)
