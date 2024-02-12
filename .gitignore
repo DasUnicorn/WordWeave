@@ -1,8 +1,8 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+*/__pycache__/*
 *.py[cod]
-wordweave/__pycache__/
-authentication/__pycache__/
+wordweave/__pycache__/*
+authentication/__pycache__/*
 
 # Unit test / coverage reports
 .tox/
