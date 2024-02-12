@@ -4,7 +4,7 @@
 <!-- index.html content starts here -->
 <div class="container-lg py-3">
     <h1 class="pt-4 text-center text-uppercase">Your Personal Timeline</h1>
-    <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" class="icon"> New Thread</a>
+    <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" alt="" class="icon"> New Thread</a>
     <p class="py-4">Welcome to your personal timeline.<br>Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
     <div class="d-flex md-rows">
         <a href={% url 'home' %} class="toogle-button mt-2">Global Timeline</a>
@@ -17,9 +17,9 @@
                 {% for thread in tag_timeline %}
                 <div class="card my-2 d-flex flex-row">
                     <div class="d-flex flex-column align-items-center">
-                        <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></a>
+                        <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></a>
                         <p class="circle m-0">{{ thread.votes }}</p>
-                        <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></a>
+                        <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180"></a>
                         {% for tag in thread.tags.all %}
                         <a href="{% url 'tag_site' slug=tag.slug %}">
                             <p class="tag">{{ tag }}</p>
