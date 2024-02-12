@@ -17,7 +17,7 @@
 </div>
 {% endif %}
 <div class="container-lg py-3">
-    <h1 class="pt-4 text-center text-uppercase">Global Timeline</h1>
+    <h1 class="py-4 text-center text-uppercase">Global Timeline</h1>
     {% if request.user.is_authenticated %}
     <a href={% url 'create_thread' %} class="neon-button ps-1"><img src="{% static 'img/icons/add.svg' %}" alt="" class="icon"> New Thread</a>
     <p class="py-4">Welcome to the global timeline.<br>Choose between the "Global Timeline" with all posts, or check out your personal "Tag based Timeline" that contains all the Tags you follow.</p>
