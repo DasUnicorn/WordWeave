@@ -302,6 +302,7 @@ Starts a lightweight development web server on the local machine.
 * I learned a lot about django unittests from 
 [The Dumbfounds](https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2)
 * All svg icons come from [svgrepo](https://www.svgrepo.com/svg/513800/add-square)
+* Avatar Images are free images from [freepik](https://www.freepik.com/free-vector/hand-drawn-people-avatar-set_4077151.htm#from_view=detail_alsolike)
 * This project uses image resizing by the [django imagekit](https://github.com/matthewwithanm/django-imagekit)
 * [follow and unfollow concept](https://www.youtube.com/watch?v=vFWobmzLUII)
 * django [pagination](https://dontrepeatyourself.org/post/django-pagination-with-class-based-view/)
