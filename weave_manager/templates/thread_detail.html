@@ -46,13 +46,13 @@
             </div>
             <div>
                 <a href="{% url 'user_profile' username=comment.author %}" class="link">
-                    <h2>{{ comment.author }} said:</h2>
+                    <h2>{{ comment.author }}:</h2>
                 </a>
                 <p class="card-text text-muted fs-7">{{ comment.created_on}}</p>
             </div>
         </div>
         <div class="comment">
-            <p>"{{ comment.body }}"</p>
+            <p>{{ comment.body }}</p>
         </div>
         {% if user.is_authenticated and user == comment.author %}
         <div>
