@@ -23,6 +23,15 @@ class GlobalTimeline(generic.ListView):
     queryset = Thread.objects.all()
     template_name = "index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        thread_list = context['thread_list']
+        if self.request.user.is_authenticated:
+            for thread in thread_list:
+                thread.has_upvoted = thread.has_upvoted(self.request.user)
+                thread.has_downvoted = thread.has_downvoted(self.request.user)
+        return context
+
 
 class UserTimelineView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5

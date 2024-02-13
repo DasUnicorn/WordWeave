@@ -21,12 +21,12 @@
                         <!-- Vote Part -->
                         <form action="{% url 'upvote_thread' thread_id=thread.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></button>
+                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2 {% if request.user.is_authenticated and thread.has_upvoted %}circle bg-yellow{% endif %}"></button>
                         </form>
-                        <p class="circle m-0">{{ thread.votes }}</p>
+                        <p class="circle text-light bg-hl-pink m-0">{{ thread.votes }}</p>
                         <form action="{% url 'downvote_thread' thread_id=thread.id %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180"></button>
+                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180 {% if request.user.is_authenticated and thread.has_downvoted %}circle bg-yellow{% endif %}"></button>
                         </form>
                         <!-- Tags -->
                         {% for tag in thread.tags.all %}

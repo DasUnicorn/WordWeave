@@ -72,6 +72,12 @@ class Thread(models.Model):
             # if already downvoted -> remove vote
             vote = self.thread_votes.get(user=user, thread_id=self.id)
             vote.delete()
+    
+    def has_upvoted(self, user):
+        return self.thread_votes.filter(user=user, value=1).exists()
+
+    def has_downvoted(self, user):
+        return self.thread_votes.filter(user=user, value=-1).exists()
         
     @property
     def content_html(self):
