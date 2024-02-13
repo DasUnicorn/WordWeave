@@ -230,7 +230,11 @@ The Lighthouse Test results show excellent results:
 <img src="static/img/readme/lighthouse-profile.png" alt="Lighthouse Test Results Profile" width=600px>
 
 #### Jigsaw CSS Validator
-
+The Jigsaw CSS Validator throws one error:
+According to the test the Property *text-wrap: pretty* doesn't exist. In reality this is a [fairly new](https://developer.chrome.com/blog/css-text-wrap-pretty) css property. It is not yet implemented for all browser. *(see below)*
+![Jigsaw Result](static/img/readme/css-test.png)
+![Can I use, screenshot](static/img/readme/wrap-test.png)
+*Screenshot From [caniuse.com](https://caniuse.com/?search=text-wrap%3Apretty)*
 
 #### W3C Validator
 

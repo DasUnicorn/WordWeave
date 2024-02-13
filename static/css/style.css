@@ -9,6 +9,7 @@
 	/* #F52789 */
 }
 
+/* Backgrounds */
 .bg-yellow {
 	background-color: #FFFF33;
 }
@@ -21,10 +22,40 @@
 	background-color: var(--color-text-light);
 }
 
+.banner-content {
+	background-color: var(--color-text-dark);
+	color: var(--color-text-light);
+}
+
+.bg-hl {
+	background-color: var(--color-highlight);
+}
+
+.bg-hl-pink {
+	background-color: var(--color-background-highlight);
+}
+
+/* Text */
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: 'Alatsi', sans-serif;
+	text-wrap: pretty;
+}
+
+.font-marker {
+	font-family: 'Permanent Marker', cursive;
+}
+
 .text-dark {
 	color: var(--color-text-dark);
 }
 
+.color-dark {
+	color: var(--color-text-dark);
+}
 
 .logo {
 	font-family: 'Permanent Marker', cursive;
@@ -33,6 +64,13 @@
 	text-decoration: none;
 	text-decoration: transparent;
 }
+
+.header-gif {
+	width: 80%;
+	max-width: 500px;
+}
+
+/* Use Profile */
 
 .profile-pic {
 	width: 100px;
@@ -47,15 +85,7 @@
 	border: solid;
 }
 
-.header-gif {
-	width: 80%;
-	max-width: 500px;
-}
-
-.banner-content {
-	background-color: var(--color-text-dark);
-	color: var(--color-text-light);
-}
+/* Votes */
 
 .circle {
 	background-color: var(--color-background-highlight);
@@ -67,17 +97,23 @@
 	border-radius: 50px;
 }
 
+/* Images */
+
 .icon {
 	width: 30px;
 	height: 30px;
 }
 
-h1,
-h2,
-h3,
-h4 {
-	font-family: 'Alatsi', sans-serif;
-	text-wrap: pretty;
+.rotate-180 {
+	transform: rotate(180deg);
+}
+
+/* Links */
+
+a {
+	/* Fallback for iOS: */
+	text-decoration: none;
+	text-decoration: transparent;
 }
 
 .link {
@@ -93,30 +129,14 @@ h4 {
 	background-color: var(--color-background-highlight);
 }
 
-.bg-hl {
-	background-color: var(--color-highlight);
-}
-
-.bg-hl-pink {
-	background-color: var(--color-background-highlight);
-}
-
-.color-dark {
-	color: var(--color-text-dark);
-}
-
-.bg-light {
-	background-color: var(--color-text-light);
-}
+/* Banner */
 
 .banner-box {
 	border: 2px solid var(--color-text-light);
 	box-shadow: -8px -8px 0px 1px var(--color-text-light);
 }
 
-.font-marker {
-	font-family: 'Permanent Marker', cursive;
-}
+/* Buttons */
 
 .neon-button {
 	background-color: black;
@@ -166,11 +186,12 @@ h4 {
 	color: var(--color-text-light);
 }
 
-a {
-	/* Fallback for iOS: */
-	text-decoration: none;
-	text-decoration: transparent;
+.rm-btn {
+	background: transparent;
+	border: none;
 }
+
+/* Tags */
 
 .tag {
 	padding: 5px;
@@ -184,40 +205,14 @@ a {
 	background-color: var(--color-text-light);
 }
 
-.rotate-180 {
-	transform: rotate(180deg);
-}
 
-.rm-btn {
-	background: transparent;
-	border: none;
-}
-
+/* Flex elements */
 .md-show {
 	display: none;
 }
 
 .md-rows {
 	flex-direction: column !important;
-}
-
-@include media-breakpoint-up(md) {
-	.rows {
-		display: flex;
-		flex-direction: row !important;
-	}
-}
-
-@include media-breakpoint-up(md) {
-	.md-show {
-		display: flex !important;
-	}
-}
-
-@include media-breakpoint-up(md) {
-	.md-rows {
-		flex-direction: row !important;
-	}
 }
 
 
