@@ -8,6 +8,59 @@ You can check out the [live-site.](https://word-weave-eb35426ae0cb.herokuapp.com
 
 ![Mock Up](static/img/readme/mockup.png)
 
+## Content
+
+<!-- toc -->
+
+- [Technologies Used](#technologies-used)
+  * [Languages Used](#languages-used)
+  * [Frameworks, Libraries & Programs Used](#frameworks-libraries--programs-used)
+- [User Experience](#user-experience)
+  * [Target Audience](#target-audience)
+  * [User stories](#user-stories)
+    + [Workflow](#workflow)
+- [Design](#design)
+  * [Wireframes](#wireframes)
+    + [Timeline](#timeline)
+    + [Profile](#profile)
+- [Features](#features)
+  * [Existing Features](#existing-features)
+    + [User Account:](#user-account)
+    + [Profile:](#profile)
+    + [Threads, Comments, Votes:](#threads-comments-votes)
+    + [Tags:](#tags)
+    + [Global and Tag-based Timeline:](#global-and-tag-based-timeline)
+  * [Features Left to Implement](#features-left-to-implement)
+    + [Moderation:](#moderation)
+    + [Dark Mode:](#dark-mode)
+  * [Accessibility](#accessibility)
+    + [Fonts](#fonts)
+    + [Colors](#colors)
+    + [Structural HTML](#structural-html)
+- [Testing](#testing)
+    + [Lighthouse Test](#lighthouse-test)
+    + [Jigsaw CSS Validator](#jigsaw-css-validator)
+    + [W3C Validator](#w3c-validator)
+    + [Accessibility](#accessibility-1)
+    + [JS Hint](#js-hint)
+  * [Manual Testing](#manual-testing)
+  * [Automatic Testing](#automatic-testing)
+  * [Unfixed Bugs](#unfixed-bugs)
+  * [Fixed Bugs](#fixed-bugs)
+  * [The Situation:](#the-situation)
+  * [The Problem:](#the-problem)
+  * [Solution:](#solution)
+- [Deployment](#deployment)
+  * [Local Development](#local-development)
+    + [How to Clone](#how-to-clone)
+    + [How to Fork](#how-to-fork)
+  * [Deploy locally](#deploy-locally)
+    + [Usage](#usage)
+  * [Deployment Using Heroku](#deployment-using-heroku)
+- [Credits](#credits)
+
+<!-- tocstop -->
+
 ## Technologies Used
 
 * GitHub – storage and deployment
@@ -137,7 +190,7 @@ These concepts were presented to other people for feedback and evaluation. Their
 * Personalized Tag Timeline: Users can follow tags, and threads with these tags appear in their personalized tag-based timeline for a tailored browsing experience.
 
 * Pagination: For a better load time and usage with multiple threads.
-<img src="static/img/readme/pagination.png" alt="Pagination" height=400px> \
+<img src="static/img/readme/pagination.png" alt="Pagination" width=600px>
 
 ### Features Left to Implement
 
@@ -153,7 +206,7 @@ These concepts were presented to other people for feedback and evaluation. Their
 
 ### Accessibility
 
-#### Fonts and Font Sizes
+#### Fonts
 The font 'Permanent Marker' was chosen as the font for the logo as well as logo related statement text. It is legible, but also rough and gritty. Breaking the clean visual of the site.
 
 'Alatsi' was chosen for the Headings and Roboto for the general text. Both are easily readable and clean in their optic.
@@ -329,6 +382,7 @@ Starts a lightweight development web server on the local machine.
 7. Deploy from "deploy", or choose an automatic deploy option.
 
 ## Credits
+* Markdown Table of Content by [Jon Schlinkert](https://github.com/jonschlinkert/markdown-toc)
 * The user story structure was used from the [Atlassian Archive](https://community.atlassian.com/t5/Jira-Content-Archive-questions/Default-Description-Text-on-Create/qaq-p/2359579)
 * The Tags in this project are provided by [django-taggit](https://github.com/jazzband/django-taggit)
 * The default profile picture is by [freepik](https://de.freepik.com/vektoren-kostenlos/handgezeichnetes-flaches-profilsymbol_17539361.htm#query=profile%20picture&position=42&from_view=search&track=ais&uuid=594c74d8-53ba-48f7-9d10-3770ce010d32)
