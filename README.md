@@ -218,11 +218,7 @@ The website's style and vibe are defined by its color scheme. Chosen to resemble
 
 ![color scheme](static/img/readme/colors.png)
 
-#### Structural HTML
-
-
 ## Testing
-
 
 #### Lighthouse Test
 The Lighthouse Test results show excellent results:
@@ -237,10 +233,14 @@ According to the test the Property *text-wrap: pretty* doesn't exist. In reality
 *Screenshot From [caniuse.com](https://caniuse.com/?search=text-wrap%3Apretty)*
 
 #### W3C Validator
-
+The W3C HTML Validator shows no errors.
+![HTML Check](static/img/readme/html-check.png)
+![HTML Check](static/img/readme/html-check-profile.png)
 
 #### Accessibility
-The result of the WAVE Web Accessibility Evaluation Tool shows .... Errors.
+The result of the WAVE Web Accessibility Evaluation Tool shows no Errors.
+![Wave Check](static/img/readme/wave.png)
+![Wave Check](static/img/readme/wave-profile.png)
 
 
 ### Manual Testing
