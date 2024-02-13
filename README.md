@@ -56,6 +56,8 @@ If an issue encounters blockers or dependencies that prevent progress, it is mov
 
 Throughout its journey, from 'To Do' to 'Testing' and ultimately 'Done', detailed information including comments, Git commits, and testing results is added to each issue. This approach ensures transparency regarding the path and work undertaken for every issue.
 
+![Kanban-Board](static/img/readme/kanban.png)
+
 ## Design
 The design process began with the creation of [three concepts:](https://www.figma.com/file/kyb4eClnCRghZT5nCFtHZ7/Untitled?type=whiteboard&node-id=0%3A1&t=HesaSLC53DPFYpXK-1) a retro-inspired theme featuring nostalgic colors and forms, a modern and elegant approach with sleek lines and refined aesthetics, and a hip neon profile.
 
@@ -86,24 +88,50 @@ These concepts were presented to other people for feedback and evaluation. Their
 * Sign up: Users can register on the page with a username, an optional email, and password.
 * Login: Registered users can log in to their accounts using their credentials.
 * Delete Account: Users have the option to delete their accounts, removing all associated content from the platform.
+* Change Password: Users can change their passwords for better security
+![Change Password](static/img/readme/change-password.png)
+* Passwort Reset: Users can reset their Password per mail. This only works when an email has been entered.
+* Settings: For easier acces to all option, settings are displayed on an additional page
+![Settings](static/img/readme/settings.png)
 
 #### Profile:
 
 * User Profile and Bio: Each user has a profile where they can set a profile picture and update their bio text.
+![Profile](static/img/readme/personal-profile.png)
+![Update Profile](static/img/readme/update-profile.png)
 * User Content Display: The profile displays all threads/posts created by the user.
 * Vote Collection: Users can collect votes on their posts, threads, and comments. The total number of votes collected across all content is shown on the profile.
+
 
 #### Threads, Comments, Votes:
 
 * Create Threads and Comments: Logged-in users can create threads and comments on the platform. Threads appear in the global timeline and can be commented on by other logged-in users.
+![Write Thread](static/img/readme/write-thread.png)
+![Leave a comment form](static/img/readme/leave-comment-form.png)
 * Upvote and Downvote: Users can upvote or downvote threads and comments to give and collect points on the platform.
 * Edit: Logged-in users can edit their threads and comments on the platform.
+![Edit and delete thread buttons](static/img/readme/edit-thread-buttons.png)
+![edit and delete comment button](static/img/readme/edit-comment-button.png)
+![Edit Comment](static/img/readme/edit-comment.png)
 * Delete: Logged-in users can delete their threads and comments. Confirmation is asked before the deletion is executed.
+![Delete Commend Confirm](static/img/readme/delete-comment-confirm.png)
+![Delete thread Confirm](static/img/readme/delete-thread-confirm.png)
+
+#### Tags:
+* Follow Tags
+![Follow Tags](static/img/readme/follow-tag.png)
+* Unfollow Tags
+![Unfollow Tags](static/img/readme/unfollow-tag.png)
+* Overview over all tags you follow:
+![All Tags](static/img/readme/all-tags.png)
 
 #### Global and Tag-based Timeline:
 
 * Global Timeline: The global timeline is visible to all users, showcasing threads from across the platform.
 * Personalized Tag Timeline: Users can follow tags, and threads with these tags appear in their personalized tag-based timeline for a tailored browsing experience.
+
+* Pagination: For a better load time and usage with multiple threads.
+![Pagination](static/img/readme/pagination.png)
 
 ### Features Left to Implement
 
