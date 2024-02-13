@@ -48,9 +48,15 @@
     <div class="d-flex flex-column">
         <div class="d-flex flex-row align-items-center">
             <div class="p-2">
-                <a href="{% url 'upvote_comment' comment_id=comment.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></img></a>
+                <form action="{% url 'upvote_comment' comment_id=comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></button>
+                </form>
                 <p class="circle m-0">{{ comment.votes }}</p>
-                <a href="{% url 'downvote_comment' comment_id=comment.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></img></a>
+                <form action="{% url 'downvote_comment' comment_id=comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2 rotate-180"></button>
+                </form>
             </div>
             <div>
                 <a href="{% url 'user_profile' username=comment.author %}" class="link">
