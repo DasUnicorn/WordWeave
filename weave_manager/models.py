@@ -94,31 +94,41 @@ class Comment(models.Model):
     def up_vote(self, user):
         # Check if the user has already voted for the thread
         if not self.comment_votes.filter(user=user).exists():
+            # if not, vote is made
             self.votes = F('votes') + 1
             self.save()
             self.comment_votes.create(user=user, value=1)
         elif self.comment_votes.get(user=user, comment_id=self.id).value == -1:
+            # if downvoted -> change to downvote
             self.votes = F('votes') + 2
             self.save()
             vote = self.comment_votes.get(user=user, comment_id=self.id)
             vote.value = 1
             vote.save()
-        # Here need to come an exception that gets handle to inform the user that they have already voted.
+        elif self.comment_votes.get(user=user, comment_id=self.id).value == 1:
+            # if already upvoted -> remove vote
+            vote = self.comment_votes.get(user=user, comment_id=self.id)
+            vote.delete()
 
     def down_vote(self, user):
         # Check if the user has already voted for the thread
         if not self.comment_votes.filter(user=user).exists():
+            # if not, vote is made
             self.votes = F('votes') - 1
             self.save()
             self.comment_votes.create(user=user, value=-1)
         elif self.comment_votes.get(user=user, comment_id=self.id).value == 1:
+            # if upvoted -> change to downvote
             self.votes = F('votes') - 2
             self.save()
             vote = self.comment_votes.get(user=user, comment_id=self.id)
             vote.value = -1
             vote.save()
-        # Here need to come an exception that gets handle to inform the user that they have already voted.
-
+        elif self.comment_votes.get(user=user, comment_id=self.id).value == -1:
+            # if already downvoted -> remove vote
+            vote = self.comment_votes.get(user=user, comment_id=self.id)
+            vote.delete()
+        
 
 class ThreadVote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
