@@ -55,7 +55,6 @@
                             <p class="card-text text-muted fs-7">{{ thread.created_on}}
                         </div>
                         <p class="card-text">{{ thread.content|truncatechars:500 }}</p>
-                        </p>
                         <a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="neon-button align-self-end">Full thread</a>
                     </div>
                 </div>
