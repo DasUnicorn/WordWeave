@@ -89,16 +89,18 @@ These concepts were presented to other people for feedback and evaluation. Their
 * Login: Registered users can log in to their accounts using their credentials.
 * Delete Account: Users have the option to delete their accounts, removing all associated content from the platform.
 * Change Password: Users can change their passwords for better security
-![Change Password](static/img/readme/change-password.png)
+<img src="static/img/readme/change-password.png" alt="Change Password" height=400px> \
+
 * Passwort Reset: Users can reset their Password per mail. This only works when an email has been entered.
 * Settings: For easier acces to all option, settings are displayed on an additional page
-![Settings](static/img/readme/settings.png)
+<img src="static/img/readme/settings.png" alt="Settings" height=400px> \
 
 #### Profile:
 
 * User Profile and Bio: Each user has a profile where they can set a profile picture and update their bio text.
-![Profile](static/img/readme/personal-profile.png)
-![Update Profile](static/img/readme/update-profile.png)
+<img src="static/img/readme/personal-profile.png" alt="Profile" height=400px> \
+<img src="static/img/readme/update-profile.png" alt="Update Profile" height=400px> \
+
 * User Content Display: The profile displays all threads/posts created by the user.
 * Vote Collection: Users can collect votes on their posts, threads, and comments. The total number of votes collected across all content is shown on the profile.
 
@@ -106,24 +108,28 @@ These concepts were presented to other people for feedback and evaluation. Their
 #### Threads, Comments, Votes:
 
 * Create Threads and Comments: Logged-in users can create threads and comments on the platform. Threads appear in the global timeline and can be commented on by other logged-in users.
-![Write Thread](static/img/readme/write-thread.png)
-![Leave a comment form](static/img/readme/leave-comment-form.png)
+<img src="static/img/readme/write-thread.png" alt="Write Thread" height=400px>
+<img src="static/img/readme/leave-comment-form.png" alt="Comment Form" height=400px>
+
 * Upvote and Downvote: Users can upvote or downvote threads and comments to give and collect points on the platform.
 * Edit: Logged-in users can edit their threads and comments on the platform.
-![Edit and delete thread buttons](static/img/readme/edit-thread-buttons.png)
-![edit and delete comment button](static/img/readme/edit-comment-button.png)
-![Edit Comment](static/img/readme/edit-comment.png)
+<img src="static/img/readme/edit-thread-buttons.png" alt="Edit and delete buttons" height=400px>
+<img src="static/img/readme/edit-comment-button.png" alt="Edit, Delete buttons" height=400px>
+<img src="static/img/readme/edit-comment.png" alt="Edit Comment" height=400px>
+
 * Delete: Logged-in users can delete their threads and comments. Confirmation is asked before the deletion is executed.
-![Delete Commend Confirm](static/img/readme/delete-comment-confirm.png)
-![Delete thread Confirm](static/img/readme/delete-thread-confirm.png)
+<img src="static/img/readme/delete-comment-confirm.png" alt="Delete Comment" height=400px>
+<img src="static/img/readme/delete-thread-confirm.png" alt="Delete Thread" height=400px>
 
 #### Tags:
 * Follow Tags
-![Follow Tags](static/img/readme/follow-tag.png)
+<img src="static/img/readme/follow-tag.png" alt="Follow Tag" height=400px>
+
 * Unfollow Tags
-![Unfollow Tags](static/img/readme/unfollow-tag.png)
+<img src="static/img/readme/unfollow-tag.png" alt="Unfollow Tag" height=400px>
+
 * Overview over all tags you follow:
-![All Tags](static/img/readme/all-tags.png)
+<img src="static/img/readme/all-tags.png" alt="All Tags" height=400px>
 
 #### Global and Tag-based Timeline:
 
@@ -131,7 +137,7 @@ These concepts were presented to other people for feedback and evaluation. Their
 * Personalized Tag Timeline: Users can follow tags, and threads with these tags appear in their personalized tag-based timeline for a tailored browsing experience.
 
 * Pagination: For a better load time and usage with multiple threads.
-![Pagination](static/img/readme/pagination.png)
+<img src="static/img/readme/pagination.png" alt="Pagination" height=400px> \
 
 ### Features Left to Implement
 
