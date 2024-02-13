@@ -225,7 +225,9 @@ The website's style and vibe are defined by its color scheme. Chosen to resemble
 
 
 #### Lighthouse Test
-
+The Lighthouse Test results show excellent results:
+<img src="static/img/readme/lighthouse.png" alt="Lichthouse test Results" width=600px>
+<img src="static/img/readme/lighthouse-profile.png" alt="Lighthouse Test Results Profile" width=600px>
 
 #### Jigsaw CSS Validator
 
@@ -235,9 +237,6 @@ The website's style and vibe are defined by its color scheme. Chosen to resemble
 
 #### Accessibility
 The result of the WAVE Web Accessibility Evaluation Tool shows .... Errors.
-
-
-#### JS Hint
 
 
 ### Manual Testing
