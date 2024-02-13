@@ -3,6 +3,7 @@ from .models import Thread, Comment
 from follow.models import Follower
 from taggit.models import Tag
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, TemplateView
@@ -113,18 +114,21 @@ class MyPaginator(Paginator):
             else:
                 raise
 
+@require_POST
 @login_required
 def upvote_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.up_vote(request.user)
     return redirect('home')
 
+@require_POST
 @login_required
 def downvote_thread(request, thread_id):
     thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
     thread.down_vote(request.user)
     return redirect('home')
 
+@require_POST
 @login_required
 def upvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
@@ -132,6 +136,7 @@ def upvote_comment(request, comment_id):
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
+@require_POST
 @login_required
 def downvote_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.

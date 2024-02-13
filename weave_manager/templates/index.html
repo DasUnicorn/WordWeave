@@ -33,9 +33,15 @@
                 {% for thread in thread_list %}
                 <div class="card my-2 d-flex flex-row">
                     <div class="d-flex flex-column align-items-center">
-                        <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></a>
+                        <form action="{% url 'upvote_thread' thread_id=thread.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></button>
+                        </form>
                         <p class="circle m-0">{{ thread.votes }}</p>
-                        <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180"></a>
+                        <form action="{% url 'downvote_thread' thread_id=thread.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180"></button>
+                        </form>
                         {% for tag in thread.tags.all %}
                         <a href="{% url 'tag_site' slug=tag.slug %}">
                             <p class="tag">{{ tag }}</p>

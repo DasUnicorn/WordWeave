@@ -7,14 +7,22 @@
     <div class="d-flex flex-row align-items-center justify-content-center m-2">
         <p class="m-0">Tags:</p>
         {% for tag in thread.tags.all %}
-        <a href="{% url 'tag_site' slug=tag.slug %}"><p class="tag m-0 mx-1">{{ tag }}</p>
-        {% endfor %}</a>
+        <a href="{% url 'tag_site' slug=tag.slug %}">
+            <p class="tag m-0 mx-1">{{ tag }}</p>
+            {% endfor %}
+        </a>
     </div>
     <div class="my-2 d-flex flex-row">
         <div class="d-flex flex-column align-items-center">
-            <a href="{% url 'upvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2"></img></a>
+            <form action="{% url 'upvote_thread' thread_id=thread.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></button>
+            </form>
             <p class="circle m-0">{{ thread.votes }}</p>
-            <a href="{% url 'downvote_thread' thread_id=thread.id %}"><img src="{% static 'img/icons/up.svg' %}" class="icon m-2 rotate-180"></img></a>
+            <form action="{% url 'downvote_thread' thread_id=thread.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="downvote" class="icon m-2 rotate-180"></button>
+            </form>
         </div>
         <div class="card-body d-flex flex-column">
             <h2><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
