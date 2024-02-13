@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 <div class="container-lg my-2">
     <h1>User Profile</h1>
-    <form id="commentForm" method="post" style="margin-top: 1.3em;" enctype='multipart/form-data'>
+    <form id="commentForm" method="post" class="mt-3" enctype='multipart/form-data'>
         {% csrf_token %}
         {% crispy form %}
     </form>
