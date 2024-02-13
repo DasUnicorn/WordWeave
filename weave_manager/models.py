@@ -27,7 +27,7 @@ class Thread(models.Model):
         ordering = ["-created_on"]
 
     def __str__(self):
-        return f"The title of this thread is {self.title}"
+        return f"{self.title}"
 
     # Creating the slug
     def save(self, *args, **kwargs):
@@ -38,31 +38,41 @@ class Thread(models.Model):
     def up_vote(self, user):
         # Check if the user has already voted for the thread
         if not self.thread_votes.filter(user=user).exists():
+            # if note, vote is made
             self.votes = F('votes') + 1
             self.save()
             self.thread_votes.create(user=user, value=1)
         elif self.thread_votes.get(user=user, thread_id=self.id).value == -1:
+            # if downvoted -> change to upvote
             self.votes = F('votes') + 2
             self.save()
             vote = self.thread_votes.get(user=user, thread_id=self.id)
             vote.value = 1
             vote.save()
-        # Here need to come an exception that gets handle to inform the user that they have already voted.
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == 1:
+            # if already upvoted -> remove vote
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.delete()
 
     def down_vote(self, user):
         # Check if the user has already voted for the thread
         if not self.thread_votes.filter(user=user).exists():
+            # if note, vote is made
             self.votes = F('votes') - 1
             self.save()
             self.thread_votes.create(user=user, value=-1)
         elif self.thread_votes.get(user=user, thread_id=self.id).value == 1:
+            # if upvoted -> change to downvote
             self.votes = F('votes') - 2
             self.save()
             vote = self.thread_votes.get(user=user, thread_id=self.id)
             vote.value = -1
             vote.save()
-        # Here need to come an exception that gets handle to inform the user that they have already voted.
-
+        elif self.thread_votes.get(user=user, thread_id=self.id).value == -1:
+            # if already downvoted -> remove vote
+            vote = self.thread_votes.get(user=user, thread_id=self.id)
+            vote.delete()
+        
     @property
     def content_html(self):
         return markdown2.markdown(self.content)
@@ -116,11 +126,17 @@ class ThreadVote(models.Model):
     value = models.SmallIntegerField()
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
 
+    def __str__(self):
+        return f"{self.user} voted on {self.thread}"
+
 class CommentVote(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     value = models.SmallIntegerField()
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="comment_votes")
+
+    def __str__(self):
+        return f"{self.user} voted on {self.comment}"
 
 
 @receiver(pre_delete, sender=ThreadVote)
