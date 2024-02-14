@@ -34,6 +34,9 @@
                 <p class="card-text text-muted fs-7">{{ thread.created_on}}</p>
             </div>
             <p class="card-text">{{ thread.content_html|safe }}</p>
+            {% if thread.picture %}
+            <img src="{{ thread.picture.url }}" class="w-100">
+            {% endif %}
         </div>
         <!-- Add edit and delete buttons for the thread -->
         {% if user.is_authenticated and user == thread.author %}

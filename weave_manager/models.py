@@ -22,6 +22,7 @@ class Thread(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     tags = TaggableManager()
+    picture = models.ImageField(upload_to='thread_pictures', blank=True, null=True)
 
     class Meta:
         ordering = ["-created_on"]
@@ -33,6 +34,21 @@ class Thread(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+
+        # Check if the instance has a primary key, therefore exists
+        if self.pk:
+            try:
+                current_thread = Thread.objects.get(pk=self.pk)
+                # If a picture exist and has changed, delete the old one
+                if current_thread.picture and self.picture != current_thread.picture:
+                    # Delete the old picture from the Cloudflare R2 bucket
+                    try:
+                        default_storage.delete(current_thread.picture.name)
+                    except FileNotFoundError:
+                        pass  # If the file does not exist, do nothing
+            except ObjectDoesNotExist:
+                raise ValueError("Thread does not exist")
+
         super().save(*args, **kwargs)
 
     def up_vote(self, user):
@@ -78,7 +94,7 @@ class Thread(models.Model):
 
     def has_downvoted(self, user):
         return self.thread_votes.filter(user=user, value=-1).exists()
-        
+
     @property
     def content_html(self):
         return markdown2.markdown(self.content)

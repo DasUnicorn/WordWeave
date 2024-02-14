@@ -6,7 +6,7 @@ from crispy_forms.layout import Submit
 class ThreadForm(forms.ModelForm):
     class Meta:
         model = Thread
-        fields = ['title', 'content', 'tags']
+        fields = ['title', 'content', 'picture', 'tags']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
