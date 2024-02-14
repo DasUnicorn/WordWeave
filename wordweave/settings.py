@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from django.conf import settings
 from django.conf.urls.static import static
+import dj_database_url
 
 # The `DYNO` env var is set on Heroku CI, but it's not a real Heroku app, so we have to
 # also explicitly exclude CI:
