@@ -6,14 +6,11 @@ from image_uploader_widget.widgets import ImageUploaderWidget
 from crispy_forms.layout import Layout, Submit
 
 class CustomSignupForm(SignupForm):
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
-    def signup(self, request, user):
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.save()
-        return user
+    username = forms.CharField(max_length=25, label="Username")
 
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        return username
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
