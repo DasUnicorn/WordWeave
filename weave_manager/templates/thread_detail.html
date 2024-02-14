@@ -57,12 +57,12 @@
                 <!-- Voting for Comments -->
                 <form action="{% url 'upvote_comment' comment_id=comment.id %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2"></button>
+                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2 {% if request.user.is_authenticated and comment.has_upvoted %}circle bg-yellow{% endif %}"></button>
                 </form>
                 <p class="circle text-light bg-hl-pink m-0">{{ comment.votes }}</p>
                 <form action="{% url 'downvote_comment' comment_id=comment.id %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2 rotate-180"></button>
+                    <button type="submit" class="rm-btn"><img src="{% static 'img/icons/up.svg' %}" alt="upvote" class="icon m-2 rotate-180 {% if request.user.is_authenticated and comment.has_downvoted %}circle bg-yellow{% endif %}"></button>
                 </form>
             </div>
             <div>
@@ -75,7 +75,7 @@
         <div class="comment">
             <p>{{ comment.body }}</p>
         </div>
-        <!-- Thread Entries -->
+        <!-- Add edit and delete buttons for the comment -->
         {% if user.is_authenticated and user == comment.author %}
         <div>
             <a href="{% url 'edit_comment' comment_id=comment.id %}" class="neon-button"><img src="{% static 'img/icons/edit.svg' %}" class="icon"><span class="ms-2 md-show">Edit Comment</span></a>
@@ -85,7 +85,6 @@
     </div>
     <hr>
     {% endfor %}
-    <!-- Add edit and delete buttons for the comment -->
     {% if request.user.is_authenticated %}
     <h2>Leave a Comment</h2>
     <form method="post" action="{% url 'add_comment' thread_id=thread.id %}">

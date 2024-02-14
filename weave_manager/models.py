@@ -150,6 +150,12 @@ class Comment(models.Model):
             # if already downvoted -> remove vote
             vote = self.comment_votes.get(user=user, comment_id=self.id)
             vote.delete()
+
+    def has_upvoted(self, user):
+        return self.comment_votes.filter(user=user, value=1).exists()
+
+    def has_downvoted(self, user):
+        return self.comment_votes.filter(user=user, value=-1).exists()
         
 
 class ThreadVote(models.Model):

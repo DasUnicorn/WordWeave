@@ -46,6 +46,15 @@ class UserTimelineView(LoginRequiredMixin, generic.ListView):
 
         return followed_threads
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        thread_list = context['tag_timeline']
+        if self.request.user.is_authenticated:
+            for thread in thread_list:
+                thread.has_upvoted = thread.has_upvoted(self.request.user)
+                thread.has_downvoted = thread.has_downvoted(self.request.user)
+        return context
+
 class InfoView(TemplateView):
     template_name = "info.html"
 
@@ -82,6 +91,12 @@ class TagSiteView(generic.ListView):
 
         context['user_follows_tag'] = user_follows_tag
 
+        thread_list = context['thread_list']
+        if self.request.user.is_authenticated:
+            for thread in thread_list:
+                thread.has_upvoted = thread.has_upvoted(self.request.user)
+                thread.has_downvoted = thread.has_downvoted(self.request.user)
+
         return context
 
 
@@ -94,6 +109,19 @@ class ThreadDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
         context['comments'] = self.object.comments.all()  # Retrieve comments for the thread
+
+        thread = context['thread']
+        if self.request.user.is_authenticated:
+            thread.has_upvoted = thread.has_upvoted(self.request.user)
+            thread.has_downvoted = thread.has_downvoted(self.request.user)
+
+        comment_list = context['comments']
+        if self.request.user.is_authenticated:
+            for comment in comment_list:
+                comment.has_upvoted = comment.has_upvoted(self.request.user)
+                comment.has_downvoted = comment.has_downvoted(self.request.user)
+
+
         return context
 
 class AddCommentView(View):
