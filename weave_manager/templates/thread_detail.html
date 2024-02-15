@@ -28,12 +28,12 @@
         </div>
         <!-- Thread Body -->
         <div class="card-body d-flex flex-column">
-            <h2><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
+            <h2 class="text-break"><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
             <div class="d-flex flex-row justify-content-between">
                 <p class="fs-7">by <a href="{% url 'user_profile' username=thread.author %}" class="link">{{ thread.author }}</a></p>
                 <p class="card-text text-muted fs-7">{{ thread.created_on}}</p>
             </div>
-            <p class="card-text">{{ thread.content_html|safe }}</p>
+            <p class="card-text text-break">{{ thread.content_html|safe }}</p>
             {% if thread.picture %}
             <img src="{{ thread.picture.url }}" class="w-100">
             {% endif %}
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="comment">
-            <p>{{ comment.body }}</p>
+            <p class="text-break">{{ comment.body_html|safe }}</p>
         </div>
         <!-- Add edit and delete buttons for the comment -->
         {% if user.is_authenticated and user == comment.author %}
