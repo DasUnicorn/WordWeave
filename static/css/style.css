@@ -237,6 +237,15 @@ a {
 	}
 }
 
+/* Toasts */
+.toast-position {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it's above other content */
+    overflow-y: auto;
+}
+
 /* Overwright Bootstrap classes*/
 .nav-link:hover,
 .logo:hover {

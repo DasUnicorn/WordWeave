@@ -19,6 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="{% static 'js/bootstrap-custom.js' %}"></script>
     {{ form.media }}
 </head>
 
@@ -57,14 +60,28 @@
         </div>
     </nav>
     <main class="bg-white">
+        {% if messages %}
+        <div class="toast-container position-fixed toast-position">
+            {% for message in messages %}
+            <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-bs-autohide="false">
+                <div class="toast-header bg-hl-pink text-light">
+                    <img src="{% static 'img/icons/info.svg' %}" class="me-2 icon" alt="">
+                    <strong class="me-auto">Information</strong>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body bg-dark text-light">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
     </main>
     <!-- Footer -->
     <footer></footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-    </script>
 </body>
 
 </html>
