@@ -14,6 +14,7 @@ from .forms import CommentForm
 from django.views import View
 from django.shortcuts import get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator, EmptyPage
+from django.contrib import messages
 
 # Create your views here.
 
@@ -68,6 +69,7 @@ class CreateThreadView(LoginRequiredMixin, FormView):
         # Set the author before saving the form
         form.instance.author = self.request.user
         form.save()
+        messages.add_message(self.request, messages.INFO, 'Your Thread has been created.')
         return super().form_valid(form)
 
 class TagSiteView(generic.ListView):
@@ -134,6 +136,7 @@ class AddCommentView(View):
             comment.thread = thread
             comment.author = request.user
             comment.save()
+            messages.add_message(self.request, messages.INFO, 'Your Comment has been created.')
 
         return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
@@ -189,6 +192,7 @@ def edit_thread(request, thread_id):
         form = ThreadForm(request.POST, instance=thread)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Your Thread has been edited.')
             return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
     else:
         form = ThreadForm(instance=thread)
@@ -201,6 +205,7 @@ def delete_thread(request, thread_id):
 
     if request.method == 'POST':
         # Handle the deletion of the thread
+        messages.add_message(request, messages.INFO, 'Your Thread has been deleted.')
         thread.delete()
         return redirect('home') 
 
@@ -215,6 +220,7 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
+            messages.add_message(request, messages.INFO, 'Your Comment has been edited.')
             return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
     else:
         form = CommentForm(instance=comment)
@@ -227,6 +233,7 @@ def delete_comment(request, comment_id):
 
     if request.method == 'POST':
         # Handle the deletion of the thread
+        messages.add_message(request, messages.INFO, 'Your Comment has been deleted.')
         comment.delete()
         return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
 
