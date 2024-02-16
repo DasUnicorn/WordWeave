@@ -34,3 +34,14 @@ class ProfileUpdateForm(forms.ModelForm):
         if current_user:
             self.initial['bio'] = current_user.bio
             self.initial['profile_pic'] = current_user.profile_pic
+
+    def form_valid(self, form):
+        # Save the form data
+        self.object = form.save(commit=False)
+        
+        # Check if the user wants to clear the profile picture
+        if form.cleaned_data['clear_profile_pic']:
+            self.object.profile_pic = None
+
+        self.object.save()
+        return super().form_valid(form)
