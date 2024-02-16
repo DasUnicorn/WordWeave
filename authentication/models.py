@@ -26,6 +26,7 @@ class User(AbstractUser):
                 # If the profile picture has been cleared, delete the corresponding database entry
                 if self.profile_pic is None and current_user.profile_pic:
                     self.profile_pic.delete(save=False)  # Delete the profile picture file, do not safe multiple times
+                    self.profile_pic = None
             except ObjectDoesNotExist:
                 raise ValueError("User does not exist")
         super().save(*args, **kwargs)
