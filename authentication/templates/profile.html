@@ -12,7 +12,11 @@
 		<!-- User Info -->
 		<div class="d-flex flex-column align-items-center">
 			<div class="pt-5 d-flex md-rows align-items-center w-100 max-w-75">
+				{% if user.profile_pic %}
 				<img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+				{% else %}
+				<img src="{% static 'img/default.png' %}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+				{% endif %}
 				<div class="bg-light text-dark w-75 p-2 m-3 text-center">
 					<h1>{{ user.username }}</h1>
 					<p>{{ user.bio }}</p>
