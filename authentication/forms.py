@@ -17,8 +17,8 @@ class ProfileUpdateForm(forms.ModelForm):
         model = User
         fields = ('bio', 'profile_pic')
 
-    bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    profile_pic = forms.ImageField()
+    bio = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    profile_pic = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
