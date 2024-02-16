@@ -40,8 +40,8 @@
                         <h2 class="text-break"><a href="{% url 'thread_detail' thread_id=thread.id slug=thread.slug %}" class="card-title text-break">{{ thread.title }}</a></h2>
                         <div class="d-flex flex-row justify-content-between">
                             <p class="fs-7 text-break">by <a href="{% url 'user_profile' username=thread.author %}" class="link">
-                                    {% if user.profile_pic and user.profile_pic.url != "/img/False" %}
-                                    <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle icon">
+                                    {% if thread.author.profile_pic and thread.author.profile_pic.url != "/img/False" %}
+                                    <img src="{{ thread.author.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle icon">
                                     {% else %}
                                     <img src="{% static 'img/default.png' %}" alt="Profile Picture" class="profile-pic bg-light rounded-circle icon">
                                     {% endif %}
