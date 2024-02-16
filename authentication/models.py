@@ -15,12 +15,14 @@ class User(AbstractUser):
         if self.pk:
             try:
                 current_user = User.objects.get(pk=self.pk)
+                # If the profile picture is cleared
+                if not self.profile_pic and current_user.profile_pic:
+                    self.profile_pic.delete(save=False) 
                 # If the profile picture exist and has changed, delete the old one
-                if current_user.profile_pic and self.profile_pic != current_user.profile_pic:
+                elif current_user.profile_pic and self.profile_pic != current_user.profile_pic:
                     # Delete the old profile picture from the Cloudflare R2 bucket
                     try:
                         default_storage.delete(current_user.profile_pic.name)
-                        self.profile_pic.delete(save=False) 
                     except FileNotFoundError:
                         pass  # If the file does not exist, do nothing
             except ObjectDoesNotExist:
