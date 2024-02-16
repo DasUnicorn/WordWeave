@@ -251,7 +251,8 @@ Unittests
 ### Unfixed Bugs
 
 ### Fixed Bugs
-### The Situation:
+#### Cascading Deletes for Votes
+##### The Situation:
 When a user deletes their profile, all threads, comments and votes the user has made on the platform should get deleted with it. 
 The current set up is as followed:
 
@@ -295,10 +296,10 @@ class ThreadVote(models.Model):
 
 ```
 
-### The Problem:
+##### The Problem:
 After Deleting a User, their votes (as instances of the Vote Model) get deleted, but the value "votes" of the Thread itselfs is never. Since the Votes for each thread is are the Thread.values that get displayed. The Votes in the website are never updated.
 
-### Solution:
+##### The Solution:
 The goal is to create a function within the ThreadVote Model that updates the value of the associated thread whenever a ThreadVote is deleted.
 
 I tried this by overwriting the delete() function.
@@ -331,6 +332,43 @@ def update_thread_votes(sender, instance, **kwargs):
     elif instance.value == -1:
         instance.thread.votes = F('votes') + 1
     instance.thread.save()
+```
+#### Default Pictures get deleted
+##### The Situation:
+After signing up the user recieves a default profile picture.
+The moment any user changes their profile picture, it is gone for everyone.
+
+##### The Problem:
+With the storage of pictures in the cloud bucket, it was implemented that the old picture was deleted the moment one of the users deletes their profile picture by chooseing a new one, the default image gets deleted from the bucket.
+
+##### The Solution:
+To solve this problem the default picture was removed as a concept from the model itself and instead implemented in form of a fallback inside the template itself.
+The default profile picture is now safely stored inside the static files and can not be deleted by users.
+
+**Before:**
+```
+<div class="pt-5 d-flex md-rows align-items-center w-100 max-w-75">
+    <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+    <div class="bg-light text-dark w-75 p-2 m-3 text-center">
+        <h1>{{ user.username }}</h1>
+        <p>{{ user.bio }}</p>
+    </div>
+</div>
+```
+
+**After:**
+```
+<div class="pt-5 d-flex md-rows align-items-center w-100 max-w-75">
+    {% if user.profile_pic %}
+    <img src="{{ user.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+    {% else %}
+    <img src="{% static 'img/default.png' %}" alt="Profile Picture" class="profile-pic bg-light rounded-circle">
+    {% endif %}
+    <div class="bg-light text-dark w-75 p-2 m-3 text-center">
+        <h1>{{ user.username }}</h1>
+        <p>{{ user.bio }}</p>
+    </div>
+</div>
 ```
 
 ## Deployment
