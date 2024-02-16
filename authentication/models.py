@@ -20,6 +20,7 @@ class User(AbstractUser):
                     # Delete the old profile picture from the Cloudflare R2 bucket
                     try:
                         default_storage.delete(current_user.profile_pic.name)
+                        self.profile_pic.delete(save=False) 
                     except FileNotFoundError:
                         pass  # If the file does not exist, do nothing
             except ObjectDoesNotExist:

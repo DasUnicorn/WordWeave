@@ -73,7 +73,7 @@
             </div>
             <div>
                 <a href="{% url 'user_profile' username=comment.author %}" class="link d-flex flex-row align-items-center">
-                    {% if comment.author.profile_pic and comment.author.profile_pic.url != "/img/False" and comment.author.profile_pic.url != "/profile/{{comment.author}}" %}
+                    {% if comment.author.profile_pic and comment.author.profile_pic.url != "/img/False" %}
                     <img src="{{ comment.author.profile_pic.url }}" alt="Profile Picture" class="profile-pic bg-light rounded-circle icon me-2">
                     {% else %}
                     <img src="{% static 'img/default.png' %}" alt="Profile Picture" class="profile-pic bg-light rounded-circle icon me-2">
