@@ -342,7 +342,7 @@ The moment any user changes their profile picture, it is gone for everyone.
 With the storage of pictures in the cloud bucket, it was implemented that the old picture was deleted the moment one of the users deletes their profile picture by chooseing a new one, the default image gets deleted from the bucket.
 
 ##### The Solution:
-To solve this problem the default picture was removed as a concept from the model itself and instead implemented in form of a fallback inside the template itself.
+To solve this problem the default picture was removed as a concept from the model and instead implemented in form of a fallback inside the template itself.
 The default profile picture is now safely stored inside the static files and can not be deleted by users.
 
 **Before:**
