@@ -24,7 +24,7 @@ class User(AbstractUser):
                         except FileNotFoundError:
                             pass  # If the file does not exist, do nothing
                 # If the profile picture has been cleared, delete the corresponding database entry
-                if not self.profile_pic and current_user.profile_pic:
+                if self.profile_pic is None and current_user.profile_pic:
                     self.profile_pic.delete(save=False)  # Delete the profile picture file, do not safe multiple times
             except ObjectDoesNotExist:
                 raise ValueError("User does not exist")
