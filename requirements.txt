@@ -192,6 +192,9 @@ django-allauth==0.59.0 ; python_full_version >= "3.12.1" and python_full_version
 django-appconf==1.0.6 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:c3ae442fba1ff7ec830412c5184b17169a7a1e71cf0864a4c3f93cf4c98a1993 \
     --hash=sha256:cfe87ea827c4ee04b9a70fab90b86d704cb02f2981f89da8423cb0fabf88efbf
+django-cleanup==8.1.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
+    --hash=sha256:70df905076a44e7a111b31198199af633dee08876e199e6dce36ca8dd6b8b10f \
+    --hash=sha256:7903873ea73b3f7e61e055340d27dba49b70634f60c87a573ad748e172836458
 django-crispy-forms==2.1 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:4d7ec431933ad4d4b5c5a6de4a584d24613c347db9ac168723c9aaf63af4bb96 \
     --hash=sha256:d592044771412ae1bd539cc377203aa61d4eebe77fcbc07fbc8f12d3746d4f6b
