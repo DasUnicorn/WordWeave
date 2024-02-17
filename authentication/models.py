@@ -14,6 +14,7 @@ class User(AbstractUser):
         # Check if the instance has a primary key
         if self.pk:
             try:
+                # Get the pre save data from the user as current_user
                 current_user = User.objects.get(pk=self.pk)
                 # If the profile picture has changed
                 if self.profile_pic != current_user.profile_pic:
@@ -23,10 +24,6 @@ class User(AbstractUser):
                             default_storage.delete(current_user.profile_pic.name)
                         except FileNotFoundError:
                             pass  # If the file does not exist, do nothing
-                # If the profile picture has been cleared, delete the corresponding database entry
-                if self.profile_pic is None and current_user.profile_pic:
-                    self.profile_pic.delete(save=False)  # Delete the profile picture file, do not safe multiple times
-                    self.profile_pic = None
             except ObjectDoesNotExist:
                 raise ValueError("User does not exist")
         super().save(*args, **kwargs)
