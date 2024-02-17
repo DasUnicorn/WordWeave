@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     'image_uploader_widget',
     'imagekit',
     'storages',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 # Crespy Bootstrap Settings:
