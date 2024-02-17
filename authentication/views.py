@@ -61,12 +61,12 @@ class ProfileUpdateView(FormView):
         return kwargs
 
     def form_valid(self, form):
-
-        print(f"Authenticated User: {self.request.user}")
-
         current_user_profile = self.request.user
         current_user_profile.bio = form.cleaned_data['bio']
-        current_user_profile.profile_pic = form.cleaned_data['profile_pic']
+        if form.cleaned_data['profile_pic']:
+            current_user_profile.profile_pic = form.cleaned_data['profile_pic']
+        else:
+            current_user_profile.profile_pic = None
         current_user_profile.save()
 
         return super().form_valid(form)
