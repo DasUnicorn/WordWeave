@@ -52,7 +52,7 @@ class ProfileUpdateView(FormView):
         fields = ('bio', 'profile_pic')
 
     bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    profile_pic = forms.ImageField(widget=ImageUploaderWidget())
+    profile_pic = forms.ImageField(widget = forms.FileInput(attrs={'class': 'form-control'}))
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
