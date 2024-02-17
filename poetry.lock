@@ -427,6 +427,19 @@ async-dramatiq = ["django-dramatiq (>=0.4.0)"]
 async-rq = ["django-rq (>=0.6.0)"]
 
 [[package]]
+name = "django-markdown2"
+version = "0.3.1"
+description = "This is a simple app, which supplies a single template tag for markdown markup."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-markdown2-0.3.1.tar.gz", hash = "sha256:f04748d56788f6291d8d35f0e53a58530e1c0b34981b046883b319b64c8117e2"},
+]
+
+[package.dependencies]
+markdown2 = "*"
+
+[[package]]
 name = "django-storages"
 version = "1.14.2"
 description = "Support for many storage backends in Django"
@@ -947,4 +960,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12.1"
-content-hash = "fd0ee1565818d794fc6cd55e69d14028ab5f81859bb41325f63e73a5ad55781d"
+content-hash = "538e80e95ee7d38b84a29c4838a5d9be98cb7d08b3604ba5f50c17c8b71a485f"

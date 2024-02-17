@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     'image_uploader_widget',
     'imagekit',
     'storages',
+    'django_markdown2',
     'django_cleanup.apps.CleanupConfig',
 ]
 

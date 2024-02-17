@@ -204,6 +204,8 @@ django-image-uploader-widget==0.4.1 ; python_full_version >= "3.12.1" and python
 django-imagekit==5.0.0 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:a8e77ed6549751026a51f961bb2cd5fda739be691496da8eecbe68ffb966c261 \
     --hash=sha256:aae9f74a8e9b6ceb5d15f7d8e266302901e76d9f532c78bd5135cb0fa206a6b0
+django-markdown2==0.3.1 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
+    --hash=sha256:f04748d56788f6291d8d35f0e53a58530e1c0b34981b046883b319b64c8117e2
 django-storages==1.14.2 ; python_full_version >= "3.12.1" and python_full_version < "4.0.0" \
     --hash=sha256:1db759346b52ada6c2efd9f23d8241ecf518813eb31db9e2589207174f58f6ad \
     --hash=sha256:51b36af28cc5813b98d5f3dfe7459af638d84428c8df4a03990c7d74d1bea4e5

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load md2 %}
 {% block content %}
 <!-- Display the Thread -->
 <div class="container-lg">
@@ -84,7 +85,7 @@
             </div>
         </div>
         <div class="comment">
-            <p class="text-break">{{ comment.body_html|safe }}</p>
+            <p class="text-break">{{ comment.body|markdown }}</p>
         </div>
         <!-- Add edit and delete buttons for the comment -->
         {% if user.is_authenticated and user == comment.author %}
