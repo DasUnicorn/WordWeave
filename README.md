@@ -86,6 +86,7 @@ Python, HTML/CSS, Java Script
 * [markdown2](https://pypi.org/project/django-markdown2/)
 * [django-image-uploader-widget](https://pypi.org/project/django-image-uploader-widget/)
 * django-storages and boto3, for r2 bucket storage
+* [django-cleanup](https://github.com/un1t/django-cleanup)
 
 ## User Experience
 
@@ -139,61 +140,146 @@ These concepts were presented to other people for feedback and evaluation. Their
 
 ### Existing Features
 
-#### User Account:
+#### Navigation Bar
+The Navigation Bar guides the User througout the platform.
 
-* Sign up: Users can register on the page with a username, an optional email, and password.
-* Login: Registered users can log in to their accounts using their credentials.
-* Delete Account: Users have the option to delete their accounts, removing all associated content from the platform.
-* Change Password: Users can change their passwords for better security
+##### Visitors
+People who haven't created a user account yet have the option to sign in. People with user accounts can use the login functionality.
+<img src="static/img/readme/nav.png" alt="Navigation Bar"> \
+<img src="static/img/readme/nav-mobile.png" alt="Navigation Bar on Mobile" height=200px>> \
+
+##### Signed-In Users
+For people that have signed in, the Navigation Bar gives the Users easy acces to their profile.
+<img src="static/img/readme/nav-user.png" alt="Navigation Bar for Signed in Users"> \
+
+##### Admins
+Admins of the platform can reach the django admin panel easily through the Navigation bar.
+<img src="static/img/readme/nav-admin.png" alt="Navigation Bar for Signed in Admins"> \
+
+#### User Account:
+The User Accounts in this project are managed by the AllAuth Django package.
+
+##### User Sign up
+Users can register on the page with a username, an optional email, and password. After registration all their information is stored in the database.
+<img src="static/img/readme/sign-up.png" alt="Sign Up Form"> \
+
+##### User Login
+Registered users can log in to their accounts using their credentials.
+<img src="static/img/readme/login.png" alt="Login Form"> \
+
+##### User Logout
+Logged-in users can log out of the site by clicking the logout link in the navigation bar. They have to confirm their decision.
+<img src="static/img/readme/sign-out.png" alt="Sign out Confirmation"> \
+
+##### change Password
+Registered users can reset their password.
 <img src="static/img/readme/change-password.png" alt="Change Password" height=400px> \
 
-* Passwort Reset: Users can reset their Password per mail. This only works when an email has been entered.
-* Settings: For easier acces to all option, settings are displayed on an additional page
+##### Reset Password, through mail
+If a user has entered a valid email adress, they can reset their password by mail with a verification link. This is especcilly usefull when the user has fergotten their password.
+<img src="static/img/readme/reset.png" alt="Reset Password By Mail"> \
+
+##### Delete User Account
+Users have the option to delete their accounts, removing all associated content from the platform.
+
+##### Access Settings
+For easier acces to all option, settings are displayed on an additional page, making it easier for a user to find all possibile Account Options.
 <img src="static/img/readme/settings.png" alt="Settings" height=400px> \
 
 #### Profile:
+Each User on the platform has a User Profile.
 
-* User Profile and Bio: Each user has a profile where they can set a profile picture and update their bio text.
+##### Profile Picture and Bio
+Each user has a profile where they can set a profile picture and update their bio text.
+After signing up the user starts with a default picture and default bio text.
 <img src="static/img/readme/personal-profile.png" alt="Profile" height=400px> \
 <img src="static/img/readme/update-profile.png" alt="Update Profile" height=400px> \
+<img src="static/img/readme/default-profile.png" alt="Settings"> \
 
-* User Content Display: The profile displays all threads/posts created by the user.
-* Vote Collection: Users can collect votes on their posts, threads, and comments. The total number of votes collected across all content is shown on the profile.
+##### User Content Display
+The profile displays all threads/posts created by the user.
+<img src="static/img/readme/your-threads.png" alt="Threadlist from Users Profile"> \
+<img src="static/img/readme/profile-threads.png" alt="Threadlist from Users Profile"> \
 
+##### Vote Collection
+Users can collect votes on their posts, threads, and comments. The total number of votes collected across all content is shown on the profile for each user.
+<img src="static/img/readme/user-votes.png" alt="Vote from a Profile" height=200px> \
 
 #### Threads, Comments, Votes:
+On this platform Users engage by writing Threads. Each Thread can be commented.
+Threads, as well as comments can be up- and down voted by Users.
 
-* Create Threads and Comments: Logged-in users can create threads and comments on the platform. Threads appear in the global timeline and can be commented on by other logged-in users.
+##### Create Threads
+Logged-in users can create threads on the platform. Threads appear in the global timeline and can be commented on by other logged-in users.
 <img src="static/img/readme/write-thread.png" alt="Write Thread" height=400px>
+
+##### Create Comments
+Logged-in users can create comments on the platform. Comments appear below the thread they relate to.
 <img src="static/img/readme/leave-comment-form.png" alt="Comment Form" height=400px>
 
-* Upvote and Downvote: Users can upvote or downvote threads and comments to give and collect points on the platform.
-* Edit: Logged-in users can edit their threads and comments on the platform.
+##### Upvote and Downvote
+Users can upvote or downvote threads and comments to give and collect points on the platform.
+<img src="static/img/readme/vote.png" alt="Vote Option next to a Thread" height=200px> \
+
+##### Edit Threads
+Logged-in users can edit their threads  on the platform.
 <img src="static/img/readme/edit-thread-buttons.png" alt="Edit and delete buttons" height=400px>
+
+##### Edit Comments
+Logged-in users can edit their comments on the platform.
 <img src="static/img/readme/edit-comment-button.png" alt="Edit, Delete buttons" height=400px>
 <img src="static/img/readme/edit-comment.png" alt="Edit Comment" height=400px>
 
-* Delete: Logged-in users can delete their threads and comments. Confirmation is asked before the deletion is executed.
+##### Delete Threads and Comments
+Logged-in users can delete their threads and comments. Confirmation is asked before the deletion is executed.
 <img src="static/img/readme/delete-comment-confirm.png" alt="Delete Comment" height=400px>
 <img src="static/img/readme/delete-thread-confirm.png" alt="Delete Thread" height=400px>
 
+##### Change or Delete Votes
+Logged-in users can delete or change their votes on threads and comments.
+The current vote of each user is displayed with a yellow background behind the up or downvote icon. If the opposite icon is pressed, the vote changes, if the current vote is pressed again, it is removed.
+<img src="static/img/readme/vote.png" alt="Vote Option next to a Thread" height=200px> \
+
 #### Tags:
-* Follow Tags
+Each Thread can be created with tags. Tags can be followed by users to create personal timelines.
+
+##### Tag Site
+Each Tag has their own site, which desplayed all threads created with that tag.
+<img src="static/img/readme/tag-site.png" alt="Tag Site"> \
+
+##### Follow Tags
+On Tag Sites, the user has the option to follow a tag by pressing the botton on top of the site.
 <img src="static/img/readme/follow-tag.png" alt="Follow Tag" height=400px>
 
-* Unfollow Tags
+##### Unfollow Tags
+On Tag Sites, the user has an option to unfollow tags, if they follow them.
 <img src="static/img/readme/unfollow-tag.png" alt="Unfollow Tag" height=400px>
 
-* Overview over all tags you follow:
+##### Overview over all tags you follow
+By navigating through the profile setting, a logged-in User can get to a view that shows them all tags they are following. This gives them an easier place to remove them.
 <img src="static/img/readme/all-tags.png" alt="All Tags" height=400px>
 
 #### Global and Tag-based Timeline:
 
-* Global Timeline: The global timeline is visible to all users, showcasing threads from across the platform.
-* Personalized Tag Timeline: Users can follow tags, and threads with these tags appear in their personalized tag-based timeline for a tailored browsing experience.
+##### Global Timeline
+The global timeline is visible to all Users and Visitors, showcasing threads from across the platform.
+<img src="static/img/readme/global.png" alt="Global Timeline"> \
 
-* Pagination: For a better load time and usage with multiple threads.
+##### Personalized Tag Timeline
+Users can follow tags, and threads with these tags appear in their personalized tag-based timeline for a tailored browsing experience.
+<img src="static/img/readme/tag-based.png" alt="Tag Based Timeline"> \
+
+##### Pagination
+For a better load time and usage with multiple threads, the timeline has a pagination feature.
 <img src="static/img/readme/pagination.png" alt="Pagination" width=600px>
+
+#### Messages
+Users get notified about changes on the platform through the django message system.
+<img src="static/img/readme/message.png" alt="All Tags" height=200px>
+
+#### Django Admin Panel
+Inside the Django Admin panel, Administrators have acces to the models of the django project.
+<img src="static/img/readme/admin-panel.png" alt="All Tags">
 
 ### Features Left to Implement
 
