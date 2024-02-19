@@ -281,6 +281,10 @@ Users get notified about changes on the platform through the django message syst
 Inside the Django Admin panel, Administrators have acces to the models of the django project.
 <img src="static/img/readme/admin-panel.png" alt="All Tags">
 
+#### Info Page
+An information page let's intrested visitors know what Weaver is all about.
+<img src="static/img/readme/info.png" alt="Info Page">
+
 ### Features Left to Implement
 
 #### Moderation:
