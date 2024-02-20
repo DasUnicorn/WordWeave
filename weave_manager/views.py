@@ -43,7 +43,8 @@ class UserTimelineView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         user = self.request.user
         followed_tags = Tag.objects.filter(following__followed_by=user)
-        followed_threads = Thread.objects.filter(tags__in=followed_tags).distinct()
+        followed_threads = Thread.objects.filter(
+            tags__in=followed_tags).distinct()
 
         return followed_threads
 
@@ -56,21 +57,28 @@ class UserTimelineView(LoginRequiredMixin, generic.ListView):
                 thread.has_downvoted = thread.has_downvoted(self.request.user)
         return context
 
+
 class InfoView(TemplateView):
     template_name = "info.html"
 
-#  LoginRequiredMixin is used to ensure that only logged-in users can create threads.
+# LoginRequiredMixin is used to ensure that only logged-in users
+# can create threads.
+
+
 class CreateThreadView(LoginRequiredMixin, FormView):
     template_name = 'create_thread.html'
     form_class = ThreadForm
-    success_url = reverse_lazy('home')  # Redirect to a view that displays a list of threads
+    # Redirect to a view that displays a list of threads
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         # Set the author before saving the form
         form.instance.author = self.request.user
         form.save()
-        messages.add_message(self.request, messages.INFO, 'Your Thread has been created.')
+        messages.add_message(self.request, messages.INFO,
+                             'Your Thread has been created.')
         return super().form_valid(form)
+
 
 class TagSiteView(generic.ListView):
     template_name = "tag_site.html"
@@ -89,7 +97,8 @@ class TagSiteView(generic.ListView):
 
         user_follows_tag = False
         if self.request.user.is_authenticated:
-            user_follows_tag = Follower.objects.filter(followed_by=self.request.user, following=tag).exists()
+            user_follows_tag = Follower.objects.filter(
+                followed_by=self.request.user, following=tag).exists()
 
         context['user_follows_tag'] = user_follows_tag
 
@@ -110,7 +119,8 @@ class ThreadDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
-        context['comments'] = self.object.comments.all()  # Retrieve comments for the thread
+        # Retrieve comments for the thread
+        context['comments'] = self.object.comments.all()
 
         thread = context['thread']
         if self.request.user.is_authenticated:
@@ -121,10 +131,11 @@ class ThreadDetailView(DetailView):
         if self.request.user.is_authenticated:
             for comment in comment_list:
                 comment.has_upvoted = comment.has_upvoted(self.request.user)
-                comment.has_downvoted = comment.has_downvoted(self.request.user)
-
+                comment.has_downvoted = comment.has_downvoted(
+                    self.request.user)
 
         return context
+
 
 class AddCommentView(View):
     def post(self, request, thread_id):
@@ -136,9 +147,11 @@ class AddCommentView(View):
             comment.thread = thread
             comment.author = request.user
             comment.save()
-            messages.add_message(self.request, messages.INFO, 'Your Comment has been created.')
+            messages.add_message(self.request, messages.INFO,
+                                 'Your Comment has been created.')
 
         return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
+
 
 class MyPaginator(Paginator):
     def validate_number(self, number):
@@ -154,35 +167,44 @@ class MyPaginator(Paginator):
             else:
                 raise
 
+
 @require_POST
 @login_required
 def upvote_thread(request, thread_id):
-    thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
+    # pk lookup shortcut, which stands for “primary key”.
+    thread = get_object_or_404(Thread, pk=thread_id)
     thread.up_vote(request.user)
     return redirect('home')
+
 
 @require_POST
 @login_required
 def downvote_thread(request, thread_id):
-    thread = get_object_or_404(Thread, pk=thread_id) # pk lookup shortcut, which stands for “primary key”.
+    # pk lookup shortcut, which stands for “primary key”.
+    thread = get_object_or_404(Thread, pk=thread_id)
     thread.down_vote(request.user)
     return redirect('home')
+
 
 @require_POST
 @login_required
 def upvote_comment(request, comment_id):
-    comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
+    # pk lookup shortcut, which stands for “primary key”.
+    comment = get_object_or_404(Comment, pk=comment_id)
     comment.up_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
 
+
 @require_POST
 @login_required
 def downvote_comment(request, comment_id):
-    comment = get_object_or_404(Comment, pk=comment_id) # pk lookup shortcut, which stands for “primary key”.
+    # pk lookup shortcut, which stands for “primary key”.
+    comment = get_object_or_404(Comment, pk=comment_id)
     comment.down_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
+
 
 @login_required
 def edit_thread(request, thread_id):
@@ -192,12 +214,16 @@ def edit_thread(request, thread_id):
         form = ThreadForm(request.POST, instance=thread)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, 'Your Thread has been edited.')
-            return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
+            messages.add_message(request, messages.INFO,
+                                 'Your Thread has been edited.')
+            return redirect('thread_detail', thread_id=thread.id,
+                            slug=thread.slug)
     else:
         form = ThreadForm(instance=thread)
 
-    return render(request, 'edit_thread.html', {'form': form, 'thread': thread})
+    return render(request, 'edit_thread.html',
+                  {'form': form, 'thread': thread})
+
 
 @login_required
 def delete_thread(request, thread_id):
@@ -205,12 +231,14 @@ def delete_thread(request, thread_id):
 
     if request.method == 'POST':
         # Handle the deletion of the thread
-        messages.add_message(request, messages.INFO, 'Your Thread has been deleted.')
+        messages.add_message(request, messages.INFO,
+                             'Your Thread has been deleted.')
         thread.delete()
-        return redirect('home') 
+        return redirect('home')
 
     # Render the delete confirmation page
     return render(request, 'delete_thread_confirm.html', {'thread': thread})
+
 
 @login_required
 def edit_comment(request, comment_id):
@@ -220,12 +248,16 @@ def edit_comment(request, comment_id):
         form = CommentForm(request.POST, instance=comment)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.INFO, 'Your Comment has been edited.')
-            return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
+            messages.add_message(request, messages.INFO,
+                                 'Your Comment has been edited.')
+            return redirect('thread_detail', thread_id=comment.thread.id,
+                            slug=comment.thread.slug)
     else:
         form = CommentForm(instance=comment)
 
-    return render(request, 'edit_comment.html', {'form': form, 'comment': comment})
+    return render(request, 'edit_comment.html', {'form': form,
+                                                 'comment': comment})
+
 
 @login_required
 def delete_comment(request, comment_id):
@@ -233,9 +265,11 @@ def delete_comment(request, comment_id):
 
     if request.method == 'POST':
         # Handle the deletion of the thread
-        messages.add_message(request, messages.INFO, 'Your Comment has been deleted.')
+        messages.add_message(request, messages.INFO,
+                             'Your Comment has been deleted.')
         comment.delete()
-        return redirect('thread_detail', thread_id=comment.thread.id, slug=comment.thread.slug)
+        return redirect('thread_detail', thread_id=comment.thread.id,
+                        slug=comment.thread.slug)
 
     # Render the delete confirmation page
     return render(request, 'delete_comment_confirm.html', {'comment': comment})

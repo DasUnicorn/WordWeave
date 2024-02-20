@@ -4,7 +4,7 @@ from django.views import generic
 from django.views.generic.edit import FormView
 from .models import User
 from weave_manager.models import Thread, Comment
-from django.db.models import Sum 
+from django.db.models import Sum
 from .forms import ProfileUpdateForm
 from django import forms
 from django.urls import reverse_lazy
@@ -42,6 +42,7 @@ class UserProfileView(generic.DetailView):
 
         return context
 
+
 class ProfileUpdateView(FormView):
     template_name = "update_profile.html"
     form_class = ProfileUpdateForm
@@ -51,8 +52,10 @@ class ProfileUpdateView(FormView):
         model = User
         fields = ('bio', 'profile_pic')
 
-    bio = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    profile_pic = forms.ImageField(widget = forms.FileInput(attrs={'class': 'form-control'}))
+    bio = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control'}))
+    profile_pic = forms.ImageField(
+        widget=forms.FileInput(attrs={'class': 'form-control'}))
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -75,13 +78,13 @@ class ProfileUpdateView(FormView):
         # Use 'username' as the parameter name
         return reverse_lazy("user_profile", args=[self.request.user.username])
 
+
 @login_required
 def delete_profile(request, user_id):
     user = get_object_or_404(User, id=user_id)
-    
+
     if request.method == 'POST' and request.user == user:
         user.delete()
         return redirect('home')
 
     return redirect('profile', user.username)
-

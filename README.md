@@ -79,6 +79,7 @@ Python, HTML/CSS, Java Script
 ### Frameworks, Libraries & Programs Used
 
 * Git / Github
+* Bootstrap
 * [django-allauth](https://docs.allauth.org/en/latest/)
 * [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/)
 * [pillow Imaging Library](https://pypi.org/project/pillow/)
@@ -311,6 +312,17 @@ The website's style and vibe are defined by its color scheme. Chosen to resemble
 
 ![color scheme](static/img/readme/colors.png)
 
+## Data
+
+### Database schema
+The Database was planned as the following:
+<img src="static/img/readme/db-sketch.png" alt="Database Schema">
+After realizing this project, the database structure is the following:
+<img src="static/img/readme/db-scheme.png" alt="Current Database Schema">
+* Current Database Schema, exported with django-extensions*
+
+## Security
+
 ## Testing
 
 #### Lighthouse Test
@@ -334,6 +346,24 @@ The W3C HTML Validator shows no errors.
 The result of the WAVE Web Accessibility Evaluation Tool shows no Errors.
 ![Wave Check](static/img/readme/wave.png)
 ![Wave Check](static/img/readme/wave-profile.png)
+
+#### PEP8
+
+The [Pep8 CI](https://pep8ci.herokuapp.com/) Linter was used, returning the following results:
+
+| App            | File      | CI Linter Result                                                                          |
+|----------------|-----------|-------------------------------------------------------------------------------------------|
+| authentication | forms.py  | All clear, no errors found                                                                |
+|                | models.py | All clear, no errors found                                                                |
+|                | urls.py   | All clear, no errors found                                                                |
+|                | views.py  | All clear, no errors found                                                                |
+| follow         | models.py | 16:  E501 line too long (80 > 79 characters)                                              |
+|                | urls.py   | All clear, no errors found                                                                |
+|                | views.py  | 21:  E501 line too long (93 > 79 characters) 25:  E501 line too long (89 > 79 characters) |
+| weave_manager  | forms.py  | All clear, no errors found                                                                |
+|                | models.py | All clear, no errors found                                                                |
+|                | urls.py   | All clear, no errors found                                                                |
+|                | views.py  | All clear, no errors found                                                                |
 
 
 ### Manual Testing
@@ -487,7 +517,13 @@ To fork the repository:
 
 ### Deploy locally
 
-django-admin is Django’s command-line utility for administrative tasks. This [django docs](https://docs.djangoproject.com/en/5.0/ref/django-admin/) outlines all it can do.
+Install poetry.
+To install the  dependencies for this project, run:
+```
+poetry install
+```
+
+To navigate the project, use the django-admin is Django’s command-line utility for administrative tasks. This [django docs](https://docs.djangoproject.com/en/5.0/ref/django-admin/) outlines all it can do.
 
 #### Usage
 django commands follow the following pattern:
@@ -501,7 +537,7 @@ $ python -m django <command> [options]
 **Development**
 
 ```
-django-admin runserver
+python manage.py runserver
 ```
 Starts a lightweight development web server on the local machine.
 
@@ -510,10 +546,12 @@ Starts a lightweight development web server on the local machine.
 1. Register for an account on Heroku or sign in.
 2. Create a new app.
 3. Name your App.
-4. Add Node JS and Python packages to app setting.
-5. Connect github repository to Heroku app
-6. Add creds.json content for a given google sheet
-7. Deploy from "deploy", or choose an automatic deploy option.
+5. Connect your github repository to Heroku app.
+6. Create a Live Database by adding the postgreSQL add-on.
+7. Create a Cloudfare Account and set up a R2 Bucket.
+8. Create and Set up an email account for verification mails.
+9. Set Config Vars for your cloudfare bucket (*AWS_S3_SECRET_ACCESS_KEY*), database (*DATABASE_URL*) and email(*EMAIL_HOST_PASSWORD*).
+10. Deploy from "deploy", or choose an automatic deploy option.
 
 ## Credits
 * Markdown Table of Content by [Jon Schlinkert](https://github.com/jonschlinkert/markdown-toc)
@@ -522,6 +560,7 @@ Starts a lightweight development web server on the local machine.
 * The default profile picture is by [freepik](https://de.freepik.com/vektoren-kostenlos/handgezeichnetes-flaches-profilsymbol_17539361.htm#query=profile%20picture&position=42&from_view=search&track=ais&uuid=594c74d8-53ba-48f7-9d10-3770ce010d32)
 * The navbar icon is from [flaticon](https://www.flaticon.com/free-icon/menu-bar_8860952?term=navigation&page=1&position=42&origin=search&related_id=8860952)
 * The [django-image-uploader-widget](https://pypi.org/project/django-image-uploader-widget/) was used for the profile image
+* [DrawSQL](https://drawsql.app/) was used to create the database sketch and [django-extensions](https://django-extensions.readthedocs.io/en/latest/graph_models.html) for the final export. 
 * I learned a lot about django unittests from 
 [The Dumbfounds](https://www.youtube.com/watch?v=0MrgsYswT1c&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=2)
 * All svg icons come from [svgrepo](https://www.svgrepo.com/svg/513800/add-square)

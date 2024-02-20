@@ -3,6 +3,7 @@ from .models import Thread, Comment
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+
 class ThreadForm(forms.ModelForm):
     class Meta:
         model = Thread
@@ -18,6 +19,7 @@ class ThreadForm(forms.ModelForm):
             self.helper.add_input(Submit('submit', 'Edit Thread'))
         else:
             self.helper.add_input(Submit('submit', 'Create Thread'))
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

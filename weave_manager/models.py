@@ -12,17 +12,19 @@ import markdown2
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
+
 class Thread(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name="posts")
+                               on_delete=models.CASCADE, related_name="posts")
     content = models.TextField()
     votes = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     tags = TaggableManager()
-    picture = models.ImageField(upload_to='thread_pictures', blank=True, null=True)
+    picture = models.ImageField(
+        upload_to='thread_pictures', blank=True, null=True)
 
     class Meta:
         ordering = ["-created_on"]
@@ -40,7 +42,8 @@ class Thread(models.Model):
             try:
                 current_thread = Thread.objects.get(pk=self.pk)
                 # If a picture exist and has changed, delete the old one
-                if current_thread.picture and self.picture != current_thread.picture:
+                if current_thread.picture and (
+                        self.picture != current_thread.picture):
                     # Delete the old picture from the Cloudflare R2 bucket
                     try:
                         default_storage.delete(current_thread.picture.name)
@@ -88,7 +91,7 @@ class Thread(models.Model):
             # if already downvoted -> remove vote
             vote = self.thread_votes.get(user=user, thread_id=self.id)
             vote.delete()
-    
+
     def has_upvoted(self, user):
         return self.thread_votes.filter(user=user, value=1).exists()
 
@@ -99,10 +102,13 @@ class Thread(models.Model):
     def content_html(self):
         return markdown2.markdown(self.content)
 
+
 class Comment(models.Model):
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="comments")
+    thread = models.ForeignKey(
+        Thread, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, related_name="commenter")
+                               on_delete=models.CASCADE,
+                               related_name="commenter")
     body = models.TextField()
     votes = models.IntegerField(default=0)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -156,22 +162,27 @@ class Comment(models.Model):
 
     def has_downvoted(self, user):
         return self.comment_votes.filter(user=user, value=-1).exists()
-        
+
 
 class ThreadVote(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     value = models.SmallIntegerField()
-    thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name="thread_votes")
+    thread = models.ForeignKey(
+        Thread, on_delete=models.CASCADE, related_name="thread_votes")
 
     def __str__(self):
         return f"{self.user} voted on {self.thread}"
 
+
 class CommentVote(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     value = models.SmallIntegerField()
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name="comment_votes")
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name="comment_votes")
 
     def __str__(self):
         return f"{self.user} voted on {self.comment}"
@@ -184,6 +195,7 @@ def update_thread_votes(sender, instance, **kwargs):
     elif instance.value == -1:
         instance.thread.votes = F('votes') + 1
     instance.thread.save()
+
 
 @receiver(pre_delete, sender=CommentVote)
 def update_comment_votes(sender, instance, **kwargs):

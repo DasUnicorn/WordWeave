@@ -5,6 +5,7 @@ from crispy_forms.helper import FormHelper
 from image_uploader_widget.widgets import ImageUploaderWidget
 from crispy_forms.layout import Layout, Submit
 
+
 class CustomSignupForm(SignupForm):
     username = forms.CharField(max_length=25, label="Username")
 
@@ -12,12 +13,15 @@ class CustomSignupForm(SignupForm):
         username = self.cleaned_data['username']
         return username
 
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('bio', 'profile_pic')
 
-    bio = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    bio = forms.CharField(required=False,
+                          widget=forms.TextInput(
+                              attrs={'class': 'form-control'}))
     profile_pic = forms.ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
