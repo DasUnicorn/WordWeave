@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from image_uploader_widget.widgets import ImageUploaderWidget
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class UserProfileView(generic.DetailView):
@@ -43,7 +44,7 @@ class UserProfileView(generic.DetailView):
         return context
 
 
-class ProfileUpdateView(FormView):
+class ProfileUpdateView(LoginRequiredMixin, FormView):
     template_name = "update_profile.html"
     form_class = ProfileUpdateForm
     edit_only = True
