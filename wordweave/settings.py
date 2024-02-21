@@ -39,7 +39,7 @@ if IS_HEROKU_APP:
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4i66ks)n7!1dai3kc777si%ty2(c%i($8zrw*wz@d#(%2_5s^3'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if not IS_HEROKU_APP:
@@ -93,8 +93,15 @@ INSTALLED_APPS = [
     'imagekit',
     'storages',
     'django_markdown2',
+    'django_extensions',
     'django_cleanup.apps.CleanupConfig',
 ]
+
+# graph models for django extension
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
 
 # Crespy Bootstrap Settings:
 
