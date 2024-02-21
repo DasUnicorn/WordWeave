@@ -63,8 +63,6 @@ class InfoView(TemplateView):
 
 # LoginRequiredMixin is used to ensure that only logged-in users
 # can create threads.
-
-
 class CreateThreadView(LoginRequiredMixin, FormView):
     template_name = 'create_thread.html'
     form_class = ThreadForm
