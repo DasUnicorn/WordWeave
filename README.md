@@ -369,7 +369,66 @@ The [Pep8 CI](https://pep8ci.herokuapp.com/) Linter was used, returning the foll
 ### Manual Testing
 
 ### Automatic Testing
-Unittests
+This project contains Unittests to automatically test the application.
+
+Coverage Report, creates by coverage:
+
+| Name                                                                                        |    Stmts |     Miss |   Cover |   Missing |
+|-------------------------------------------------------------------------------------------- | -------: | -------: | ------: | --------: |
+| authentication/\_\_init\_\_.py                                                              |        0 |        0 |    100% |           |
+| authentication/admin.py                                                                     |        8 |        0 |    100% |           |
+| authentication/apps.py                                                                      |        4 |        0 |    100% |           |
+| authentication/forms.py                                                                     |       25 |        2 |     92% |     13-14 |
+| authentication/migrations/0001\_initial.py                                                  |        8 |        0 |    100% |           |
+| authentication/migrations/0002\_alter\_user\_bio\_alter\_user\_profile\_pic.py              |        4 |        0 |    100% |           |
+| authentication/migrations/0003\_alter\_user\_profile\_pic\_alter\_user\_username.py         |        4 |        0 |    100% |           |
+| authentication/migrations/0004\_alter\_user\_bio\_alter\_user\_profile\_pic.py              |        4 |        0 |    100% |           |
+| authentication/migrations/\_\_init\_\_.py                                                   |        0 |        0 |    100% |           |
+| authentication/models.py                                                                    |       10 |        0 |    100% |           |
+| authentication/tests/\_\_init\_\_.py                                                        |        0 |        0 |    100% |           |
+| authentication/tests/test\_forms.py                                                         |       10 |        0 |    100% |           |
+| authentication/tests/test\_models.py                                                        |       13 |        0 |    100% |           |
+| authentication/tests/test\_urls.py                                                          |       10 |        0 |    100% |           |
+| authentication/tests/test\_views.py                                                         |       59 |        0 |    100% |           |
+| authentication/urls.py                                                                      |        4 |        0 |    100% |           |
+| authentication/views.py                                                                     |       63 |        2 |     97% |    71, 91 |
+| follow/\_\_init\_\_.py                                                                      |        0 |        0 |    100% |           |
+| follow/admin.py                                                                             |        3 |        0 |    100% |           |
+| follow/apps.py                                                                              |        4 |        0 |    100% |           |
+| follow/migrations/0001\_initial.py                                                          |        7 |        0 |    100% |           |
+| follow/migrations/\_\_init\_\_.py                                                           |        0 |        0 |    100% |           |
+| follow/models.py                                                                            |       10 |        1 |     90% |        16 |
+| follow/tests/\_\_init\_\_.py                                                                |        0 |        0 |    100% |           |
+| follow/tests/test\_views.py                                                                 |        0 |        0 |    100% |           |
+| follow/urls.py                                                                              |        3 |        0 |    100% |           |
+| follow/views.py                                                                             |       42 |       31 |     26% |9-30, 34-53, 61-62 |
+| manage.py                                                                                   |       12 |        2 |     83% |     12-13 |
+| weave\_manager/\_\_init\_\_.py                                                              |        0 |        0 |    100% |           |
+| weave\_manager/admin.py                                                                     |        6 |        0 |    100% |           |
+| weave\_manager/apps.py                                                                      |        4 |        0 |    100% |           |
+| weave\_manager/forms.py                                                                     |       24 |        0 |    100% |           |
+| weave\_manager/migrations/0001\_initial.py                                                  |        8 |        0 |    100% |           |
+| weave\_manager/migrations/0002\_rename\_thread\_comment\_thread\_commentvote\_threadvote.py |        6 |        0 |    100% |           |
+| weave\_manager/migrations/0003\_remove\_comment\_votes\_remove\_thread\_votes.py            |        4 |        0 |    100% |           |
+| weave\_manager/migrations/0004\_thread\_votes\_alter\_commentvote\_comment\_and\_more.py    |        6 |        0 |    100% |           |
+| weave\_manager/migrations/0005\_comment\_votes.py                                           |        4 |        0 |    100% |           |
+| weave\_manager/migrations/0006\_alter\_thread\_slug.py                                      |        4 |        0 |    100% |           |
+| weave\_manager/migrations/0007\_thread\_picture.py                                          |        4 |        0 |    100% |           |
+| weave\_manager/migrations/\_\_init\_\_.py                                                   |        0 |        0 |    100% |           |
+| weave\_manager/models.py                                                                    |      145 |       20 |     86% |33, 48-53, 90-93, 120, 155-158, 176, 188, 195-196, 204-205 |
+| weave\_manager/tests/\_\_init\_\_.py                                                        |        0 |        0 |    100% |           |
+| weave\_manager/tests/test\_forms.py                                                         |       65 |        0 |    100% |           |
+| weave\_manager/tests/test\_models.py                                                        |       66 |        0 |    100% |           |
+| weave\_manager/tests/test\_views.py                                                         |       53 |        6 |     89% |     81-91 |
+| weave\_manager/tests/test\_voting.py                                                        |      139 |        0 |    100% |           |
+| weave\_manager/urls.py                                                                      |        3 |        0 |    100% |           |
+| weave\_manager/views.py                                                                     |      182 |       73 |     60% |44-49, 52-58, 74-78, 86-87, 90-109, 140-151, 156-166, 214-220, 228-238, 243-256, 262-273 |
+| wordweave/\_\_init\_\_.py                                                                   |        0 |        0 |    100% |           |
+| wordweave/asgi.py                                                                           |        4 |        4 |      0% |     10-16 |
+| wordweave/settings.py                                                                       |       57 |       14 |     75% |35, 145, 216-220, 224-230 |
+| wordweave/urls.py                                                                           |        6 |        0 |    100% |           |
+| wordweave/wsgi.py                                                                           |        4 |        4 |      0% |     10-16 |
+|                                                                                   **TOTAL** | **1101** |  **159** | **86%** |    
 
 ### Unfixed Bugs
 
