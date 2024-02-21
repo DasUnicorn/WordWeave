@@ -197,3 +197,89 @@ class ThreadVoteDeletionTest(TestCase):
         # Check if the vote count of the thread is adjusted accordingly
         self.assertEqual(self.thread.votes, 0)
 
+
+class CommentVoteDeletionTest(TestCase):
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(
+            username='testuser', password='Pass123Word!')
+        # Create a test thread
+        self.thread = Thread.objects.create(
+            title='Test Thread', content='Test Content', tags='test', author=self.user)
+        # Create a test comment to the thread
+        self.comment = Comment.objects.create(
+            body='This is a Test.', author=self.user, thread=self.thread)
+        # Log in the user
+        self.client.login(username='testuser', password='Pass123Word!')
+        # Upvote the comment
+        self.client.post(reverse('upvote_comment', kwargs={
+                         'comment_id': self.comment.id}))
+
+    def test_vote_deletion(self):
+        # Get the vote associated with the thread
+        vote = CommentVote.objects.get(user=self.user, comment=self.comment)
+        # Delete the vote
+        vote.delete()
+        # Refresh the thread from the database
+        self.comment.refresh_from_db()
+        # Check if the vote object is deleted
+        self.assertFalse(CommentVote.objects.filter(id=vote.id).exists())
+        # Check if the vote count of the thread is adjusted accordingly
+        self.assertEqual(self.comment.votes, 0)
+
+
+class UniqueThreadVoteTest(TestCase):
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(
+            username='testuser', password='Pass123Word!')
+        # Create a test thread
+        self.thread = Thread.objects.create(
+            title='Test Thread', content='Test Content', tags='test', author=self.user)
+        # Log in the user
+        self.client.login(username='testuser', password='Pass123Word!')
+
+    def test_unique_vote(self):
+        # Upvote the thread
+        response = self.client.post(
+            reverse('upvote_thread', kwargs={'thread_id': self.thread.id}))
+        # Check if the thread has received an upvote
+        self.thread.refresh_from_db()
+        self.assertEqual(self.thread.votes, 1)
+
+        # Attempt to upvote the thread again
+        response = self.client.post(
+            reverse('upvote_thread', kwargs={'thread_id': self.thread.id}))
+        # Check if the previous vote is removed and the vote count is back to 0
+        self.thread.refresh_from_db()
+        self.assertEqual(self.thread.votes, 0)
+
+
+class UniqueCommentVoteTest(TestCase):
+    def setUp(self):
+        # Create a test user
+        self.user = User.objects.create_user(
+            username='testuser', password='Pass123Word!')
+        # Create a test thread
+        self.thread = Thread.objects.create(
+            title='Test Thread', content='Test Content', tags='test', author=self.user)
+        # Create a test comment to the thread
+        self.comment = Comment.objects.create(
+            body='This is a Test.', author=self.user, thread=self.thread)
+        # Log in the user
+        self.client.login(username='testuser', password='Pass123Word!')
+
+    def test_unique_vote(self):
+        # Upvote the thread
+        response = self.client.post(
+            reverse('upvote_comment', kwargs={'comment_id': self.comment.id}))
+        # Check if the thread has received an upvote
+        self.comment.refresh_from_db()
+        self.assertEqual(self.comment.votes, 1)
+
+        # Attempt to upvote the comment again
+        response = self.client.post(
+            reverse('upvote_comment', kwargs={'comment_id': self.comment.id}))
+        # Check if the previous vote is removed and the vote count is back to 0
+        self.comment.refresh_from_db()
+        self.assertEqual(self.comment.votes, 0)
