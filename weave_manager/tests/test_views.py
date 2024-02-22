@@ -61,12 +61,10 @@ class ThreadEditTest(TestCase):
         self.thread = Thread.objects.create(
             title='Test Thread', content='Original content', tags='test',
             author=self.user)
-        print("Thread ID: " + str(self.thread.id))
 
     def test_thread_edit(self):
         # Log in as the user
         self.client.login(username='testuser', password='testpassword')
-        print("Pre Change: " + str(self.thread.content))
 
         # New content for the thread
         new_content = 'Updated content'
@@ -78,7 +76,6 @@ class ThreadEditTest(TestCase):
             data={'title': self.thread.title,
                   'content': new_content, 'tags': self.thread.tags}
         )
-        print(response.content)
 
         # Check that the thread's content is updated correct
         self.thread.refresh_from_db()
