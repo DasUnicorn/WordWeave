@@ -88,6 +88,8 @@ Python, HTML/CSS, Java Script
 * [django-image-uploader-widget](https://pypi.org/project/django-image-uploader-widget/)
 * django-storages and boto3, for r2 bucket storage
 * [django-cleanup](https://github.com/un1t/django-cleanup)
+* coverage for testing
+* django extensions for exporting DB schema
 
 ## User Experience
 
@@ -319,9 +321,11 @@ The Database was planned as the following:
 <img src="static/img/readme/db-sketch.png" alt="Database Schema">
 After realizing this project, the database structure is the following:
 <img src="static/img/readme/db-scheme.png" alt="Current Database Schema">
-* Current Database Schema, exported with django-extensions*
+*Current Database Schema, exported with django-extensions*
 
 ## Security
+
+
 
 ## Testing
 
@@ -351,20 +355,27 @@ The result of the WAVE Web Accessibility Evaluation Tool shows no Errors.
 
 The [Pep8 CI](https://pep8ci.herokuapp.com/) Linter was used, returning the following results:
 
-| App            | File      | CI Linter Result                                                                          |
-|----------------|-----------|-------------------------------------------------------------------------------------------|
-| authentication | forms.py  | All clear, no errors found                                                                |
-|                | models.py | All clear, no errors found                                                                |
-|                | urls.py   | All clear, no errors found                                                                |
-|                | views.py  | All clear, no errors found                                                                |
-| follow         | models.py | 16:  E501 line too long (80 > 79 characters)                                              |
-|                | urls.py   | All clear, no errors found                                                                |
-|                | views.py  | 21:  E501 line too long (93 > 79 characters) 25:  E501 line too long (89 > 79 characters) |
-| weave_manager  | forms.py  | All clear, no errors found                                                                |
-|                | models.py | All clear, no errors found                                                                |
-|                | urls.py   | All clear, no errors found                                                                |
-|                | views.py  | All clear, no errors found                                                                |
-
+| App            | File                 | CI Linter Result           |
+|----------------|----------------------|----------------------------|
+| authentication | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+|                | tests/test_forms.py  | All clear, no errors found |
+|                | tests/test_models.py | All clear, no errors found |
+|                | tests/test_urls.py   | All clear, no errors found |
+|                | tests/test_views.py  | All clear, no errors found |
+| follow         | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+| weave_manager  | forms.py             | All clear, no errors found |
+|                | models.py            | All clear, no errors found |
+|                | urls.py              | All clear, no errors found |
+|                | views.py             | All clear, no errors found |
+|                | tests/test_form.py   | All clear, no errors found |
+|                | tests/test_models.py | All clear, no errors found |
+|                | tests/test_view.py   | All clear, no errors found |
+|                | tests/test_voting.py | All clear, no errors found |
 
 ### Manual Testing
 
