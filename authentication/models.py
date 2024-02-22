@@ -1,11 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
-from django.core.files.storage import default_storage
-from django.core.exceptions import ObjectDoesNotExist
 
 
-class User(AbstractUser):
+class User(AbstractUser):  # noqa: F811
     username = models.CharField(max_length=25, unique=True)
     bio = models.CharField(max_length=200, null=True, blank=True, unique=False,
                            default="Your bio could be here.")

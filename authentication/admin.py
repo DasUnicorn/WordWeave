@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import User
 from django.utils.translation import gettext_lazy as _
 
+
 class ProfileAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("username", "password")}),
@@ -30,6 +31,7 @@ class ProfileAdmin(UserAdmin):
             },
         ),
     )
+
 
 # Register your models here.
 admin.site.register(User, ProfileAdmin)
