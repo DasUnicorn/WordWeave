@@ -15,8 +15,9 @@ You can check out the [live-site.](https://word-weave-eb35426ae0cb.herokuapp.com
 - [Technologies Used](#technologies-used)
   * [Languages Used](#languages-used)
   * [Frameworks, Libraries & Programs Used](#frameworks-libraries--programs-used)
-- [User Experience](#user-experience)
+- [User Experience and Workflow](#user-experience-and-workflow)
   * [Target Audience](#target-audience)
+  * [Epics](#epics)
   * [User stories](#user-stories)
     + [Workflow](#workflow)
 - [Design](#design)
@@ -25,25 +26,62 @@ You can check out the [live-site.](https://word-weave-eb35426ae0cb.herokuapp.com
     + [Profile](#profile)
 - [Features](#features)
   * [Existing Features](#existing-features)
+    + [Navigation Bar](#navigation-bar)
+      - [Visitors](#visitors)
+      - [Signed-In Users](#signed-in-users)
+      - [Admins](#admins)
     + [User Account:](#user-account)
+      - [User Sign up](#user-sign-up)
+      - [User Login](#user-login)
+      - [User Logout](#user-logout)
+      - [change Password](#change-password)
+      - [Reset Password, through mail](#reset-password-through-mail)
+      - [Delete User Account](#delete-user-account)
+      - [Access Settings](#access-settings)
     + [Profile:](#profile)
+      - [Profile Picture and Bio](#profile-picture-and-bio)
+      - [User Content Display](#user-content-display)
+      - [Vote Collection](#vote-collection)
     + [Threads, Comments, Votes:](#threads-comments-votes)
+      - [Create Threads](#create-threads)
+      - [Create Comments](#create-comments)
+      - [Upvote and Downvote](#upvote-and-downvote)
+      - [Edit Threads](#edit-threads)
+      - [Edit Comments](#edit-comments)
+      - [Delete Threads and Comments](#delete-threads-and-comments)
+      - [Change or Delete Votes](#change-or-delete-votes)
     + [Tags:](#tags)
+      - [Tag Site](#tag-site)
+      - [Follow Tags](#follow-tags)
+      - [Unfollow Tags](#unfollow-tags)
+      - [Overview over all tags you follow](#overview-over-all-tags-you-follow)
     + [Global and Tag-based Timeline:](#global-and-tag-based-timeline)
+      - [Global Timeline](#global-timeline)
+      - [Personalized Tag Timeline](#personalized-tag-timeline)
+      - [Pagination](#pagination)
+    + [Messages](#messages)
+    + [Django Admin Panel](#django-admin-panel)
+    + [Info Page](#info-page)
   * [Features Left to Implement](#features-left-to-implement)
     + [Moderation:](#moderation)
     + [Dark Mode:](#dark-mode)
   * [Accessibility](#accessibility)
     + [Fonts](#fonts)
     + [Colors](#colors)
+- [Data](#data)
+  * [Database schema](#database-schema)
+- [Security](#security)
 - [Testing](#testing)
     + [Lighthouse Test](#lighthouse-test)
     + [Jigsaw CSS Validator](#jigsaw-css-validator)
     + [W3C Validator](#w3c-validator)
     + [Accessibility](#accessibility-1)
+    + [PEP8](#pep8)
   * [Manual Testing](#manual-testing)
   * [Automatic Testing](#automatic-testing)
   * [Unfixed Bugs](#unfixed-bugs)
+    + [Redirect After Voting on Threads](#redirect-after-voting-on-threads)
+      - [Possible Solutions](#possible-solutions)
   * [Fixed Bugs](#fixed-bugs)
     + [Cascading Deletes for Votes](#cascading-deletes-for-votes)
       - [The Situation:](#the-situation)
@@ -91,18 +129,23 @@ Python, HTML/CSS, Java Script
 * coverage for testing
 * django extensions for exporting DB schema
 
-## User Experience
+## User Experience and Workflow
 
 ### Target Audience
 
-The target audience for Weaver includes creators, enthusiasts, and curious minds with a focus on engaging young and hip generations through its modern and vibrant design. These individuals are passionate about engaging in conversations on the platform or sharing ideas in the comment section. 
+The target audience for Weaver includes creators, enthusiasts, and curious minds with a focus on engaging young and hip generations through its modern and vibrant design. These individuals are passionate about engaging in conversations on the platform or sharing ideas in the comment section.
+
+### Epics
+Sadly GitHub does not support epics.
+Therefore Epics have been created as a separate Issue, containing a list of all User Stories belonging to this Epic.
+They have the label "epic" to filter for them.
 
 ### User stories
 Features in this project are structured through [user stories](https://github.com/DasUnicorn/WordWeave/issues?q=is%3Aissue).
 Each User Story contains:
 - **Dependencies:** This field indicates any external factors or requirements that need to be fulfilled before the user story can be implemented in a form of a list of other user stories.
 - **Description Of Service Or Screen:** This field typically describes the specific service, feature, or screen that the user story relates to.
-- **User Objective:** This field outlines the user's goal or objective. It should clearly state what the user wants to achieve or accomplish. The format follows: "As a user, I want to [action], so that [reason or benefit]."
+- **User Objective:** This field outlines the user's goal or objective. It should clearly state what the user wants to achieve or accomplish. The format follows: "As a user, I want to [action], so that [reason or benefit]." With this Objective in mind, User Stories are created to align with the target audience.
 - **Acceptance Criteria:** This field specifies the conditions or criteria that must be met for the user story to be considered complete. It helps define the boundaries and expectations for implementing the user story.
 
 #### Workflow
@@ -186,7 +229,7 @@ If a user has entered a valid email adress, they can reset their password by mai
 Users have the option to delete their accounts, removing all associated content from the platform.
 
 ##### Access Settings
-For easier acces to all option, settings are displayed on an additional page, making it easier for a user to find all possibile Account Options.\
+For easier acces to all options, settings are displayed on an additional page, making it easier for a user to find all possibile Account Options.\
 <img src="static/img/readme/settings.png" alt="Settings" height=400px>
 
 #### Profile:
@@ -325,7 +368,13 @@ After realizing this project, the database structure is the following:
 
 ## Security
 
+I try to keep things in my Django project as secure as possible. I made sure that only logged-in users could do certain actions in the app. I did this by using the '@login_required' parameter in Django. For the class-based views, I relied on the LoginRequiredMixin mixin to make sure only authenticated users could access certain parts of the app.
 
+If someone tries to do logged in required actions without logging in, they get redirected to the sign-in page.
+
+The safety of user registration and login processes by integrating the AllAuth Django extension. This extension provides a robust framework for managing user authentication securely, offering features such as secure password storage and authentication workflows.
+
+Sensitive information (such as the email adress) remains accessible only to authorized individuals, like admins an the owner of the data. Users are restricted from viewing or accessing sensitive data belonging to other users. This is due to the database, which requires a login.
 
 ## Testing
 
@@ -378,6 +427,49 @@ The [Pep8 CI](https://pep8ci.herokuapp.com/) Linter was used, returning the foll
 |                | tests/test_voting.py | All clear, no errors found |
 
 ### Manual Testing
+
+All main functionality was tested manually.
+
+| Feature                                                | Expected Outcome                                                                                                                                                                                                                    | Testing Performed                                                                                             | Result                                                                                                                           | Pass/Fail |
+|--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|-----------|
+| Sign Up                                                | When the User is signing up with valid credentials, an account should be created. After Signing up, the User is logged in.                                                                                                          | Signing up with username = test, email = test@test.de,  password = Secure123!                                 | The User is logged in. An Account has been created.                                                                              | Pass      |
+| Invalid Sign Up                                        | When the User is signing in with invalid credentials, they get informed about the invalid data.                                                                                                                                     | Signing up with username = superlongusername123456789superlong, email = test(at)test.de, password = 123       | The User gets informed about an invalid email and password. The Username gets shorten to the appropriate length after creation.  | Pass      |
+| Login                                                  | Can login in with the correct password and username.                                                                                                                                                                                | Login with username = test,  password = Secure123!                                                            | User is logged in.                                                                                                               | pass      |
+| Invalid Login                                          | Users can't login with invalid credentials.                                                                                                                                                                                         | Login with username = test, password = InSecure123!                                                           | The user is not logged in.                                                                                                       | Pass      |
+| Logout                                                 | After Confirming to logout, the user gets logged out.                                                                                                                                                                               | Pressing Button to confirm the logout.                                                                        | User is logged out.                                                                                                              | Pass      |
+| User Profile                                           | Logged in Users can reach their Profile by pressing Profile in the Navbar.                                                                                                                                                          | Logging in. Pressing Profile.                                                                                 | The profile of the logged in user opens.                                                                                         | Pass      |
+| Update Profile                                         | Users can update their bio and profile pic by selecting both under Your settings -> Update Profile.                                                                                                                                 | Logging in. Navigation to change profile. Update Bio and picture.                                             | Bio and picture changes to new data                                                                                              | Pass      |
+| Clear Profile Picture and Bio                          | When changing the profile bio to empty and clear the profile picture, both should be removed.                                                                                                                                       | Clearing profile picture from form and leave the bio empty.                                                   | Profile picture is removed, default profile picture is displayed. Bio is removed.                                                | Pass      |
+| Changing Password                                      | Setting a new password results in new login credentials.                                                                                                                                                                            | Changing password. Logout. Login with old credentials. Login with new credentials.                            | Login with old password does not work, Login in with new password is successful.                                                 | Pass      |
+| Add email                                              | Adding a new email with Your Settings -> Update email should result in connecting a new email with the user.                                                                                                                        | Adding a new email.                                                                                           | Email successfull displayed.                                                                                                     | Pass      |
+| Reset password by mail                                 | When pressing the "forgotten password" option and entering an email, a verification email is send. In this email a link can be pressed to reset the password.                                                                       | Entering an email adress and reset a password.                                                                | An email with an link to reset the password arrives. pressing the link gives the option to rest a password.                      | Pass      |
+| Delete Profile                                         | After confirming the deletion a user account should get deleted. All threads, comments and votes made by the user should get deleted with it.                                                                                       | Confirming the Delete of User profile.                                                                        | User is logged out. Account is delted. All threads, comments and votes by this user are gone.                                    | Pass      |
+| Thread Creation                                        | Valid Data should create a new thread. The thread gets displayed in the global timeline under the users threads and on the site of the uses tag. If the user follows the used tag, the thread gets shown in the tag based timeline. | create a thread. Title = "This is a test", content = "This should work.", tags = "test". Follow the tag test. | The thread is created. The thread shows in the global timline, tagbased timelin, on my profile and on the tag site of test.      | Pass      |
+| Invalid Thread Creation                                | Invalid threads should not be accepted.                                                                                                                                                                                             | Tryingt to create an empty thread.                                                                            | fields that can not be empty show errors.                                                                                        | Pass      |
+| Create Thread with picture                             | When creating a thread with a picture, the picture should be shown in the thread detail.                                                                                                                                            | Creating a thread with a picture.                                                                             | The picture shows up in the thread detail.                                                                                       | Pass      |
+| Change Picture in thread                               | When a thread is edited and a picture is changed. The new picture is shown in the thread detail.                                                                                                                                    | Creating a thread with picture 1. Edit the thread to picture 2.                                               | Picture 2 is shown in the thread detail.                                                                                         | Pass      |
+| Clear Picture in thread                                | When a picture is cleared from a thread, it should be removed from the thread detail.                                                                                                                                               | Creating a thread with picture. Remove Pic.                                                                   | Picture is remove from thread.                                                                                                   | Pass      |
+| Markdown in threads                                    | When using markdown formatting in thread content, the correct markdown styling is displayed.                                                                                                                                        | A thread with the content "#This is a test / Does *this* work?" is created.                                   | Markdown styling is shown in the thread detail site.                                                                             | Pass      |
+| Leaving a Comment                                      | Logged in Users can leave a comment under a thread.                                                                                                                                                                                 | Opening a thread. Filling out the comment form. submit the form.                                              | The comment gets displayed under the thread.                                                                                     | Pass      |
+| Markdown for Comments                                  | Comments have markdown styling.                                                                                                                                                                                                     | Trying "## Hey / Does *this* work?" in the body of the of the comment. submit comment.                        | Markdown formatting is displayed.                                                                                                | Pass      |
+| Tag Site                                               | When pressing on a tag, logged in users should see a follow and unfollow option. All threads with this tag sgould be displayed.                                                                                                     | Clicking on a tag.                                                                                            | The tag sites with the unfollow/follow button opens. All threads with this tag are displayed.                                    | Pass      |
+| Follow a tag                                           | When a user is not following a tag the option "follow this tag" is presented on the tag site. A click makes the user follow the tag. All threads with this tag now appear in the tag based timeline.                                | Clicking "follow this tag" on tag site.                                                                       | button changes to "unfollow this tag", seeing all threads with this tag in the tag based timeline.                               | Pass      |
+| Unfollow a tag                                         | When a user unfollows a tag, all threads with this tag are getting removed from the tag based timeline.                                                                                                                             | Clicking "unfollow ths tag" on tag site.                                                                      | No threads with this tag show in the tag based timeine. Button changes to "follow this tag"                                      | Pass      |
+| Global Timeline                                        | The global timeline shows all threads.                                                                                                                                                                                              | Entering global timeline.                                                                                     | It shows all threads.                                                                                                            | Pass      |
+| Info for unregistered User                             | Users who haven't sign up yet should get a cool header, as well as a info what weaver is all about.                                                                                                                                 | Header on the landing page is shown. Login. Header is removed.                                                | Header is only visible for not logged in users.                                                                                  | Pass      |
+| Tag based Timeline.                                    | Users should have the option to visit the tag based timeline after logging in. The tag based timeline only shows threads containg tags a user is following.                                                                         | Login. Choose Tagbased Timeline.                                                                              | The List of threads only contain threads with the tags the user follows.                                                         | Pass      |
+| Upvoting Thread                                        | After pressing the arrow up next to the thread / above the vote count, the vote should count should move 1 up and the arrow up get a yellow background.                                                                             | Pressing the arrow up.                                                                                        | The vote counts +1, the arrow up gets a yellow background.                                                                       | Pass      |
+| Downvoting Thread                                      | After pressing the arrow down, the vote should count -1 and the down arrow should get a yellow background highlight.                                                                                                                | Pressing the arrow down.                                                                                      | The vote vount is -1, the arrow down has a yellow background.                                                                    | Pass      |
+| Changing the vote from Upvote to Downvote              | When the user decides to change their vote from an Up to a Downvote, the application should react accordingly.                                                                                                                      | Upvoting a thread. Downvoting a thread.                                                                       | The vote count removed the upvote and entered a downvote. Now the downvote has a yellow background.                              | Pass      |
+| Changing from Downvote to Upvote                       | When the user decides to change their vote from a Downvote to an Upvote, the application should react accordingly.                                                                                                                  | Downvoting a thread. Upvoting a thread.                                                                       | The count removed the Down vote and adds the upvote. the upvote has a yellow background.                                         | Pass      |
+| Removing an upvote on a thread.                        | By pressing on an already made upvote, the vote should be removed.                                                                                                                                                                  | Upvoting. Upvoting again.                                                                                     | the vote is removed. No arrow has a yellow background.                                                                           | Pass      |
+| Removing a downvote on a thread.                       | By pressing on an already made downvote, the vote should be removed.                                                                                                                                                                | Downvoting. Downvoting again.                                                                                 | the vote is removed. No arrow has a yellow background.                                                                           | Pass      |
+| Upvoting comment                                       | After pressing the arrow up next to the comment / above the vote count, the vote should count should move 1 up and the arrow up get a yellow background.                                                                            | Pressing the arrow up.                                                                                        | The vote counts +1, the arrow up gets a yellow background.                                                                       |           |
+| Downvoting comment                                     | After pressing the arrow down, the vote should count -1 and the down arrow should get a yellow background highlight.                                                                                                                | Pressing the arrow down.                                                                                      | The vote vount is -1, the arrow down has a yellow background.                                                                    |           |
+| Changing the vote from Upvote to Downvote on a comment | When the user decides to change their vote from an Up to a Downvote, the application should react accordingly.                                                                                                                      | Upvoting a comment. Downvoting a comment.                                                                     | The vote count removed the upvote and entered a downvote. Now the downvote has a yellow background.                              |           |
+| Changing from Downvote to Upvote on a comment          | When the user decides to change their vote from a Downvote to an Upvote, the application should react accordingly.                                                                                                                  | Downvoting a comment. Upvoting a comment.                                                                     | The count removed the Down vote and adds the upvote. the upvote has a yellow background.                                         |           |
+| Removing an upvote on a comment.                       | By pressing on an already made upvote, the vote should be removed.                                                                                                                                                                  | Upvoting. Upvoting again.                                                                                     | the vote is removed. No arrow has a yellow background.                                                                           |           |
+| Removing a downvote on a comment.                      | By pressing on an already made downvote, the vote should be removed.                                                                                                                                                                | Downvoting. Downvoting again.                                                                                 | the vote is removed. No arrow has a yellow background.                                                                           |           |
 
 ### Automatic Testing
 This project contains Unittests to automatically test the application.
@@ -439,9 +531,39 @@ Coverage Report, creates by coverage:
 | wordweave/settings.py                                                                       |       57 |       14 |     75% |35, 145, 216-220, 224-230 |
 | wordweave/urls.py                                                                           |        6 |        0 |    100% |           |
 | wordweave/wsgi.py                                                                           |        4 |        4 |      0% |     10-16 |
-|                                                                                   **TOTAL** | **1101** |  **159** | **86%** |    
+|                                                                                   **TOTAL** | **1101** |  **159** | **86%** |
+
+The tests run without any Errors:
+´´´
+Using python3 (3.12.1)
+Found 46 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+./home/lana/.cache/pypoetry/virtualenvs/wordweave-jm8Ce3Z9-py3.12/lib/python3.12/site-packages/django/core/handlers/base.py:61: UserWarning: No directory at: /home/lana/Projects/WordWeave/staticfiles/
+  mw_instance = middleware(adapted_handler)
+.............................................
+----------------------------------------------------------------------
+Ran 46 tests in 24.402s
+
+OK
+Destroying test database for alias 'default'...
+´´´    
 
 ### Unfixed Bugs
+
+#### Redirect After Voting on Threads
+When the user votes on threads, they always get redirected to the Global Timeline.
+Therefore the user always looses the site the were on.
+This is especially problematic when voting threads on another Users profile, since the design changes drasticlly with a redirect to the global timeline.
+
+##### Possible Solutions
+A parameter containing the previous url, or url name, needs to be passed down when voting.
+This way a redirect can redirecting the User to the previous page after voting.
+Now there still might be the issue that the user voted on the bottom of the page, but gets redirected to the top.
+Each thread yould have an id, to redirect to in the url.
+
+Another and probably better version would be to handle the voting with a JavaScript Function.
+This way a redirect is not needed and the voting can happen in the background. 
 
 ### Fixed Bugs
 #### Cascading Deletes for Votes
