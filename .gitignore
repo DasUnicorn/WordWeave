@@ -1,8 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__
 *.py[cod]
-wordweave/__pycache__/*
-authentication/__pycache__/*
+*.sqlite3
+/assets
 
 # Unit test / coverage reports
 .tox/
