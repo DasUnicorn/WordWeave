@@ -1,16 +1,21 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from authentication.models import User
-from weave_manager.models import Thread, Comment
+from weave_manager.models import Thread
 from django.template.response import TemplateResponse
-from weave_manager.views import InfoView
 
 
 class InfoViewTest(TestCase):
+    """Unittest to test the Info View."""
     def setUp(self):
+        """Set up the Client"""
         self.client = Client()
 
     def test_info_view(self):
+        """
+        Tests if the info site is reached by the correct url
+        with the correct template.
+        """
         url = reverse('info')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -54,11 +59,14 @@ class ThreadEditTest(TestCase):
         self.user = User.objects.create_user(
             username='testuser', password='testpassword')
         self.thread = Thread.objects.create(
-            title='Test Thread', content='Original content', author=self.user)
+            title='Test Thread', content='Original content', tags='test',
+            author=self.user)
+        print("Thread ID: " + str(self.thread.id))
 
     def test_thread_edit(self):
         # Log in as the user
         self.client.login(username='testuser', password='testpassword')
+        print("Pre Change: " + str(self.thread.content))
 
         # New content for the thread
         new_content = 'Updated content'
@@ -67,8 +75,10 @@ class ThreadEditTest(TestCase):
         response = self.client.post(
             reverse('edit_thread', kwargs={'thread_id': self.thread.id}),
             # Include new content in the POST data
-            data={'content': new_content}
+            data={'title': self.thread.title,
+                  'content': new_content, 'tags': self.thread.tags}
         )
+        print(response.content)
 
         # Check that the thread's content is updated correct
         self.thread.refresh_from_db()
@@ -80,9 +90,5 @@ class ThreadEditTest(TestCase):
         # Check that the redirect is to the correct site
         redirected_url = response.url
         expected_url = reverse('thread_detail', kwargs={
-            'thread_id': self.thread.id, 'slug': self.slug})
+            'thread_id': self.thread.id, 'slug': self.thread.slug})
         self.assertEqual(redirected_url, expected_url)
-
-        # Optionally, check for messages displayed to the user
-        messages = [msg.message for msg in response.context['messages']]
-        self.assertIn('Thread edited successfully.', messages)

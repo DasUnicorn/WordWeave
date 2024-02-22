@@ -5,11 +5,21 @@ from crispy_forms.layout import Submit
 
 
 class ThreadForm(forms.ModelForm):
+    """
+    Form to create and edit a thread.
+    """
     class Meta:
+        """
+        Set Model and field (title, content, picture, tag)
+        to create and edit.
+        """
         model = Thread
         fields = ['title', 'content', 'picture', 'tags']
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize form.
+        """
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
@@ -23,6 +33,9 @@ class ThreadForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """
+    Comment Creation form.
+    """
     class Meta:
         model = Comment
         fields = ['body']

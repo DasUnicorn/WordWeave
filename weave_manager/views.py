@@ -12,19 +12,22 @@ from .forms import ThreadForm
 from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
-from django.shortcuts import get_object_or_404, redirect, reverse
+from django.shortcuts import get_object_or_404, redirect  # noqa: F811
 from django.core.paginator import Paginator, EmptyPage
 from django.contrib import messages
 
-# Create your views here.
-
 
 class GlobalTimeline(generic.ListView):
+    """
+    Global Timeline that displays all threads.
+    This view has pagination.
+    """
     paginate_by = 5
     queryset = Thread.objects.all()
     template_name = "index.html"
 
     def get_context_data(self, **kwargs):
+        """returns a list of all threads"""
         context = super().get_context_data(**kwargs)
         thread_list = context['thread_list']
         if self.request.user.is_authenticated:
@@ -35,12 +38,17 @@ class GlobalTimeline(generic.ListView):
 
 
 class UserTimelineView(LoginRequiredMixin, generic.ListView):
+    """
+    Timeline containing all threads with tags
+    the logged in user is following.
+    """
     paginate_by = 5
     template_name = "timeline.html"
     context_object_name = 'tag_timeline'
     login_url = '/accounts/login/'
 
     def get_queryset(self):
+        """returns a list of threads with tags a user is following."""
         user = self.request.user
         followed_tags = Tag.objects.filter(following__followed_by=user)
         followed_threads = Thread.objects.filter(
@@ -49,6 +57,7 @@ class UserTimelineView(LoginRequiredMixin, generic.ListView):
         return followed_threads
 
     def get_context_data(self, **kwargs):
+        """Returns the vote info for the user on each thread."""
         context = super().get_context_data(**kwargs)
         thread_list = context['tag_timeline']
         if self.request.user.is_authenticated:
@@ -59,17 +68,24 @@ class UserTimelineView(LoginRequiredMixin, generic.ListView):
 
 
 class InfoView(TemplateView):
+    """Sets Info View template."""
     template_name = "info.html"
+
 
 # LoginRequiredMixin is used to ensure that only logged-in users
 # can create threads.
 class CreateThreadView(LoginRequiredMixin, FormView):
+    """
+    View to create a new thread.
+    Logged in User required.
+    """
     template_name = 'create_thread.html'
     form_class = ThreadForm
     # Redirect to a view that displays a list of threads
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
+        """Validate form data. Sends message on success."""
         # Set the author before saving the form
         form.instance.author = self.request.user
         form.save()
@@ -79,14 +95,22 @@ class CreateThreadView(LoginRequiredMixin, FormView):
 
 
 class TagSiteView(generic.ListView):
+    """
+    View to surply data for the tagsite.
+    """
     template_name = "tag_site.html"
     context_object_name = 'thread_list'
 
     def get_queryset(self):
+        """returns slug of a thread"""
         tag_slug = self.kwargs['slug']
         return Thread.objects.filter(tags__slug=tag_slug)
 
     def get_context_data(self, **kwargs):
+        """
+        Returns the info if a user is following a given tag,
+        as well as the information if the user has up or downvoted a thread.
+        """
         context = super().get_context_data(**kwargs)
         tag_slug = self.kwargs['slug']
 
@@ -136,7 +160,11 @@ class ThreadDetailView(DetailView):
 
 
 class AddCommentView(View):
+    """
+    View for creating a comment.
+    """
     def post(self, request, thread_id):
+        """Post request handling, saves comment and returns to thread."""
         thread = Thread.objects.get(id=thread_id)
         form = CommentForm(request.POST)
 
@@ -152,7 +180,14 @@ class AddCommentView(View):
 
 
 class MyPaginator(Paginator):
+    """
+    Pagination for site.
+
+    Keyword Arguments:
+    numer -- int, the maximum number of objects per page.
+    """
     def validate_number(self, number):
+        """Validate the number of objects per page"""
         try:
             return super().validate_number(number)
         except EmptyPage:
@@ -169,6 +204,13 @@ class MyPaginator(Paginator):
 @require_POST
 @login_required
 def upvote_thread(request, thread_id):
+    """
+    Upvote a given thread.
+    User has to be logged in.
+
+    Keyword Argument:
+    thread_id -- the id of the thread that should get upvoted.
+    """
     # pk lookup shortcut, which stands for “primary key”.
     thread = get_object_or_404(Thread, pk=thread_id)
     thread.up_vote(request.user)
@@ -178,6 +220,13 @@ def upvote_thread(request, thread_id):
 @require_POST
 @login_required
 def downvote_thread(request, thread_id):
+    """
+    Downvote a given thread.
+    User has to be logged in.
+
+    Keyword Argument:
+    thread_id -- the id of the thread that should get downvoted.
+    """
     # pk lookup shortcut, which stands for “primary key”.
     thread = get_object_or_404(Thread, pk=thread_id)
     thread.down_vote(request.user)
@@ -187,6 +236,13 @@ def downvote_thread(request, thread_id):
 @require_POST
 @login_required
 def upvote_comment(request, comment_id):
+    """
+    Upvote a given comment.
+    User has to be logged in.
+
+    Keyword Argument:
+    comment_id -- the id of the comment that should get upvoted.
+    """
     # pk lookup shortcut, which stands for “primary key”.
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.up_vote(request.user)
@@ -197,6 +253,13 @@ def upvote_comment(request, comment_id):
 @require_POST
 @login_required
 def downvote_comment(request, comment_id):
+    """
+    Downvote a given comment.
+    User has to be logged in.
+
+    Keyword Argument:
+    comment_id -- the id of the comment that should get downvoted.
+    """
     # pk lookup shortcut, which stands for “primary key”.
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.down_vote(request.user)
@@ -206,6 +269,13 @@ def downvote_comment(request, comment_id):
 
 @login_required
 def edit_thread(request, thread_id):
+    """
+    Edit a given thread.
+    User has to be logged in.
+
+    Keyword Argument:
+    thread_id -- the id of the thread that should get edited.
+    """
     thread = get_object_or_404(Thread, id=thread_id, author=request.user)
 
     if request.method == 'POST':
@@ -225,6 +295,13 @@ def edit_thread(request, thread_id):
 
 @login_required
 def delete_thread(request, thread_id):
+    """
+    Delete a given thread.
+    User has to be logged in.
+
+    Keyword Argument:
+    thread_id -- the id of the thread that should get deteled.
+    """
     thread = get_object_or_404(Thread, id=thread_id, author=request.user)
 
     if request.method == 'POST':
@@ -240,6 +317,13 @@ def delete_thread(request, thread_id):
 
 @login_required
 def edit_comment(request, comment_id):
+    """
+    Edit a given comment.
+    User has to be logged in.
+
+    Keyword Argument:
+    comment_id -- the id of the comment that should get edited.
+    """
     comment = get_object_or_404(Comment, id=comment_id, author=request.user)
 
     if request.method == 'POST':
@@ -259,6 +343,13 @@ def edit_comment(request, comment_id):
 
 @login_required
 def delete_comment(request, comment_id):
+    """
+    Delete a given comment.
+    User has to be logged in.
+
+    Keyword Argument:
+    comment_id -- the id of the comment that should get delted.
+    """
     comment = get_object_or_404(Comment, id=comment_id, author=request.user)
 
     if request.method == 'POST':
