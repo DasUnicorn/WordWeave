@@ -34,21 +34,6 @@ class Thread(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
 
-        # Check if the instance has a primary key, therefore exists
-        if self.pk:
-            try:
-                current_thread = Thread.objects.get(pk=self.pk)
-                # If a picture exist and has changed, delete the old one
-                if current_thread.picture and (
-                        self.picture != current_thread.picture):
-                    # Delete the old picture from the Cloudflare R2 bucket
-                    try:
-                        default_storage.delete(current_thread.picture.name)
-                    except FileNotFoundError:
-                        pass  # If the file does not exist, do nothing
-            except ObjectDoesNotExist:
-                raise ValueError("Thread does not exist")
-
         super().save(*args, **kwargs)
 
     def up_vote(self, user):

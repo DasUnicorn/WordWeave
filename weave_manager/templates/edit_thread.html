@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-lg p-3">
   <h2>Edit Thread</h2>
-  <form method="post" action="{% url 'edit_thread' thread_id=thread.id %}">
+  <form method="post" action="{% url 'edit_thread' thread_id=thread.id %}" enctype="multipart/form-data">
     {% csrf_token %}
     {% crispy form %}
   </form>

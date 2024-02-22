@@ -7,8 +7,9 @@ from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, TemplateView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, UpdateView
 from .forms import ThreadForm
+from django import forms
 from django.urls import reverse_lazy
 from .forms import CommentForm
 from django.views import View
@@ -94,6 +95,59 @@ class CreateThreadView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
+class EditThreadView(LoginRequiredMixin, UpdateView):
+    """
+    Edit a given thread view.
+    User needs to be logged in.
+    """
+    model = Thread
+    template_name = 'edit_thread.html'
+    form_class = ThreadForm
+    context_object_name = 'thread'
+
+    def get_object(self, queryset=None):
+        thread_id = self.kwargs.get('thread_id')
+        return get_object_or_404(Thread, 
+                                 id=thread_id,
+                                 author=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        context['form'] = self.form_class(instance=self.object)
+        print(context['form'])
+        return context
+
+    def form_valid(self, form):
+        """Validate the ThreadForm."""
+        thread = form.save(commit=False)
+        if form.cleaned_data['picture']:
+            thread.picture = form.cleaned_data['picture']
+        else:
+            # Cloudfare bucket returns False when clearing images.
+            # Since False can't be written into the ImageField
+            # we have to set it to None.
+            thread.picture = None
+        
+        thread.save()
+        messages.add_message(self.request,
+                             messages.INFO,
+                             'Your Thread has been edited.')
+        return super().form_valid(form)
+
+    def get_success_url(self, *args, **kwargs):
+        """
+        Return the succes url.
+
+        Arguments:
+        thread_id -- the id of the thread as parameter
+        slug -- the slug of the thread you want the detail view of.
+        """
+        thread = self.object
+        return reverse_lazy('thread_detail', kwargs={'thread_id': thread.id,
+                            'slug': thread.slug})
+
+
 class TagSiteView(generic.ListView):
     """
     View to surply data for the tagsite.
@@ -134,6 +188,10 @@ class TagSiteView(generic.ListView):
 
 
 class ThreadDetailView(DetailView):
+    """
+    View, handling the display of a single threat, 
+    inclusive their comments and a comment form.
+    """
     model = Thread
     template_name = 'thread_detail.html'
     context_object_name = 'thread'
@@ -265,32 +323,6 @@ def downvote_comment(request, comment_id):
     comment.down_vote(request.user)
     thread = get_object_or_404(Thread, pk=comment.thread.id)
     return redirect('thread_detail', thread_id=thread.id, slug=thread.slug)
-
-
-@login_required
-def edit_thread(request, thread_id):
-    """
-    Edit a given thread.
-    User has to be logged in.
-
-    Keyword Argument:
-    thread_id -- the id of the thread that should get edited.
-    """
-    thread = get_object_or_404(Thread, id=thread_id, author=request.user)
-
-    if request.method == 'POST':
-        form = ThreadForm(request.POST, instance=thread)
-        if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.INFO,
-                                 'Your Thread has been edited.')
-            return redirect('thread_detail', thread_id=thread.id,
-                            slug=thread.slug)
-    else:
-        form = ThreadForm(instance=thread)
-
-    return render(request, 'edit_thread.html',
-                  {'form': form, 'thread': thread})
 
 
 @login_required

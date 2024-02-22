@@ -14,7 +14,7 @@ urlpatterns = [
          views.downvote_comment, name='downvote_comment'),
     path('thread/<int:thread_id>/add_comment/',
          views.AddCommentView.as_view(), name='add_comment'),
-    path('thread/<int:thread_id>/edit/', views.edit_thread,
+    path('thread/<int:thread_id>/edit/', views.EditThreadView.as_view(),
          name='edit_thread'),
     path('thread/<int:thread_id>/delete/',
          views.delete_thread, name='delete_thread'),
