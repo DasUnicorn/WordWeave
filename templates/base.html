@@ -5,6 +5,7 @@
 <html lang="en">
 
 <head>
+    {% block head %}
     <title>Weaver</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Weaver - the social media that sparks conversation.">
@@ -23,6 +24,7 @@
     </script>
     <script src="{% static 'js/bootstrap-custom.js' %}"></script>
     {{ form.media }}
+    {% endblock %}
 </head>
 
 <body class="">
@@ -78,7 +80,7 @@
         {% endif %}
         {% block content %}
         <!-- Content Goes here -->
-        {% endblock content %}
+        {% endblock %}
     </main>
     <!-- Footer -->
     <footer></footer>

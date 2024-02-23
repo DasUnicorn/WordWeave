@@ -394,6 +394,10 @@ The W3C HTML Validator shows no errors.
 ![HTML Check](static/img/readme/html-check.png)
 ![HTML Check](static/img/readme/html-check-profile.png)
 
+#### JS Hint Validator
+The JS Hint Validator shows no errors.
+![JS Hint Result](static/img/readme/jshint.png)
+
 #### Accessibility
 The result of the WAVE Web Accessibility Evaluation Tool shows no Errors.
 ![Wave Check](static/img/readme/wave.png)
@@ -548,22 +552,6 @@ Ran 46 tests in 24.402s
 OK
 Destroying test database for alias 'default'...
 ´´´    
-
-### Unfixed Bugs
-
-#### Redirect After Voting on Threads
-When the user votes on threads, they always get redirected to the Global Timeline.
-Therefore the user always looses the site the were on.
-This is especially problematic when voting threads on another Users profile, since the design changes drasticlly with a redirect to the global timeline.
-
-##### Possible Solutions
-A parameter containing the previous url, or url name, needs to be passed down when voting.
-This way a redirect can redirecting the User to the previous page after voting.
-Now there still might be the issue that the user voted on the bottom of the page, but gets redirected to the top.
-Each thread yould have an id, to redirect to in the url.
-
-Another and probably better version would be to handle the voting with a JavaScript Function.
-This way a redirect is not needed and the voting can happen in the background. 
 
 ### Fixed Bugs
 #### Cascading Deletes for Votes
