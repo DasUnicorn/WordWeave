@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head %}
+{{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-lg py-3">
+	<h1 class="h1-404">404</h1>
+	<p> Ups. We can not find the page you are looking for.</p>
+	<a class="neon-button w" href="{% url 'home' %}">Return Home</a>
+</div>
+
+{% endblock %}

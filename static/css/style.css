@@ -74,6 +74,15 @@ h4 {
 	max-width: 500px;
 }
 
+.h1-404 {
+	font-family: 'Permanent Marker', cursive;
+	color: var(--color-text-dark);
+	/* Fallback for iOS */
+	text-decoration: none;
+	text-decoration: transparent;
+	font-size: xxx-large;
+}
+
 /* Use Profile */
 
 .profile-pic {
