@@ -75,13 +75,11 @@ You can check out the [live-site.](https://word-weave-eb35426ae0cb.herokuapp.com
     + [Lighthouse Test](#lighthouse-test)
     + [Jigsaw CSS Validator](#jigsaw-css-validator)
     + [W3C Validator](#w3c-validator)
+    + [JS Hint Validator](#js-hint-validator)
     + [Accessibility](#accessibility-1)
     + [PEP8](#pep8)
   * [Manual Testing](#manual-testing)
   * [Automatic Testing](#automatic-testing)
-  * [Unfixed Bugs](#unfixed-bugs)
-    + [Redirect After Voting on Threads](#redirect-after-voting-on-threads)
-      - [Possible Solutions](#possible-solutions)
   * [Fixed Bugs](#fixed-bugs)
     + [Cascading Deletes for Votes](#cascading-deletes-for-votes)
       - [The Situation:](#the-situation)
@@ -538,7 +536,7 @@ Coverage Report, creates by coverage:
 |                                                                                   **TOTAL** | **1101** |  **159** | **86%** |
 
 The tests run without any Errors:
-´´´
+```
 Using python3 (3.12.1)
 Found 46 test(s).
 Creating test database for alias 'default'...
@@ -551,7 +549,7 @@ Ran 46 tests in 24.402s
 
 OK
 Destroying test database for alias 'default'...
-´´´    
+```  
 
 ### Fixed Bugs
 #### Cascading Deletes for Votes
