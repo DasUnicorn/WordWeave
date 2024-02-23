@@ -11,10 +11,7 @@
 	<div class="">
 		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_change_password' %}">Change Password</a>
 		<a class="btn btn-primary secondaryAction m-3" href="{% url 'account_email' %}">Change E-Mail</a>
-		<form method="post" action="{% url 'delete_profile' user.id %}" class="m-3">
-			{% csrf_token %}
-			<button type="submit" class="btn btn-primary secondaryAction" onclick="return confirm('{% trans " Are you sure you want to delete your profile?" %}');">Delete Profile</button>
-		</form>
+		<a href="{% url 'delete_profile' user_id=user.id %}" class="btn btn-primary secondaryAction">Delete Profile</a>
 	</div>
 	<hr>
 	<!-- Profile Settings -->

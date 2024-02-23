@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-lg p-3">
+  <h2>Delete Profile</h2>
+  <p>Are you sure you want to delete your Account?</p>
+  <p>All your Threads, Comments and Votes will be gone.</p>
+  <form method="post" action="{% url 'delete_profile' user_id=user.id %}">
+    {% csrf_token %}
+    <input type="submit" value="Yes, Delete." class="btn btn-danger">
+    <a href={% url 'home' %} class="btn">No, Please don't.</a>
+  </form>
+</div>
+{% endblock %}

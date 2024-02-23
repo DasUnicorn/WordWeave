@@ -7,7 +7,7 @@ from .forms import ProfileUpdateForm
 from django import forms
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -112,4 +112,5 @@ def delete_profile(request, user_id):
         user.delete()
         return redirect('home')
 
-    return redirect('profile', user.username)
+    # Render the delete confirmation page
+    return render(request, 'delete_profile_confirm.html', {'user': user})
